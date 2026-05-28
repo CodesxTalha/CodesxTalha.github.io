@@ -43,7 +43,7 @@
             --text-main: #0a0a0a;
             --text-muted: #6b7280;
             --text-light: #9ca3af;
-            --border-color: #f3f4f6; /* Lighter borders to match grid */
+            --border-color: #f3f4f6;
             --border-dark: #e5e7eb;
             --bg-secondary: #f9fafb;
             --github-light: #ebedf0;
@@ -291,11 +291,31 @@
 
         .mobile-nav-toggle {
             display: none;
-            background: transparent;
+            width: 44px;
+            height: 44px;
+            background-color: #0a0a0a;
             border: none;
+            border-radius: 50%;
             cursor: pointer;
-            color: #000;
-            padding: 8px;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 4px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+            z-index: 110;
+            transition: transform 0.2s ease;
+        }
+
+        .mobile-nav-toggle:active {
+            transform: scale(0.95);
+        }
+
+        .mobile-nav-toggle span {
+            display: block;
+            width: 18px;
+            height: 2px;
+            background-color: #ffffff;
+            border-radius: 2px;
         }
 
         .mobile-dropdown {
@@ -334,12 +354,12 @@
                 display: none;
             }
             .mobile-nav-toggle {
-                display: block;
+                display: flex;
             }
         }
 
         /* =========================================
-           HERO SECTION (Rebuilt for exact matching)
+           HERO SECTION
            ========================================= */
         .hero {
             position: relative;
@@ -347,6 +367,33 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Desktop specific absolute positioning for socials */
+        .desktop-socials {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .mobile-socials {
+            display: none;
+        }
+
+        .hero-socials a {
+            color: var(--text-light);
+            transition: color 0.3s ease, transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+        }
+
+        .hero-socials a:hover {
+            color: var(--text-main);
+            transform: scale(1.15) translateY(-2px);
         }
 
         .availability {
@@ -380,8 +427,7 @@
         }
         
         .hero-first, .hero-last {
-            /* Adjusted font size to fit beautifully on mobile without blowing out */
-            font-size: clamp(4rem, 11vw, 7.5rem); 
+            font-size: clamp(3.5rem, 13vw, 7.5rem); 
             font-weight: 900;
             letter-spacing: -0.04em;
             text-transform: uppercase;
@@ -395,13 +441,19 @@
             color: var(--text-light);
         }
 
-        .hero-role-social-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 3rem;
-            flex-wrap: wrap;
-            gap: 1.5rem;
+        .hero-role-wrapper {
+            position: relative;
+            padding-left: 50px;
+            margin-bottom: 1.5rem;
+        }
+
+        .role-line {
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 35px;
+            height: 1.5px;
+            background-color: var(--text-main);
         }
 
         .role-text {
@@ -418,31 +470,10 @@
             font-weight: 400;
         }
 
-        .hero-inline-socials {
-            display: flex;
-            gap: 1.5rem;
-            align-items: center;
-        }
-
-        .hero-inline-socials a {
-            color: var(--text-light);
-            transition: color 0.3s ease, transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: flex;
-        }
-
-        .hero-inline-socials a:hover {
-            color: var(--text-main);
-        }
-
-        .hero-actions {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 3rem;
-            flex-wrap: wrap;
-        }
-
         .hero-desc {
-            max-width: 500px;
+            max-width: 550px;
+            padding-left: 50px;
+            margin-bottom: 3rem;
         }
 
         .hero-desc p {
@@ -452,25 +483,43 @@
             font-weight: 400;
         }
 
-        /* Responsive Hero Tweaks */
-        @media (max-width: 768px) {
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: nowrap;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        /* Mobile Hero Restructuring */
+        @media (max-width: 900px) {
             .hero {
                 padding: 4rem 0 2rem 0;
             }
-            .hero-role-social-row {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1.5rem;
+            .desktop-socials {
+                display: none; /* Hide on mobile */
+            }
+            .mobile-socials {
+                display: flex;
+                width: 100%;
+                justify-content: center;
+                gap: 2.5rem;
+                margin-top: 3.5rem;
+                padding-top: 2.5rem;
+                border-top: 1px solid var(--border-dark);
+            }
+            .mobile-socials svg {
+                width: 24px;
+                height: 24px;
             }
             .hero-actions {
-                width: 100%;
-                flex-direction: column;
+                flex-direction: row;
+                gap: 0.75rem;
             }
             .hero-actions .btn {
-                width: 100%;
-            }
-            .hero-desc {
-                margin-top: 1rem;
+                flex: 1; /* Make buttons split the mobile width 50/50 */
+                padding: 1.1rem 0;
+                font-size: 0.7rem;
             }
         }
 
@@ -489,8 +538,8 @@
             text-transform: uppercase;
             cursor: pointer;
             gap: 0.5rem;
-            border: none; /* Reset */
-            box-shadow: none !important; /* Force no shadows */
+            border: none;
+            box-shadow: none !important;
             
             /* The 'Alive' Transition */
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
@@ -507,7 +556,7 @@
 
         .btn-dark:hover {
             background-color: #222;
-            
+            transform: scale(1.04);
         }
 
         .btn-outline {
@@ -518,10 +567,15 @@
 
         .btn-outline:hover {
             background-color: var(--bg-secondary);
+            transform: scale(1.04);
+        }
+
+        .btn:active {
+            transform: scale(0.96);
         }
 
         /* =========================================
-           ABOUT / BIOGRAPHY (Rebuilt for matching)
+           ABOUT / BIOGRAPHY
            ========================================= */
         .about-section-header {
             display: flex;
@@ -564,7 +618,7 @@
 
         .about-image-wrapper {
             width: 100%;
-            max-width: 380px; /* Prevents oversized image */
+            max-width: 320px;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
@@ -577,7 +631,6 @@
             background-color: var(--bg-secondary);
             border-radius: var(--radius-md);
             object-fit: cover;
-            /* Removed the B/W filter as requested */
         }
 
         .about-image-caption {
@@ -709,7 +762,7 @@
         }
 
         /* =========================================
-           FEATURED WORKS & OTHER SECTIONS
+           FEATURED WORKS
            ========================================= */
         .section-header-standard {
             margin-bottom: var(--space-lg);
@@ -747,7 +800,7 @@
             border: 1px solid var(--border-dark);
             font-size: 0.8rem;
             font-weight: 700;
-            transition: all 0.2s ease;
+            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             background: #ffffff;
             color: var(--text-main);
         }
@@ -756,6 +809,7 @@
             background: var(--text-main);
             color: var(--bg-color);
             border-color: var(--text-main);
+            transform: scale(1.05); 
         }
 
         .works-grid {
@@ -817,6 +871,10 @@
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s ease;
+        }
+
+        .work-card:hover .work-img {
+            transform: scale(1.03);
         }
 
         .work-info {
@@ -930,6 +988,7 @@
         }
 
         .gh-sq:hover {
+            transform: scale(1.6);
             z-index: 10;
         }
 
@@ -1044,8 +1103,11 @@
                 <a href="#contact" class="nav-item">CONTACT</a>
             </div>
 
+            <!-- Authentic Custom CSS Mobile Menu Toggle -->
             <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                <span></span>
+                <span></span>
+                <span></span>
             </button>
         </nav>
 
@@ -1056,41 +1118,68 @@
             <a href="#contact" class="mobile-nav-item">CONTACT</a>
         </div>
 
-        <!-- Hero Section (Exactly matched to mobile flow & size) -->
+        <!-- Corrected Hero Section -->
         <header class="hero scroll-reveal">
+            
+            <!-- Desktop Socials (Right Aligned) -->
+            <div class="hero-socials desktop-socials">
+                <a href="https://www.linkedin.com/in/talha-khalid-920910323/" target="_blank" aria-label="LinkedIn">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                </a>
+                <a href="https://github.com/Talhakhalidawan/" target="_blank" aria-label="GitHub">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </a>
+                <a href="https://x.com/talha_khalid_6" target="_blank" aria-label="Twitter">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+                </a>
+            </div>
+
+            <div class="availability">
+                <div class="dot"></div>
+                AVAILABLE FOR PROJECTS
+            </div>
             
             <h1 class="hero-title">
                 <div class="hero-first">TALHA</div>
                 <div class="hero-last">KHALID</div>
             </h1>
             
-            <div class="hero-role-social-row">
+            <div class="hero-role-wrapper">
+                <div class="role-line"></div>
                 <div class="role-text">
                     SOFTWARE ENGINEER <span class="amp">&amp;</span> <br> 
                     FULL-STACK DEVELOPER
                 </div>
-                
-                <div class="hero-inline-socials">
-                    <a href="https://www.linkedin.com/in/talha-khalid-920910323/" target="_blank" aria-label="LinkedIn">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-                    </a>
-                    <a href="https://github.com/Talhakhalidawan/" target="_blank" aria-label="GitHub">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                    </a>
-                    <a href="https://x.com/talha_khalid_6" target="_blank" aria-label="Twitter">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
-                    </a>
-                </div>
-            </div>
-
-            <div class="hero-actions">
-                <a href="#contact" class="btn btn-dark">COLLABORATE</a>
-                <a href="static/resume.pdf" class="btn btn-outline">RESUME <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:-2px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg></a>
             </div>
 
             <div class="hero-desc">
                 <p>Building robust, high-performance web backends, intuitive mobile apps, and refined custom software with flawless logic.</p>
             </div>
+
+            <div class="hero-actions">
+                <a href="#contact" class="btn btn-dark">
+                    COLLABORATE 
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                </a>
+                <a href="static/resume.pdf" class="btn btn-outline">
+                    RESUME 
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:-2px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                </a>
+            </div>
+
+            <!-- Mobile Socials (Bottom Centered) -->
+            <div class="hero-socials mobile-socials">
+                <a href="https://www.linkedin.com/in/talha-khalid-920910323/" target="_blank" aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                </a>
+                <a href="https://github.com/Talhakhalidawan/" target="_blank" aria-label="GitHub">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </a>
+                <a href="https://x.com/talha_khalid_6" target="_blank" aria-label="Twitter">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+                </a>
+            </div>
+
         </header>
 
         <!-- About Me / Biography Section -->
@@ -1103,6 +1192,7 @@
                 <div class="about-image-wrapper">
                     <!-- Standard color image, properly sized -->
                     <img src="static/images/me.png" alt="Talha Khalid Portrait" class="about-image" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&h=500&fit=crop'">
+                    <div class="about-image-caption">V.26</div>
                 </div>
 
                 <!-- Content Right Column -->
@@ -1124,6 +1214,17 @@
                         </div>
                     </div>
 
+                    <div class="about-footer">
+                        <div class="mini-tags">
+                            <div class="mini-tag">PYTHON</div>
+                            <div class="mini-tag">DJANGO</div>
+                            <div class="mini-tag">REACT NATIVE</div>
+                            <div class="mini-tag">SQL</div>
+                            <div class="mini-tag">+5 MORE</div>
+                        </div>
+                        
+                        <a href="#contact" class="get-in-touch-link">GET IN TOUCH &rarr;</a>
+                    </div>
                 </div>
             </div>
         </section>
