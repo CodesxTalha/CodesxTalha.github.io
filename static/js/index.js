@@ -1,3 +1,48 @@
+// Immediately start the loader logic to run concurrently with page rendering
+(function() {
+    const splash = document.getElementById('splash-screen');
+    const bar = document.getElementById('splash-loader-bar');
+    const body = document.body;
+
+    if (!splash || !bar) return;
+
+    let progress = 0;
+    
+    // We want the progress to complete in around 800ms - 1100ms
+    const intervalTime = 16; // ~60fps updates
+    const totalTime = 800 + Math.random() * 300; 
+    const increments = 100 / (totalTime / intervalTime);
+
+    const loaderInterval = setInterval(() => {
+        // Add natural organic variation to the loader speed
+        const jitter = (Math.random() - 0.25) * 1.5; 
+        progress += increments + jitter;
+
+        if (progress >= 100) {
+            progress = 100;
+            clearInterval(loaderInterval);
+            
+            bar.style.width = '100%';
+            
+            // Smoothly exit splash screen
+            setTimeout(() => {
+                splash.classList.add('fade-out');
+                if (body) {
+                    body.classList.remove('loading');
+                }
+                
+                // Completely remove from DOM after CSS transition (0.6s) to free up resources
+                setTimeout(() => {
+                    splash.remove();
+                }, 600);
+            }, 180);
+        } else {
+            const displayProgress = Math.max(0, Math.floor(progress));
+            bar.style.width = displayProgress + '%';
+        }
+    }, intervalTime);
+})();
+
 document.addEventListener('DOMContentLoaded', () => {
     const expandBtn = document.getElementById('expandBtn');
     if (expandBtn) {
