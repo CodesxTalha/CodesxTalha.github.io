@@ -1,1491 +1,459 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="scroll-behavior: smooth;">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Talha Khalid - Portfolio</title>
-    <meta name="description" content="Talha Khalid — Software Engineer & Full-Stack Developer specializing in Python, Django, and React Native.">
-    <meta name="author" content="Talha Khalid">
-    
+    <title>Portfolio | Software Engineer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
     
-    <!-- Schema.org structured data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Talha Khalid",
-      "jobTitle": "Software Engineer",
-      "url": "https://talhakhalid.dev",
-      "image": "static/images/me.png",
-      "sameAs": [
-        "https://github.com/Talhakhalidawan/",
-        "https://x.com/talha_khalid_6"
-      ],
-      "knowsAbout": ["Python", "JavaScript", "React Native", "Django", "Web Development", "Mobile App Development", "Software Engineering"],
-      "worksFor": {
-        "@type": "Organization",
-        "name": "Freelance"
-      },
-      "description": "Self-taught Python full-stack developer with experience in front-end and back-end development, API integrations, and automation."
-    }
-    </script>
-
     <style>
-        /* =========================================
-           MODULAR CSS VARIABLES
-           ========================================= */
         :root {
-            /* Colors */
-            --bg-color: #ffffff;
-            --text-main: #0a0a0a;
-            --text-muted: #6b7280;
-            --text-light: #9ca3af;
-            --border-color: #f3f4f6; /* Lighter borders to match grid */
-            --border-dark: #e5e7eb;
-            --bg-secondary: #f9fafb;
-            --github-light: #ebedf0;
-            --github-1: #9be9a8;
-            --github-2: #40c463;
-            --github-3: #30a14e;
-            --github-4: #216e39;
-
-            /* Typography */
-            --font-main: 'Inter', sans-serif;
+            /* Black/White with a subtle warm/yellowish undertone */
+            --bg: #0c0c0b;
+            --surface: #141413;
+            --border: #262523;
+            --border-hover: #45433d;
+            --text-main: #ecebe6;
+            --text-muted: #8b8a85;
+            --accent: #dcd0ae; /* Very subtle yellowish tone */
             
-            /* Spacing */
-            --space-xs: 0.5rem;
-            --space-sm: 1rem;
-            --space-md: 2rem;
-            --space-lg: 4rem;
-            --space-xl: 8rem;
-
-            /* Roundness / Border Radius */
-            --radius-sm: 4px;
-            --radius-md: 12px;
-            --radius-lg: 24px;
-            --radius-pill: 9999px;
-
-            /* Layout */
-            --container-width: 1200px;
-            --nav-height: 90px;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
         }
 
-        /* =========================================
-           GLOBAL STYLES
-           ========================================= */
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
         }
 
         body {
-            font-family: var(--font-main);
-            background-color: var(--bg-color);
+            font-family: var(--font-sans);
+            background-color: var(--bg);
             color: var(--text-main);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
-            /* Full page subtle grid to match design exactly */
-            background-image: 
-                linear-gradient(to right, rgba(0,0,0,0.02) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(0,0,0,0.02) 1px, transparent 1px);
-            background-size: 50px 50px;
-            background-position: center top;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            color: var(--text-main);
+        }
+        
+        p {
+            color: var(--text-muted);
         }
 
         a {
-            color: inherit;
+            color: var(--text-main);
             text-decoration: none;
-            transition: opacity 0.2s ease, transform 0.2s ease;
+            transition: color 0.15s ease, border-color 0.15s ease;
         }
 
         a:hover {
-            opacity: 0.7;
+            color: var(--accent);
         }
 
-        img {
-            max-width: 100%;
-            display: block;
+        ::selection {
+            background-color: var(--accent);
+            color: var(--bg);
         }
 
+        .mono {
+            font-family: var(--font-mono);
+            font-size: 0.85em;
+        }
+
+        /* Layout */
         .container {
-            max-width: var(--container-width);
+            max-width: 680px;
             margin: 0 auto;
-            padding: 0 5%;
+            padding: 4rem 1.5rem 8rem 1.5rem;
         }
 
-        .section-padding {
-            padding: 6rem 0;
-        }
-
-        @media (max-width: 768px) {
-            .section-padding {
-                padding: 4rem 0;
-            }
-        }
-
-        /* =========================================
-           EDITORIAL TRANSITIONS & PRELOADER
-           ========================================= */
-        .preloader {
-            position: fixed;
-            inset: 0;
-            background-color: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 99999;
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-            overflow: hidden;
-        }
-
-        .preloader-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 16px;
-            text-align: center;
-        }
-
-        .preloader-text {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: #0a0a0a;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-        }
-
-        .preloader-bar {
-            width: 140px;
-            height: 3px;
-            background-color: #f1f5f9;
-            border-radius: 10px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .preloader-progress {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 0%;
-            background: #000000;
-            border-radius: 10px;
-            animation: fillProgress 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        @keyframes fillProgress {
-            0% { width: 0%; }
-            100% { width: 100%; }
-        }
-
-        .scroll-reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .scroll-reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* =========================================
-           NAVIGATION
-           ========================================= */
-        .navbar {
-            height: var(--nav-height);
+        /* Navigation */
+        nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: relative;
-            z-index: 50;
-            padding-top: 1rem;
+            margin-bottom: 6rem;
         }
 
         .logo {
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .logo-top {
-            font-size: 1.35rem;
-            font-weight: 900;
+            font-weight: 500;
+            color: var(--text-main);
             letter-spacing: -0.02em;
-            display: flex;
-            gap: 0.35rem;
-            text-transform: uppercase;
         }
-        
-        .logo-first {
+
+        .logo-dot {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .nav-links a:hover {
             color: var(--text-main);
         }
-        
-        .logo-last {
-            color: var(--text-light);
+
+        /* Sections */
+        section {
+            margin-bottom: 5rem;
         }
-        
-        .logo-sub {
+
+        .section-title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-main);
+            margin-bottom: 2rem;
             display: flex;
             align-items: center;
-            font-size: 0.55rem;
-            font-weight: 700;
-            color: var(--text-light);
-            letter-spacing: 0.25em;
-            margin-top: 2px;
-            text-transform: uppercase;
+            gap: 1rem;
         }
         
-        .logo-line {
-            width: 24px;
+        .section-title::after {
+            content: "";
             height: 1px;
-            background-color: var(--border-dark);
-            margin-right: 8px;
+            flex-grow: 1;
+            background-color: var(--border);
         }
 
-        .nav-pill-container {
-            display: flex;
-            position: relative;
-            background: #fbfbfc;
-            border: 1px solid var(--border-dark);
-            padding: 4px;
-            border-radius: 9999px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.01);
-        }
-
-        .nav-item {
-            position: relative;
-            z-index: 2;
-            padding: 8px 24px;
-            font-size: 0.7rem;
-            font-weight: 700;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            transition: color 0.3s ease;
-        }
-
-        .nav-item.active {
-            color: var(--text-main);
-        }
-
-        .nav-active-indicator {
-            position: absolute;
-            top: 4px;
-            height: calc(100% - 8px);
-            background: #fff;
-            border-radius: 9999px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 1;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-        }
-
-        .mobile-nav-toggle {
-            display: none;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            color: #000;
-            padding: 8px;
-        }
-
-        .mobile-dropdown {
-            display: none;
-            flex-direction: column;
-            background: #fff;
-            border: 1px solid var(--border-dark);
-            border-radius: var(--radius-md);
-            position: absolute;
-            top: 80px;
-            right: 5%;
-            width: 200px;
-            padding: 8px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            z-index: 40;
-        }
-
-        .mobile-dropdown.show {
-            display: flex;
-        }
-
-        .mobile-nav-item {
-            padding: 12px 16px;
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: #000;
-            border-radius: var(--radius-sm);
-        }
-
-        .mobile-nav-item:hover {
-            background: var(--bg-secondary);
-        }
-
-        @media (max-width: 900px) {
-            .nav-pill-container {
-                display: none;
-            }
-            .mobile-nav-toggle {
-                display: block;
-            }
-        }
-
-        /* =========================================
-           HERO SECTION (Rebuilt for exact matching)
-           ========================================= */
+        /* About / Hero */
         .hero {
-            position: relative;
-            padding: 6rem 0 4rem 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            margin-bottom: 6rem;
         }
 
-        .availability {
+        .hero h1 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1rem;
+            max-width: 600px;
+            margin-bottom: 1.5rem;
+        }
+
+        .status {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            font-size: 0.65rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            padding: 8px 16px;
-            background: #ffffff;
-            border-radius: var(--radius-pill);
-            margin-bottom: 2.5rem;
-            border: 1px solid var(--border-dark);
+            padding: 0.25rem 0.75rem;
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 4px;
             color: var(--text-muted);
         }
 
-        .dot {
-            width: 8px;
-            height: 8px;
-            background-color: #22c55e;
+        .status-dot {
+            width: 6px;
+            height: 6px;
             border-radius: 50%;
+            background-color: var(--accent);
         }
 
-        .hero-title {
+        /* Projects */
+        .projects-grid {
             display: flex;
             flex-direction: column;
-            line-height: 0.85;
-            margin-bottom: 3rem;
-        }
-        
-        .hero-first, .hero-last {
-            /* Adjusted font size to fit beautifully on mobile without blowing out */
-            font-size: clamp(4rem, 11vw, 7.5rem); 
-            font-weight: 900;
-            letter-spacing: -0.04em;
-            text-transform: uppercase;
-        }
-        
-        .hero-first {
-            color: var(--text-main);
-        }
-        
-        .hero-last {
-            color: var(--text-light);
+            gap: 1rem;
         }
 
-        .hero-role-social-row {
+        .project-card {
+            display: block;
+            padding: 1.5rem;
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            transition: border-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .project-card:hover {
+            border-color: var(--border-hover);
+        }
+
+        .project-card:hover .project-icon {
+            color: var(--accent);
+            transform: translate(2px, -2px);
+        }
+
+        .project-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 3rem;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-        }
-
-        .role-text {
-            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
-            font-weight: 800;
-            letter-spacing: 0.15em;
-            line-height: 1.5;
-            color: var(--text-main);
-            text-transform: uppercase;
-        }
-        
-        .role-text .amp {
-            color: var(--text-light);
-            font-weight: 400;
-        }
-
-        .hero-inline-socials {
-            display: flex;
-            gap: 1.5rem;
-            align-items: center;
-        }
-
-        .hero-inline-socials a {
-            color: var(--text-light);
-            transition: color 0.3s ease, transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: flex;
-        }
-
-        .hero-inline-socials a:hover {
-            color: var(--text-main);
-        }
-
-        .hero-actions {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 3rem;
-            flex-wrap: wrap;
-        }
-
-        .hero-desc {
-            max-width: 500px;
-        }
-
-        .hero-desc p {
-            color: var(--text-muted);
-            font-size: 1.05rem;
-            line-height: 1.7;
-            font-weight: 400;
-        }
-
-        /* Responsive Hero Tweaks */
-        @media (max-width: 768px) {
-            .hero {
-                padding: 4rem 0 2rem 0;
-            }
-            .hero-role-social-row {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1.5rem;
-            }
-            .hero-actions {
-                width: 100%;
-                flex-direction: column;
-            }
-            .hero-actions .btn {
-                width: 100%;
-            }
-            .hero-desc {
-                margin-top: 1rem;
-            }
-        }
-
-        /* =========================================
-           BUTTONS (Alive, Bouncy, No Shadows)
-           ========================================= */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1.1rem 2.5rem;
-            border-radius: var(--radius-pill);
-            font-weight: 800;
-            font-size: 0.75rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            cursor: pointer;
-            gap: 0.5rem;
-            border: none; /* Reset */
-            box-shadow: none !important; /* Force no shadows */
-            
-            /* The 'Alive' Transition */
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
-                        background-color 0.2s ease, 
-                        color 0.2s ease, 
-                        border-color 0.2s ease;
-        }
-
-        .btn-dark {
-            background-color: #000;
-            color: #fff;
-            border: 1px solid #000;
-        }
-
-        .btn-dark:hover {
-            background-color: #222;
-            
-        }
-
-        .btn-outline {
-            background-color: #ffffff;
-            color: #000;
-            border: 1px solid var(--text-main);
-        }
-
-        .btn-outline:hover {
-            background-color: var(--bg-secondary);
-        }
-
-        /* =========================================
-           ABOUT / BIOGRAPHY (Rebuilt for matching)
-           ========================================= */
-        .about-section-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            font-size: 0.7rem;
-            font-weight: 700;
-            color: var(--text-light);
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
             margin-bottom: 0.5rem;
         }
 
-        .about-section-header::before {
-            content: "";
-            display: block;
-            width: 40px;
-            height: 1px;
-            background-color: var(--border-dark);
-        }
-        
-        .about-title {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 900;
-            letter-spacing: -0.04em;
-            margin-bottom: var(--space-lg);
-            color: var(--text-main);
-        }
-        
-        .about-title .light-text {
-            color: var(--text-light);
-        }
-
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1.6fr;
-            gap: 5rem;
-            align-items: start;
-        }
-
-        .about-image-wrapper {
-            width: 100%;
-            max-width: 380px; /* Prevents oversized image */
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .about-image {
-            width: 100%;
-            aspect-ratio: 4/5;
-            background-color: var(--bg-secondary);
-            border-radius: var(--radius-md);
-            object-fit: cover;
-            /* Removed the B/W filter as requested */
-        }
-
-        .about-image-caption {
-            font-size: 0.6rem;
-            color: var(--text-light);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.25em;
-            border-top: 1px solid var(--border-dark);
-            width: 100%;
-            text-align: center;
-            padding-top: 0.75rem;
-            margin-top: 0.75rem;
-        }
-
-        .about-content {
-            padding-top: 1rem;
-        }
-
-        .about-eyebrow {
-            font-size: 0.65rem;
-            font-weight: 800;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .about-content h3 {
-            font-size: clamp(1.4rem, 2.5vw, 2.2rem);
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            line-height: 1.3;
-            margin-bottom: 1.5rem;
-            color: var(--text-main);
-        }
-
-        .about-content h3 .highlight {
-            color: var(--text-light);
-        }
-
-        .about-content p {
-            color: var(--text-muted);
+        .project-title {
             font-size: 1.05rem;
-            line-height: 1.7;
-            margin-bottom: 2.5rem;
-        }
-
-        .about-meta {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            border-top: 1px solid var(--border-dark);
-            border-bottom: 1px solid var(--border-dark);
-            padding: 1.5rem 0;
-            margin-bottom: 2rem;
-            gap: 1rem;
-        }
-
-        .meta-item label {
-            font-size: 0.6rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--text-light);
-            font-weight: 800;
-            display: block;
-            margin-bottom: 0.4rem;
-        }
-
-        .meta-item span {
-            font-size: 0.95rem;
-            font-weight: 800;
             color: var(--text-main);
         }
 
-        .about-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-        }
-
-        .mini-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .mini-tag {
-            font-size: 0.65rem;
-            font-weight: 700;
-            padding: 0.4rem 0.6rem;
-            background: #ffffff;
-            border: 1px solid var(--border-dark);
-            border-radius: var(--radius-sm);
+        .project-icon {
             color: var(--text-muted);
-            text-transform: uppercase;
-        }
-
-        .get-in-touch-link {
-            font-size: 0.75rem;
-            font-weight: 800;
-            color: var(--text-main);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            border-bottom: 1px solid var(--text-main);
-            padding-bottom: 2px;
-            transition: opacity 0.3s ease;
-        }
-
-        .get-in-touch-link:hover {
-            opacity: 0.6;
-        }
-
-        @media (max-width: 900px) {
-            .about-grid {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-            .about-meta {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* =========================================
-           FEATURED WORKS & OTHER SECTIONS
-           ========================================= */
-        .section-header-standard {
-            margin-bottom: var(--space-lg);
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--text-muted);
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            font-weight: 700;
-        }
-
-        .section-header-standard::before {
-            content: "";
-            display: block;
-            width: 40px;
-            height: 1px;
-            background-color: var(--border-dark);
-        }
-
-        .works-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-bottom: var(--space-lg);
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .pill-btn {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            border-radius: var(--radius-pill);
-            border: 1px solid var(--border-dark);
-            font-size: 0.8rem;
-            font-weight: 700;
             transition: all 0.2s ease;
-            background: #ffffff;
-            color: var(--text-main);
         }
 
-        .pill-btn:hover {
-            background: var(--text-main);
-            color: var(--bg-color);
-            border-color: var(--text-main);
+        .project-desc {
+            font-size: 0.95rem;
+            margin-bottom: 1.25rem;
         }
 
-        .works-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: var(--space-md);
-        }
-
-        .work-card {
-            border-radius: var(--radius-md);
-            overflow: hidden;
-            background: #ffffff;
-            padding: var(--space-sm);
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
-            border: 1px solid var(--border-dark);
-        }
-
-        .work-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.04);
-            border-color: var(--text-light);
-        }
-
-        .work-img-container {
-            width: 100%;
-            aspect-ratio: 16/10;
-            background-color: #eaeaea;
-            border-radius: var(--radius-sm);
-            overflow: hidden;
-            margin-bottom: var(--space-sm);
+        .project-tech {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .work-img-container::after {
-            content: "View Project";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0,0,0,0.8);
-            color: white;
-            padding: 0.6rem 1.2rem;
-            border-radius: var(--radius-pill);
-            font-size: 0.875rem;
-            font-weight: 600;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .work-card:hover .work-img-container::after {
-            opacity: 1;
-        }
-
-        .work-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .work-info {
-            padding: var(--space-sm) 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-        }
-
-        .work-info h4 {
-            font-size: 1.25rem;
-            font-weight: 800;
-            margin-bottom: 0.25rem;
-        }
-
-        .work-info p {
-            font-size: 0.875rem;
+            gap: 1rem;
             color: var(--text-muted);
         }
 
-        /* =========================================
-           WORK & IMPACT (EXPERIENCE)
-           ========================================= */
-        .experience-list {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-md);
-        }
-
-        .experience-item {
+        /* Experience */
+        .exp-item {
             display: grid;
-            grid-template-columns: 1fr 3fr;
-            padding-bottom: var(--space-md);
-            border-bottom: 1px solid var(--border-dark);
-            transition: padding-left 0.3s ease;
+            grid-template-columns: 140px 1fr;
+            gap: 1.5rem;
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--border);
         }
 
-        .experience-item:hover {
-            padding-left: 1rem;
+        .exp-item:first-of-type {
+            padding-top: 0;
         }
 
-        .experience-item:last-child {
+        .exp-item:last-child {
             border-bottom: none;
             padding-bottom: 0;
         }
 
-        .experience-year {
-            font-weight: 700;
-            color: var(--text-muted);
-            font-family: 'Space Grotesk', monospace;
-            font-size: 0.95rem;
-        }
-
-        .experience-role h4 {
-            font-size: 1.25rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-        }
-
-        .experience-role p {
-            color: var(--text-muted);
-            font-size: 1rem;
-            max-width: 700px;
-        }
-
-        @media (max-width: 768px) {
-            .experience-item {
+        @media (max-width: 600px) {
+            .exp-item {
                 grid-template-columns: 1fr;
                 gap: 0.5rem;
             }
-            .experience-item:hover {
-                padding-left: 0;
+            .exp-date {
+                margin-bottom: 0.25rem;
             }
         }
 
-        /* =========================================
-           GITHUB PULSE (MOCKUP)
-           ========================================= */
-        .github-box {
-            background: #ffffff;
-            border-radius: var(--radius-md);
-            padding: var(--space-lg) var(--space-md);
-            border: 1px solid var(--border-dark);
-            text-align: center;
+        .exp-date {
+            color: var(--text-muted);
         }
 
-        .github-header {
-            font-weight: 800;
-            font-size: 1.25rem;
-            margin-bottom: var(--space-sm);
-            letter-spacing: -0.02em;
+        .exp-role {
+            font-size: 1.05rem;
+            color: var(--text-main);
+            margin-bottom: 0.25rem;
         }
 
-        .github-grid-mock {
-            display: flex;
-            gap: 4px;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 1.5rem;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
+        .exp-company {
+            color: var(--accent);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
         }
 
-        .gh-sq {
-            width: 14px;
-            height: 14px;
-            border-radius: 3px;
-            background-color: var(--github-light);
-            transition: transform 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        .exp-desc {
+            font-size: 0.95rem;
         }
 
-        .gh-sq:hover {
-            z-index: 10;
+        /* Contact */
+        .contact p {
+            margin-bottom: 2rem;
+            font-size: 1rem;
         }
 
-        /* =========================================
-           CONTACT / FOOTER
-           ========================================= */
         .contact-links {
-            list-style: none;
-            border-top: 1px solid var(--border-dark);
-            margin-bottom: var(--space-xl);
-        }
-
-        .contact-links li {
-            border-bottom: 1px solid var(--border-dark);
-        }
-
-        .contact-links a {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: var(--space-md) 0;
-            font-size: clamp(1.25rem, 3vw, 1.5rem);
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            transition: all 0.3s ease;
-        }
-
-        .contact-links a:hover {
-            padding-left: 1.5rem;
-            padding-right: 1.5rem;
-            opacity: 1;
-            background-color: #fafafa;
-        }
-        
-        .huge-mail-wrapper {
-            position: relative;
-            text-align: center;
-            margin: var(--space-lg) 0;
-        }
-
-        .huge-mail {
-            font-size: clamp(1.5rem, 4vw, 4.5rem);
-            font-weight: 900;
-            letter-spacing: -0.04em;
-            text-transform: uppercase;
-            display: inline-block;
-            text-decoration: underline;
-            word-break: break-all;
-        }
-
-        .huge-mail:hover {
-            color: var(--text-muted);
-        }
-        
-        .copy-tooltip {
-            position: absolute;
-            top: -30px;
-            left: 50%;
-            transform: translateX(-50%) translateY(10px);
-            background: #111;
-            color: #fff;
-            padding: 4px 12px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            opacity: 0;
-            pointer-events: none;
-            transition: all 0.3s ease;
-        }
-        
-        .copy-tooltip.show {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-        }
-
-        footer {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
+            flex-direction: column;
             gap: 1rem;
-            padding: var(--space-md) 0;
-            border-top: 1px solid var(--border-dark);
-            font-size: 0.85rem;
+        }
+        
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
             color: var(--text-muted);
-            font-weight: 600;
+            width: fit-content;
+        }
+        
+        .contact-link:hover {
+            color: var(--text-main);
+        }
+
+        .contact-link span.mono {
+            color: var(--text-main);
+        }
+        
+        .contact-link:hover span.mono {
+            color: var(--accent);
         }
     </style>
 </head>
 <body>
 
-    <!-- Initial Loading Preloader -->
-    <div class="preloader">
-        <div class="preloader-content">
-            <div class="preloader-text">TALHA KHALID</div>
-            <div class="preloader-bar"><div class="preloader-progress"></div></div>
-        </div>
-    </div>
-
     <div class="container">
+        
         <!-- Navigation -->
-        <nav class="navbar">
-            <div class="logo">
-                <div class="logo-top"><span class="logo-first">TALHA</span> <span class="logo-last">KHALID</span></div>
-                <div class="logo-sub"><span class="logo-line"></span> SOFTWARE ENGINEER</div>
+        <nav>
+            <div class="logo">Talha<span class="logo-dot">_</span></div>
+            <div class="nav-links mono">
+                <a href="#about">about</a>
+                <a href="#projects">projects</a>
+                <a href="#experience">experience</a>
+                <a href="#contact">contact</a>
             </div>
-            
-            <div class="nav-pill-container" id="nav-pill-container">
-                <div class="nav-active-indicator" id="nav-active-indicator"></div>
-                <a href="#about" class="nav-item">ABOUT</a>
-                <a href="#work" class="nav-item">PROJECTS</a>
-                <a href="#experience" class="nav-item">EXPERIENCE</a>
-                <a href="#contact" class="nav-item">CONTACT</a>
-            </div>
-
-            <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-            </button>
         </nav>
 
-        <div class="mobile-dropdown" id="mobile-dropdown">
-            <a href="#about" class="mobile-nav-item">ABOUT</a>
-            <a href="#work" class="mobile-nav-item">PROJECTS</a>
-            <a href="#experience" class="mobile-nav-item">EXPERIENCE</a>
-            <a href="#contact" class="mobile-nav-item">CONTACT</a>
-        </div>
-
-        <!-- Hero Section (Exactly matched to mobile flow & size) -->
-        <header class="hero scroll-reveal">
-            
-            <h1 class="hero-title">
-                <div class="hero-first">TALHA</div>
-                <div class="hero-last">KHALID</div>
-            </h1>
-            
-            <div class="hero-role-social-row">
-                <div class="role-text">
-                    SOFTWARE ENGINEER <span class="amp">&amp;</span> <br> 
-                    FULL-STACK DEVELOPER
-                </div>
-                
-                <div class="hero-inline-socials">
-                    <a href="https://www.linkedin.com/in/talha-khalid-920910323/" target="_blank" aria-label="LinkedIn">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-                    </a>
-                    <a href="https://github.com/Talhakhalidawan/" target="_blank" aria-label="GitHub">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                    </a>
-                    <a href="https://x.com/talha_khalid_6" target="_blank" aria-label="Twitter">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
-                    </a>
-                </div>
-            </div>
-
-            <div class="hero-actions">
-                <a href="#contact" class="btn btn-dark">COLLABORATE</a>
-                <a href="static/resume.pdf" class="btn btn-outline">RESUME <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:-2px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg></a>
-            </div>
-
-            <div class="hero-desc">
-                <p>Building robust, high-performance web backends, intuitive mobile apps, and refined custom software with flawless logic.</p>
-            </div>
-        </header>
-
-        <!-- About Me / Biography Section -->
-        <section id="about" class="section-padding scroll-reveal">
-            <div class="about-section-header">BIOGRAPHY</div>
-            <h2 class="about-title">What <span class="light-text">I Do</span></h2>
-            
-            <div class="about-grid">
-                <!-- Image Left Column -->
-                <div class="about-image-wrapper">
-                    <!-- Standard color image, properly sized -->
-                    <img src="static/images/me.png" alt="Talha Khalid Portrait" class="about-image" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&h=500&fit=crop'">
-                </div>
-
-                <!-- Content Right Column -->
-                <div class="about-content">
-                    <div class="about-eyebrow">&bull; THE DIGITAL ARCHITECT</div>
-                    
-                    <h3>Building refined digital products with a focus on <span class="highlight">functional minimalism</span> and cloud-scale engineering.</h3>
-                    
-                    <p>I am a self-taught full-stack engineer and backend designer. I bridge the gap between clean UI design and high-level engineering. Based in Lahore, Pakistan, I focus on creating digital experiences that are as technically sound as they are visually intuitive, specializing in Python engines, Django systems, and React Native mobile frames.</p>
-                    
-                    <div class="about-meta">
-                        <div class="meta-item">
-                            <label>LOCATION</label>
-                            <span>Lahore, Pakistan</span>
-                        </div>
-                        <div class="meta-item">
-                            <label>STATUS</label>
-                            <span>Open to Work</span>
-                        </div>
-                    </div>
-
-                </div>
+        <!-- About / Hero -->
+        <section id="about" class="hero">
+            <h1>Hi, I'm Talha.</h1>
+            <p>a full stack developer who loves diving into code complexities and learning new stuff. also have a good taste of user interfaces and enhancing user experiences.</p>
+            <div class="status mono">
+                <div class="status-dot"></div>
+                Available for new opportunities
             </div>
         </section>
 
-        <!-- Selected Projects -->
-        <section id="work" class="section-padding scroll-reveal">
-            <div class="works-header">
+        <!-- Projects -->
+        <section id="projects">
+            <h2 class="section-title mono">Projects</h2>
+            <div class="projects-grid">
+                
+                <a href="#" class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">Share Beam</h3>
+                        <span class="project-icon">↗</span>
+                    </div>
+                    <p class="project-desc">Share Beam is a cross platform local files/text and all other data sharing application designed to make multi device wroflow seamless and easy. offering clean and fast delievery between multiple devices, it's very fast and has very clean user interface matching with whatsapp to make the sharing easy, it connection and sharing speed is far better then the other file sharing apps like Zapiya and Shareit.</p>
+                    <div class="project-tech mono">
+                        <span>Flutter</span>
+                        <span>Dart</span>
+                        <span>Rust</span>
+                    </div>
+                </a>
+
+                <a href="https://github.com/talha-khallid/share-beam" w class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">Minimal Analytics</h3>
+                        <span class="project-icon">↗</span>
+                    </div>
+                    <p class="project-desc">A privacy-first, lightweight analytics script under 1KB. Dashboard built with a stark monochrome aesthetic focusing entirely on data readability.</p>
+                    <div class="project-tech mono">
+                        <span>Go</span>
+                        <span>PostgreSQL</span>
+                        <span>React</span>
+                    </div>
+                </a>
+
+                <a href="https://github.com/talha-khallid/Ciro-App" target="_blank" rel="noopener noreferrer" class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">Ciro App</h3>
+                        <span class="project-icon">↗</span>
+                    </div>
+                    <p class="project-desc">An intelligent, real-time weather and crisis monitoring mobile application. It bridges the gap between traditional meteorological data and hyper-local, user-generated reports utilizing a multi-agent AI workflow.</p>
+                    <div class="project-tech mono">
+                        <span>Flutter</span>
+                        <span>Django</span>
+                        <span>AI</span>
+                    </div>
+                </a>
+
+                <a href="https://github.com/talha-khallid/BlockX" target="_blank" rel="noopener noreferrer" class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">BlockX</h3>
+                        <span class="project-icon">↗</span>
+                    </div>
+                    <p class="project-desc">A high-performance network configuration and site management tool for Google Chrome. It enforces content filtering, search engine safety policies, and domain restrictions with zero resource lag.</p>
+                    <div class="project-tech mono">
+                        <span>JavaScript</span>
+                        <span>Chrome Extension</span>
+                    </div>
+                </a>
+
+                <a href="https://github.com/talha-khallid/Luxe-Perfume" target="_blank" rel="noopener noreferrer" class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">Luxe Perfume</h3>
+                        <span class="project-icon">↗</span>
+                    </div>
+                    <p class="project-desc">A premium e-commerce platform designed for discovering and purchasing luxury fragrances, focusing on an elegant user interface and seamless shopping experience.</p>
+                    <div class="project-tech mono">
+                        <span>Web</span>
+                        <span>E-commerce</span>
+                        <span>UI/UX</span>
+                    </div>
+                </a>
+
+                <div class="project-card" style="cursor: default;">
+                    <div class="project-header">
+                        <h3 class="project-title">Proomo</h3>
+                    </div>
+                    <p class="project-desc">A platform for influencers selling their promotional offers. A Django-based application for managing influencer profiles, social accounts, and available ad spaces.</p>
+                    <div class="project-tech mono">
+                        <span>Django</span>
+                        <span>Python</span>
+                        <span>Jinja</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Experience -->
+        <section id="experience">
+            <h2 class="section-title mono">Experience</h2>
+            
+            <div class="exp-item">
+                <div class="exp-date mono">2023 — Present</div>
                 <div>
-                    <div class="section-header-standard">Featured Works</div>
-                    <h2>Selected Projects</h2>
+                    <h3 class="exp-role">Senior Software Engineer</h3>
+                    <div class="exp-company">Tech Startup Inc.</div>
+                    <p class="exp-desc">Led the architectural transition from a monolithic API to a high-throughput microservices architecture. Improved CI/CD pipeline speed by 40%.</p>
                 </div>
-                <a href="https://github.com/Talhakhalidawan" target="_blank" class="pill-btn">View GitHub</a>
             </div>
-            <div class="works-grid">
-                
-                <a href="https://github.com/Talhakhalidawan/LingoQuest" target="_blank" class="work-card">
-                    <div class="work-img-container">
-                        <img src="https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&q=80&w=600&h=375" alt="LingoQuest" class="work-img">
-                    </div>
-                    <div class="work-info">
-                        <div>
-                            <h4>LingoQuest</h4>
-                            <p>AI-Assisted Language Mobile App</p>
-                        </div>
-                    </div>
-                </a>
-                
-                <a href="https://github.com/Talhakhalidawan/Real-Time-Aerial-Object-Detector" target="_blank" class="work-card">
-                    <div class="work-img-container">
-                        <img src="https://images.unsplash.com/photo-1579975096649-e773152b04cb?auto=format&fit=crop&q=80&w=600&h=375" alt="Aerial-Object Detector" class="work-img">
-                    </div>
-                    <div class="work-info">
-                        <div>
-                            <h4>Aerial-Object Detector</h4>
-                            <p>Computer Vision Tracking — YOLOv5</p>
-                        </div>
-                    </div>
-                </a>
-                
-                <a href="https://github.com/Talhakhalidawan/Gatherhub" target="_blank" class="work-card">
-                    <div class="work-img-container">
-                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=600&h=375" alt="GatherHub" class="work-img">
-                    </div>
-                    <div class="work-info">
-                        <div>
-                            <h4>GatherHub</h4>
-                            <p>Social Web Ecosystem — Django</p>
-                        </div>
-                    </div>
-                </a>
-                
-                <a href="https://github.com/Talhakhalidawan/DevSnippets" target="_blank" class="work-card">
-                    <div class="work-img-container">
-                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=600&h=375" alt="DevSnippets" class="work-img">
-                    </div>
-                    <div class="work-info">
-                        <div>
-                            <h4>DevSnippets</h4>
-                            <p>Browser Static Utility Tool</p>
-                        </div>
-                    </div>
-                </a>
 
+            <div class="exp-item">
+                <div class="exp-date mono">2021 — 2023</div>
+                <div>
+                    <h3 class="exp-role">Full Stack Developer</h3>
+                    <div class="exp-company">Digital Agency</div>
+                    <p class="exp-desc">Developed interactive, highly performant web experiences for enterprise clients. Mentored junior developers and instituted strict code review guidelines.</p>
+                </div>
             </div>
+
         </section>
 
-        <!-- Experience Section -->
-        <section id="experience" class="section-padding scroll-reveal">
-            <div class="section-header-standard">Work & Impact</div>
-            <div class="experience-list">
-                
-                <div class="experience-item">
-                    <div class="experience-year">2024 - Present</div>
-                    <div class="experience-role">
-                        <h4>Freelance Full-Stack Developer @ Global Clients</h4>
-                        <p>Partnered with international clients to design and deploy custom full-stack solutions. Handled database modeling, secure API structures, Django backends, and responsive client builds.</p>
-                    </div>
-                </div>
-
-                <div class="experience-item">
-                    <div class="experience-year">2023 - 2024</div>
-                    <div class="experience-role">
-                        <h4>Software Engineer Intern @ IT Vision Solutions</h4>
-                        <p>Engineered responsive mobile applications using React Native. Crafted administrative panels and custom Windows desktop applications using Tkinter, accelerating back-office processes.</p>
-                    </div>
-                </div>
-
-                <div class="experience-item">
-                    <div class="experience-year">Ongoing</div>
-                    <div class="experience-role">
-                        <h4>AI Engineer & Integrator @ Vibe Coding</h4>
-                        <p>Pioneering modern hybrid developer workflows. Designing structured prompting mechanisms and utilizing LLM parsers to compile entire operational programs from scratch.</p>
-                    </div>
-                </div>
-                
-            </div>
-        </section>
-
-        <!-- GitHub Pulse -->
-        <section class="section-padding scroll-reveal">
-            <div class="github-box">
-                <div class="github-header">GITHUB PULSE</div>
-                <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem; font-weight: 600;">2,481 contributions in the last year</p>
-                <div class="github-grid-mock" id="github-pulse-grid">
-                    <!-- Javascript populates squares here -->
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="section-padding scroll-reveal">
-            <div class="section-header-standard">Get In Touch</div>
+        <!-- Contact -->
+        <section id="contact">
+            <h2 class="section-title mono">Contact</h2>
+            <p>I'm currently looking for new opportunities. Whether you have a question or just want to say hi, I'll try my best to get back to you.</p>
             
-            <ul class="contact-links">
-                <li><a href="https://github.com/Talhakhalidawan/" target="_blank">Github <span>&#8599;</span></a></li>
-                <li><a href="https://www.linkedin.com/in/talha-khalid-920910323/" target="_blank">LinkedIn <span>&#8599;</span></a></li>
-                <li><a href="https://x.com/talha_khalid_6" target="_blank">Twitter <span>&#8599;</span></a></li>
-            </ul>
-
-            <div class="huge-mail-wrapper">
-                <div id="copy-tooltip" class="copy-tooltip">Click to copy</div>
-                <a href="#" id="huge-email-link" class="huge-mail">TALHAKHALIDLKP@GMAIL.COM</a>
+            <div class="contact-links">
+                <a href="mailto:hello@example.com" class="contact-link">
+                    <span class="mono">Email</span>
+                    <span>hello@example.com</span>
+                </a>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="contact-link">
+                    <span class="mono">GitHub</span>
+                    <span>@username</span>
+                </a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="contact-link">
+                    <span class="mono">LinkedIn</span>
+                    <span>in/username</span>
+                </a>
             </div>
         </section>
 
-        <footer class="scroll-reveal">
-            <div>&copy; 2026 Talha Khalid. All Rights Reserved.</div>
-            <div>Built with minimalist HTML & CSS</div>
-        </footer>
     </div>
 
-    <!-- Complete Integrated JS Block -->
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            // 1. Preloader Logic
-            const preloader = document.querySelector('.preloader');
-            if (preloader) {
-                setTimeout(() => {
-                    preloader.style.opacity = '0';
-                    setTimeout(() => {
-                        preloader.style.display = 'none';
-                    }, 800);
-                }, 1500); 
-            }
-
-            // 2. Scroll Reveal Animations
-            const reveals = document.querySelectorAll('.scroll-reveal');
-            const revealCheck = () => {
-                const triggerBottom = window.innerHeight * 0.88;
-                reveals.forEach(el => {
-                    const top = el.getBoundingClientRect().top;
-                    if (top < triggerBottom) {
-                        el.classList.add('active');
-                    }
-                });
-            };
-            window.addEventListener('scroll', revealCheck);
-            revealCheck(); 
-
-            // 3. Navbar Active Indicator Logic
-            const navItems = document.querySelectorAll('.nav-pill-container .nav-item');
-            const indicator = document.getElementById('nav-active-indicator');
-            const sections = document.querySelectorAll('section, header');
-
-            function updateIndicator(activeItem) {
-                if(!activeItem || !indicator) return;
-                const rect = activeItem.getBoundingClientRect();
-                const containerRect = activeItem.parentElement.getBoundingClientRect();
-                
-                indicator.style.width = `${rect.width}px`;
-                indicator.style.left = `${rect.left - containerRect.left}px`;
-                
-                navItems.forEach(item => item.classList.remove('active'));
-                activeItem.classList.add('active');
-            }
-
-            if(navItems.length > 0) {
-                setTimeout(() => updateIndicator(navItems[0]), 100);
-            }
-
-            window.addEventListener('scroll', () => {
-                let current = '';
-                const scrollY = window.scrollY;
-                
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop - 150;
-                    const sectionHeight = section.offsetHeight;
-                    if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
-                        current = section.getAttribute('id');
-                    }
-                });
-                
-                if (scrollY < 100) {
-                    updateIndicator(navItems[0]); 
-                    return;
-                }
-                
-                navItems.forEach(item => {
-                    if (item.getAttribute('href') === `#${current}`) {
-                        updateIndicator(item);
-                    }
-                });
-            });
-
-            navItems.forEach(item => {
-                item.addEventListener('mouseenter', (e) => {
-                    updateIndicator(e.target);
-                });
-                
-                item.addEventListener('mouseleave', () => {
-                    let current = '';
-                    const scrollY = window.scrollY;
-                    if(scrollY < 100) {
-                        updateIndicator(navItems[0]);
-                        return;
-                    }
-                    sections.forEach(section => {
-                        const sectionTop = section.offsetTop - 150;
-                        const sectionHeight = section.offsetHeight;
-                        if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
-                            current = section.getAttribute('id');
-                        }
-                    });
-                    let activeItem = Array.from(navItems).find(i => i.getAttribute('href') === `#${current}`);
-                    if(!activeItem) activeItem = navItems[0];
-                    updateIndicator(activeItem);
-                });
-            });
-
-            // 4. Mobile Nav Toggle
-            const mobileToggle = document.getElementById('mobile-nav-toggle');
-            const mobileDropdown = document.getElementById('mobile-dropdown');
-            const mobileItems = document.querySelectorAll('.mobile-nav-item');
-
-            if(mobileToggle && mobileDropdown) {
-                mobileToggle.addEventListener('click', () => {
-                    mobileDropdown.classList.toggle('show');
-                });
-
-                mobileItems.forEach(item => {
-                    item.addEventListener('click', () => {
-                        mobileDropdown.classList.remove('show');
-                    });
-                });
-            }
-
-            // 5. Simulated Interactive GitHub Contribution Pulse Grid
-            const pulseGrid = document.getElementById('github-pulse-grid');
-            if (pulseGrid) {
-                const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-                const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-                
-                for (let i = 0; i < 180; i++) {
-                    const sq = document.createElement('div');
-                    sq.className = 'gh-sq';
-                    
-                    const randVal = Math.random();
-                    let contribs = 0;
-                    let colorClass = 'var(--github-light)';
-                    
-                    if (randVal > 0.88) {
-                        contribs = Math.floor(Math.random() * 4) + 6; 
-                        colorClass = 'var(--github-4)';
-                    } else if (randVal > 0.72) {
-                        contribs = Math.floor(Math.random() * 3) + 3; 
-                        colorClass = 'var(--github-3)';
-                    } else if (randVal > 0.52) {
-                        contribs = Math.floor(Math.random() * 2) + 2; 
-                        colorClass = 'var(--github-2)';
-                    } else if (randVal > 0.3) {
-                        contribs = 1; 
-                        colorClass = 'var(--github-1)';
-                    }
-                    
-                    sq.style.backgroundColor = colorClass;
-                    
-                    const date = new Date();
-                    date.setDate(date.getDate() - (180 - i));
-                    const dateString = `${days[date.getDay()]}, ${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
-                    
-                    const label = contribs === 0 
-                        ? `No contributions on ${dateString}` 
-                        : `${contribs} contribution${contribs > 1 ? 's' : ''} on ${dateString}`;
-                    
-                    sq.addEventListener('mouseenter', (e) => {
-                        let tooltip = document.querySelector('.gh-tooltip');
-                        if (!tooltip) {
-                            tooltip = document.createElement('div');
-                            tooltip.className = 'gh-tooltip';
-                            tooltip.style.position = 'absolute';
-                            tooltip.style.backgroundColor = '#0f172a';
-                            tooltip.style.color = '#ffffff';
-                            tooltip.style.padding = '6px 12px';
-                            tooltip.style.borderRadius = '6px';
-                            tooltip.style.fontSize = '11px';
-                            tooltip.style.fontWeight = '700';
-                            tooltip.style.zIndex = '99999';
-                            tooltip.style.pointerEvents = 'none';
-                            tooltip.style.opacity = '0';
-                            tooltip.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
-                            tooltip.style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)';
-                            tooltip.style.transform = 'translateY(5px)';
-                            document.body.appendChild(tooltip);
-                        }
-                        
-                        tooltip.textContent = label;
-                        tooltip.style.opacity = '1';
-                        tooltip.style.transform = 'translateY(0)';
-                        
-                        const rect = sq.getBoundingClientRect();
-                        const tooltipX = rect.left + window.scrollX - tooltip.offsetWidth / 2 + rect.width / 2;
-                        const tooltipY = rect.top + window.scrollY - tooltip.offsetHeight - 8;
-                        
-                        tooltip.style.left = `${tooltipX}px`;
-                        tooltip.style.top = `${tooltipY}px`;
-                    });
-                    
-                    sq.addEventListener('mouseleave', () => {
-                        const tooltip = document.querySelector('.gh-tooltip');
-                        if (tooltip) {
-                            tooltip.style.opacity = '0';
-                            tooltip.style.transform = 'translateY(5px)';
-                        }
-                    });
-                    
-                    pulseGrid.appendChild(sq);
-                }
-            }
-
-            // 6. Giant Email Connection Click-to-Copy Utility
-            const emailLink = document.getElementById('huge-email-link');
-            const copyTooltip = document.getElementById('copy-tooltip');
-            
-            if (emailLink && copyTooltip) {
-                emailLink.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const rawEmail = 'talhakhalidlkp@gmail.com';
-                    
-                    navigator.clipboard.writeText(rawEmail).then(() => {
-                        copyTooltip.textContent = 'Copied to clipboard!';
-                        copyTooltip.classList.add('show');
-                        
-                        setTimeout(() => {
-                            copyTooltip.classList.remove('show');
-                            setTimeout(() => {
-                                copyTooltip.textContent = 'Click to copy';
-                            }, 400);
-                        }, 2500);
-                    });
-                });
-
-                emailLink.addEventListener('mouseenter', () => {
-                    copyTooltip.classList.add('show');
-                });
-
-                emailLink.addEventListener('mouseleave', () => {
-                    if (copyTooltip.textContent !== 'Copied to clipboard!') {
-                        copyTooltip.classList.remove('show');
-                    }
-                });
-            }
-        });
-    </script>
 </body>
 </html>
