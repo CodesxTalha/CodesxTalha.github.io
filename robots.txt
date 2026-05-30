@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://talhakhalid.dev/sitemap.xml
+Sitemap: talha-khallid.github.io/sitemap.xml
