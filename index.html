@@ -166,10 +166,57 @@
         }
 
         /* Projects */
+        .projects-container {
+            position: relative;
+        }
+
         .projects-grid {
             display: flex;
             flex-direction: column;
             gap: 1rem;
+            max-height: 450px;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .projects-grid.expanded {
+            max-height: 2000px;
+        }
+
+        .projects-fade {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 120px;
+            background: linear-gradient(to bottom, transparent, var(--bg));
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .projects-grid.expanded ~ .projects-fade {
+            opacity: 0;
+        }
+
+        .expand-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 1rem;
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: border-color 0.2s ease, color 0.2s ease;
+        }
+
+        .expand-btn:hover {
+            border-color: var(--border-hover);
+            color: var(--accent);
         }
 
         .project-card {
@@ -266,6 +313,26 @@
             font-size: 0.95rem;
         }
 
+        ul.exp-desc {
+            list-style-type: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        ul.exp-desc li {
+            position: relative;
+            padding-left: 1rem;
+            color: var(--text-muted);
+        }
+
+        ul.exp-desc li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
         /* Contact */
         .contact p {
             margin-bottom: 2rem;
@@ -327,31 +394,19 @@
         <!-- Projects -->
         <section id="projects">
             <h2 class="section-title mono">Projects</h2>
-            <div class="projects-grid">
+            <div class="projects-container">
+                <div class="projects-grid" id="projectsGrid">
                 
                 <a href="#" class="project-card">
                     <div class="project-header">
                         <h3 class="project-title">Share Beam</h3>
                         <span class="project-icon">↗</span>
                     </div>
-                    <p class="project-desc">Share Beam is a cross platform local files/text and all other data sharing application designed to make multi device wroflow seamless and easy. offering clean and fast delievery between multiple devices, it's very fast and has very clean user interface matching with whatsapp to make the sharing easy, it connection and sharing speed is far better then the other file sharing apps like Zapiya and Shareit.</p>
+                    <p class="project-desc">A fast and seamless cross-platform local file sharing application. It offers a clean, intuitive user interface and provides significantly faster data transfer speeds compared to traditional sharing apps.</p>
                     <div class="project-tech mono">
                         <span>Flutter</span>
                         <span>Dart</span>
                         <span>Rust</span>
-                    </div>
-                </a>
-
-                <a href="https://github.com/talha-khallid/share-beam" w class="project-card">
-                    <div class="project-header">
-                        <h3 class="project-title">Minimal Analytics</h3>
-                        <span class="project-icon">↗</span>
-                    </div>
-                    <p class="project-desc">A privacy-first, lightweight analytics script under 1KB. Dashboard built with a stark monochrome aesthetic focusing entirely on data readability.</p>
-                    <div class="project-tech mono">
-                        <span>Go</span>
-                        <span>PostgreSQL</span>
-                        <span>React</span>
                     </div>
                 </a>
 
@@ -362,9 +417,10 @@
                     </div>
                     <p class="project-desc">An intelligent, real-time weather and crisis monitoring mobile application. It bridges the gap between traditional meteorological data and hyper-local, user-generated reports utilizing a multi-agent AI workflow.</p>
                     <div class="project-tech mono">
+                        <span>Python</span>
+                        <span>Dart</span>
                         <span>Flutter</span>
                         <span>Django</span>
-                        <span>AI</span>
                     </div>
                 </a>
 
@@ -387,9 +443,12 @@
                     </div>
                     <p class="project-desc">A premium e-commerce platform designed for discovering and purchasing luxury fragrances, focusing on an elegant user interface and seamless shopping experience.</p>
                     <div class="project-tech mono">
-                        <span>Web</span>
-                        <span>E-commerce</span>
-                        <span>UI/UX</span>
+                        <span>Python</span>
+                        <span>Django</span>
+                        <span>Jinja</span>
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JavaScript</span>
                     </div>
                 </a>
 
@@ -399,13 +458,19 @@
                     </div>
                     <p class="project-desc">A platform for influencers selling their promotional offers. A Django-based application for managing influencer profiles, social accounts, and available ad spaces.</p>
                     <div class="project-tech mono">
-                        <span>Django</span>
                         <span>Python</span>
+                        <span>Django</span>
                         <span>Jinja</span>
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JavaScript</span>
                     </div>
                 </div>
 
+                </div>
+                <div class="projects-fade" id="projectsFade"></div>
             </div>
+            <button class="expand-btn mono" id="expandBtn">Show more</button>
         </section>
 
         <!-- Experience -->
@@ -413,20 +478,43 @@
             <h2 class="section-title mono">Experience</h2>
             
             <div class="exp-item">
-                <div class="exp-date mono">2023 — Present</div>
+                <div class="exp-date mono">Jan 2024 — Present</div>
                 <div>
-                    <h3 class="exp-role">Senior Software Engineer</h3>
-                    <div class="exp-company">Tech Startup Inc.</div>
-                    <p class="exp-desc">Led the architectural transition from a monolithic API to a high-throughput microservices architecture. Improved CI/CD pipeline speed by 40%.</p>
+                    <h3 class="exp-role">Freelance Software Developer</h3>
+                    <div class="exp-company">Self-employed</div>
+                    <ul class="exp-desc">
+                        <li>Collaborated with clients to gather requirements and provide tailored software solutions.</li>
+                        <li>Delivered custom web and mobile applications using technologies such as Django, Flask, and React Native.</li>
+                        <li>Managed project timelines and communicated effectively to ensure client satisfaction.</li>
+                        <li>Continuously learned and adapted to new technologies to meet diverse client needs.</li>
+                    </ul>
                 </div>
             </div>
 
             <div class="exp-item">
-                <div class="exp-date mono">2021 — 2023</div>
+                <div class="exp-date mono">Ongoing</div>
                 <div>
-                    <h3 class="exp-role">Full Stack Developer</h3>
-                    <div class="exp-company">Digital Agency</div>
-                    <p class="exp-desc">Developed interactive, highly performant web experiences for enterprise clients. Mentored junior developers and instituted strict code review guidelines.</p>
+                    <h3 class="exp-role">Vibe Coding</h3>
+                    <div class="exp-company">Self-driven</div>
+                    <ul class="exp-desc">
+                        <li>Skilled in working with AI technologies and proficient in prompt engineering.</li>
+                        <li>Experienced in creating end to end applications using AI.</li>
+                        <li>Able to work effectively with new technologies, including unfamiliar programming languages and frameworks with the help of AI.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="exp-item">
+                <div class="exp-date mono">Nov 2023 — Jan 2024</div>
+                <div>
+                    <h3 class="exp-role">Software Engineer Intern</h3>
+                    <div class="exp-company"><a href="https://itvisionsolutions.com/" target="_blank">IT Vision Solutions</a></div>
+                    <ul class="exp-desc">
+                        <li>Developed mobile applications using Kivy and later transitioned to React Native for cross-platform development.</li>
+                        <li>Created user interfaces for Windows applications using Tkinter, enhancing user experience.</li>
+                        <li>Collaborated with team members to deliver projects in a fast-paced environment, meeting tight deadlines.</li>
+                        <li>Enhanced problem-solving skills by addressing real-world challenges and debugging complex issues.</li>
+                    </ul>
                 </div>
             </div>
 
@@ -455,5 +543,18 @@
 
     </div>
 
+    <script>
+        document.getElementById('expandBtn').addEventListener('click', function() {
+            var grid = document.getElementById('projectsGrid');
+            var btn = this;
+            if (grid.classList.contains('expanded')) {
+                grid.classList.remove('expanded');
+                btn.textContent = 'Show more';
+            } else {
+                grid.classList.add('expanded');
+                btn.textContent = 'Show less';
+            }
+        });
+    </script>
 </body>
 </html>
