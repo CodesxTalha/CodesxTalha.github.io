@@ -108,6 +108,27 @@
             color: var(--text-main);
         }
 
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-main);
+            padding: 0.5rem;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            transition: border-color 0.2s ease, color 0.2s ease;
+        }
+
+        .nav-toggle:hover {
+            border-color: var(--border-hover);
+            color: var(--accent);
+        }
+
+        .chevron-icon {
+            transition: transform 0.3s ease;
+        }
+
         /* Sections */
         section {
             margin-bottom: 5rem;
@@ -284,6 +305,38 @@
         }
 
         @media (max-width: 600px) {
+            nav {
+                flex-wrap: wrap;
+                margin-bottom: 4rem;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                width: 100%;
+                justify-content: space-around;
+                max-height: 0;
+                overflow: hidden;
+                opacity: 0;
+                gap: 1rem;
+                margin-top: 0;
+                transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease, margin 0.3s ease, padding 0.3s ease;
+            }
+
+            .nav-links.open {
+                max-height: 200px;
+                opacity: 1;
+                margin-top: 1rem;
+                border-top: 1px solid var(--border);
+                padding-top: 1rem;
+            }
+
+            .nav-toggle.open .chevron-icon {
+                transform: rotate(180deg);
+            }
+
             .exp-item {
                 grid-template-columns: 1fr;
                 gap: 0.5rem;
@@ -373,7 +426,12 @@
         <!-- Navigation -->
         <nav>
             <div class="logo">Talha<span class="logo-dot">_</span></div>
-            <div class="nav-links mono">
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle Navigation">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="chevron-icon">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </button>
+            <div class="nav-links mono" id="navLinks">
                 <a href="#about">about</a>
                 <a href="#projects">projects</a>
                 <a href="#experience">experience</a>
@@ -534,7 +592,7 @@
         <!-- Contact -->
         <section id="contact">
             <h2 class="section-title mono">Contact</h2>
-            <p class="desc">I'm currently looking for new opportunities. Whether you have a question or just want to say hi, I'll try my best to get back to you.</p>
+            <p class="desc">I'm currently open for new opportunities. Whether you have a question or just want to say hi, I'll try my best to get back to you.</p>
             
             <div class="contact-links">
                 <a href="mailto:talhakhalidlkp@gmail.com" target="_blank" rel="noopener noreferrer" class="contact-link">
@@ -565,6 +623,23 @@
                 grid.classList.add('expanded');
                 btn.textContent = 'Show less';
             }
+        });
+
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+        
+        navToggle.addEventListener('click', function() {
+            navToggle.classList.toggle('open');
+            navLinks.classList.toggle('open');
+        });
+
+        // Close menu when a link is clicked
+        const navItems = navLinks.querySelectorAll('a');
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                navToggle.classList.remove('open');
+                navLinks.classList.remove('open');
+            });
         });
     </script>
 </body>
