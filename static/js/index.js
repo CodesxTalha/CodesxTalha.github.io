@@ -1,5 +1,10 @@
 // Immediately start the loader logic to run concurrently with page rendering
 (function() {
+    // Immediately apply saved theme to avoid flashing
+    if (localStorage.getItem('theme') === 'light') {
+        document.body.classList.add('light-mode');
+    }
+
     const splash = document.getElementById('splash-screen');
     const bar = document.getElementById('splash-loader-bar');
     const body = document.body;
@@ -90,6 +95,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 navToggle.classList.remove('open');
                 navLinks.classList.remove('open');
             });
+        });
+    }
+
+    // Theme toggle click handler
+    const themeToggle = document.getElementById('themeToggle');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+            if (document.body.classList.contains('light-mode')) {
+                localStorage.setItem('theme', 'light');
+            } else {
+                localStorage.setItem('theme', 'dark');
+            }
         });
     }
 });

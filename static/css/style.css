@@ -12,6 +12,16 @@
     --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
+body.light-mode {
+    --bg: #faf8f5;
+    --surface: #f2efea;
+    --border: #e5dfd5;
+    --border-hover: #c8bcab;
+    --text-main: #1c1b1a;
+    --text-muted: #706b63;
+    --accent: #a3824b;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -86,6 +96,7 @@ nav {
 .nav-links {
     display: flex;
     gap: 1.5rem;
+    align-items: center;
 }
 
 .nav-links a {
@@ -95,6 +106,37 @@ nav {
 
 .nav-links a:hover {
     color: var(--text-main);
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin-left: 0.25rem;
+    transition: color 0.15s ease;
+}
+
+.theme-toggle:hover {
+    color: var(--text-main);
+}
+
+.theme-toggle .sun-icon {
+    display: block;
+}
+.theme-toggle .moon-icon {
+    display: none;
+}
+
+body.light-mode .theme-toggle .sun-icon {
+    display: none;
+}
+body.light-mode .theme-toggle .moon-icon {
+    display: block;
 }
 
 .nav-toggle {
