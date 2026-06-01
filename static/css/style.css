@@ -1,25 +1,24 @@
 :root {
-    /* Black/White with a subtle warm/yellowish undertone */
     --bg: #0c0c0b;
     --surface: #141413;
     --border: #262523;
     --border-hover: #45433d;
     --text-main: #ecebe6;
     --text-muted: #8b8a85;
-    --accent: #dcd0ae; /* Very subtle yellowish tone */
+    --accent: #ffd596;
     
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
 body.light-mode {
-    --bg: #fdfaf6;
-    --surface: #f3efe9;
-    --border: #e8e3dc;
-    --border-hover: #d2ccbf;
-    --text-main: #2b2a28;
-    --text-muted: #7a7771;
-    --accent: #b5924f;
+    --bg: #fcfaf8;
+    --surface: #f4f1e8;
+    --border: #e8dfd3;
+    --border-hover: #cfc4b2;
+    --text-main: #3d362d;
+    --text-muted: #8f8576;
+    --accent: #b86e00;
 }
 
 * {
