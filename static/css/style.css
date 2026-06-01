@@ -266,24 +266,25 @@ section {
 
 .hero h1 {
     font-size: 1.75rem;
-    margin-bottom: 1rem;
+    margin-bottom: .75rem;
 }
 
 .hero p {
     font-size: 1rem;
     max-width: 600px;
-    margin-bottom: 1.5rem;
 }
 
 .status {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.25rem 0.75rem;
+    font-size: 0.85rem;
+    padding: 0.2rem 0.7rem;
     background-color: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 4px;
+    border-radius: 6px;
     color: var(--text-muted);
+    margin-bottom: 0.75rem;
 }
 
 .status-dot {
@@ -291,6 +292,8 @@ section {
     height: 6px;
     border-radius: 50%;
     background-color: var(--accent);
+    border: 2px solid var(--border);
+    box-sizing: content-box;
 }
 
 /* Projects */
