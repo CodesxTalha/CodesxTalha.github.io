@@ -59,6 +59,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    const expExpandBtn = document.getElementById('expExpandBtn');
+    if (expExpandBtn) {
+        expExpandBtn.addEventListener('click', function() {
+            var grid = document.getElementById('expGrid');
+            var btn = this;
+            if (grid.classList.contains('expanded')) {
+                grid.classList.remove('expanded');
+                btn.innerHTML = 'show more';
+            } else {
+                grid.classList.add('expanded');
+                btn.innerHTML = 'show less';
+            }
+        });
+    }
+
     const navToggle = document.getElementById('navToggle');
     const navLinks = document.getElementById('navLinks');
     
