@@ -13,13 +13,13 @@
 }
 
 body.light-mode {
-    --bg: #faf8f5;
-    --surface: #f2efea;
-    --border: #e5dfd5;
-    --border-hover: #c8bcab;
-    --text-main: #1c1b1a;
-    --text-muted: #706b63;
-    --accent: #a3824b;
+    --bg: #fdfaf6;
+    --surface: #f3efe9;
+    --border: #e8e3dc;
+    --border-hover: #d2ccbf;
+    --text-main: #2b2a28;
+    --text-muted: #7a7771;
+    --accent: #b5924f;
 }
 
 * {
@@ -116,34 +116,105 @@ nav {
     margin-left: 1.5rem;
 }
 
-.theme-toggle {
-    background: none;
-    border: none;
+.themeToggle {
     color: var(--text-muted);
-    cursor: pointer;
+    width: 18px;
+    height: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0.5rem;
     transition: color 0.15s ease;
 }
 
-.theme-toggle:hover {
+.themeToggle:hover {
     color: var(--text-main);
 }
 
-.theme-toggle .sun-icon {
-    display: block;
-}
-.theme-toggle .moon-icon {
-    display: none;
+.st-sunMoonThemeToggleBtn {
+    position: relative;
+    cursor: pointer;
 }
 
-body.light-mode .theme-toggle .sun-icon {
-    display: none;
+.st-sunMoonThemeToggleBtn .themeToggleInput {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    position: absolute;
 }
-body.light-mode .theme-toggle .moon-icon {
-    display: block;
+
+.st-sunMoonThemeToggleBtn svg {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.4s ease;
+    transform: rotate(40deg);
+}
+
+.st-sunMoonThemeToggleBtn svg .sunMoon {
+    transform-origin: center center;
+    transition: inherit;
+    transform: scale(1);
+}
+
+.st-sunMoonThemeToggleBtn svg .sunRay {
+    transform-origin: center center;
+    transform: scale(0);
+}
+
+.st-sunMoonThemeToggleBtn svg mask > circle {
+    transition: transform 0.64s cubic-bezier(0.41, 0.64, 0.32, 1.575);
+    transform: translate(0px, 0px);
+}
+
+.st-sunMoonThemeToggleBtn svg .sunRay2 {
+    animation-delay: 0.05s !important;
+}
+.st-sunMoonThemeToggleBtn svg .sunRay3 {
+    animation-delay: 0.1s !important;
+}
+.st-sunMoonThemeToggleBtn svg .sunRay4 {
+    animation-delay: 0.17s !important;
+}
+.st-sunMoonThemeToggleBtn svg .sunRay5 {
+    animation-delay: 0.25s !important;
+}
+.st-sunMoonThemeToggleBtn svg .sunRay6 {
+    animation-delay: 0.29s !important;
+}
+
+.themeToggleInput:checked + svg {
+    transform: rotate(90deg);
+}
+.themeToggleInput:checked + svg mask > circle {
+    transform: translate(16px, -3px);
+}
+.themeToggleInput:checked + svg .sunMoon {
+    transform: scale(0.55);
+}
+.themeToggleInput:checked + svg .sunRay {
+    animation: showRay1832 0.4s ease 0s 1 forwards;
+}
+
+@keyframes showRay1832 {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* View Transitions for Theme Toggle */
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+    z-index: 1;
+}
+::view-transition-new(root) {
+    z-index: 2147483646;
 }
 
 .nav-toggle {
