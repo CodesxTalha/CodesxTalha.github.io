@@ -209,24 +209,39 @@ section {
 }
 
 .expand-btn {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
     width: 100%;
-    text-align: center;
-    padding: 1rem;
-    margin-top: 1rem;
     background: none;
-    border: 1px solid var(--border);
-    color: var(--text-main);
+    border: none;
+    color: var(--text-muted);
     font-family: var(--font-mono);
-    font-size: 0.9rem;
-    border-radius: 6px;
+    font-size: 0.85rem;
     cursor: pointer;
-    transition: border-color 0.2s ease, color 0.2s ease;
+    padding: 2rem 0;
+    margin-top: 1rem;
+    text-transform: lowercase;
+    transition: color 0.15s ease;
+}
+
+.expand-btn::before,
+.expand-btn::after {
+    content: "";
+    height: 1px;
+    flex-grow: 1;
+    background-color: var(--border);
+    transition: background-color 0.15s ease;
 }
 
 .expand-btn:hover {
-    border-color: var(--border-hover);
     color: var(--accent);
+}
+
+.expand-btn:hover::before,
+.expand-btn:hover::after {
+    background-color: var(--border-hover);
 }
 
 .project-card {

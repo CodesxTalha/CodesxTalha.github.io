@@ -51,10 +51,10 @@ document.addEventListener('DOMContentLoaded', () => {
             var btn = this;
             if (grid.classList.contains('expanded')) {
                 grid.classList.remove('expanded');
-                btn.textContent = 'Show more';
+                btn.innerHTML = 'show more';
             } else {
                 grid.classList.add('expanded');
-                btn.textContent = 'Show less';
+                btn.innerHTML = 'show less';
             }
         });
     }
