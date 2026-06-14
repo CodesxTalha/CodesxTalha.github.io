@@ -37,7 +37,7 @@
   }
 
   /* typed role */
-  const roles=['full stack python engineer','python / django developer','flask + web developer','full stack web dev'];
+  const roles=['full stack python engineer','python / django developer','flask + web developer','full stack web dev', 'web & product designer'];
   let ri=0,ci=0,del=false;const rEl=document.getElementById('role');
   function typeRole(){
     const c=roles[ri];rEl.textContent=c.substring(0,ci);
