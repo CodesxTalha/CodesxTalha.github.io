@@ -64,7 +64,7 @@ body::after{content:'';position:fixed;inset:0;z-index:49;pointer-events:none;box
 /* hero ascii */
 .ascii-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -4px}
 .ascii-wrap::-webkit-scrollbar{height:0}
-.ascii{color:var(--grn);font-size:clamp(10px,3.4vw,15px);line-height:1.05;white-space:pre;font-weight:700;letter-spacing:0}
+.ascii{color:var(--grn);font-size:14px;line-height:1.05;white-space:pre;font-weight:700;letter-spacing:0;font-variant-ligatures:none}
 .tag{margin-top:18px;font-size:15px}
 .tag .role{color:var(--cyn)}
 .cursor{display:inline-block;width:9px;height:1.05em;background:var(--grn);vertical-align:-2px;margin-left:3px;animation:blink 1.05s steps(2) infinite}
@@ -150,6 +150,7 @@ body::after{content:'';position:fixed;inset:0;z-index:49;pointer-events:none;box
   .bar .right{margin-left:auto}
   .term{padding:20px 16px 40px;padding-bottom:calc(40px + env(safe-area-inset-bottom))}
   .out{margin-bottom:24px}
+  .ascii{font-size:11px}
   .tag{font-size:14px;word-break:break-word}
   .kv{grid-template-columns:1fr;gap:0}
   .kv .k{margin-top:9px}
