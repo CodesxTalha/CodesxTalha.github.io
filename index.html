@@ -68,7 +68,7 @@ html.light .win{box-shadow:0 20px 50px rgba(0,0,0,.08)}
 /* hero ascii */
 .ascii-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -4px}
 .ascii-wrap::-webkit-scrollbar{height:0}
-.ascii{color:var(--grn);font-size:clamp(7px,1.7vw,15px);line-height:1.05;white-space:pre;font-weight:700;letter-spacing:0}
+.ascii{color:var(--grn);font-size:clamp(10px,3.4vw,15px);line-height:1.05;white-space:pre;font-weight:700;letter-spacing:0}
 .tag{margin-top:18px;font-size:15px}
 .tag .role{color:var(--cyn)}
 .cursor{display:inline-block;width:9px;height:1.05em;background:var(--grn);vertical-align:-2px;margin-left:3px;animation:blink 1.05s steps(2) infinite}
@@ -98,15 +98,18 @@ html.light .tbl tr.proj:hover{background:rgba(31,158,84,.08)}
 .tbl tr.proj:hover .arr{opacity:1;transform:translateX(3px)}
 
 /* experience git log */
-.log{margin-top:10px;border-left:2px solid var(--line);padding-left:0}
-.commit{position:relative;padding:0 0 22px 26px;margin-left:8px}
-.commit::before{content:'';position:absolute;left:-7px;top:6px;width:11px;height:11px;border-radius:50%;background:var(--bg);border:2px solid var(--grn)}
+.log{margin-top:12px;display:grid;gap:10px}
+.commit{position:relative;border:1px solid var(--line);border-radius:8px;padding:14px 16px;transition:border-color .25s,background .25s}
+.commit:hover{border-color:var(--grn);background:rgba(94,243,140,.04)}
+html.light .commit:hover{background:rgba(31,158,84,.05)}
+.commit .top{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 10px}
 .commit .hash{color:var(--yel)}
 .commit .role{color:var(--cyn);font-weight:500}
-.commit .meta{color:var(--dim);font-size:12.5px}
-.commit ul{list-style:none;margin-top:6px}
-.commit li{color:var(--fg)}
-.commit li::before{content:'+ ';color:var(--grn)}
+.commit:hover .role{color:var(--grn)}
+.commit .meta{color:var(--dim);font-size:12.5px;margin-left:auto}
+.commit ul{list-style:none;margin-top:8px}
+.commit li{color:var(--fg);padding-left:16px;position:relative}
+.commit li::before{content:'+';color:var(--grn);position:absolute;left:0}
 
 /* contact */
 .cgrid{margin-top:12px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
@@ -150,8 +153,8 @@ html.light .tbl tr.proj:hover{background:rgba(31,158,84,.08)}
   .tbl .tg{display:block;margin-top:6px}
   .tbl .nm{font-size:15px}
   .tbl .arr{opacity:1;float:right}
-  .commit{padding-left:22px;margin-left:6px}
-  .commit .meta{display:block;margin-top:2px}
+  .commit{padding:12px 14px}
+  .commit .meta{margin-left:0;display:block;margin-top:2px;width:100%}
   .cgrid{grid-template-columns:1fr;gap:9px}
   .cc{padding:14px 15px}
   .cc .val{word-break:break-word}
@@ -163,7 +166,7 @@ html.light .tbl tr.proj:hover{background:rgba(31,158,84,.08)}
 @media(max-width:360px){
   body{font-size:12.5px}
   .term{padding:16px 12px 34px}
-  .ascii{font-size:7px}
+  .ascii{font-size:9px}
 }
 
 /* short landscape phones */
@@ -195,7 +198,7 @@ html.light .tbl tr.proj:hover{background:rgba(31,158,84,.08)}
       <div class="tag"><span class="grn">talha khalid</span> :: <span class="role" id="role"></span><span class="cursor"></span></div>
       <div class="kv">
         <span class="k">status</span><span class="v grn">● available for work</span>
-        <span class="k">stack</span><span class="v">python · django · flutter · react native · ai</span>
+        <span class="k">stack</span><span class="v">python · django · flask · html · css · javascript <span class="dim">+ more</span></span>
         <span class="k">summary</span><span class="v">dev who loves diving into code complexity, ships end-to-end products, and cares about UI/UX.</span>
       </div>
     </div></div>
@@ -233,14 +236,12 @@ html.light .tbl tr.proj:hover{background:rgba(31,158,84,.08)}
     <div class="out">
       <div class="h">experience · since 2023</div>
       <div class="log">
-        <div class="commit"><span class="hash">a1f9c2e</span> <span class="role">Freelance Software Developer</span> <span class="meta">@ self-employed · jan 2024 — present</span>
-          <ul><li>gathered client requirements; shipped tailored solutions</li><li>delivered web + mobile apps in django, flask, react native</li><li>owned timelines + comms to keep clients happy</li><li>continuously adapted to new tech for diverse needs</li></ul></div>
-        <div class="commit"><span class="hash">7b3d018</span> <span class="role">Full Stack Python Engineer</span> <span class="meta">@ yoma org · nov 2025 — apr 2026</span>
-          <ul><li>engineered full-stack solutions on a US-based team</li><li>built + maintained python automation</li></ul></div>
-        <div class="commit"><span class="hash">c0ffee1</span> <span class="role">Vibe Coding</span> <span class="meta">@ self-driven · ongoing</span>
-          <ul><li>strong with AI tooling + prompt engineering</li><li>builds end-to-end apps with AI</li><li>ramps fast on unfamiliar langs/frameworks</li></ul></div>
-        <div class="commit"><span class="hash">9de44a0</span> <span class="role">Software Engineer Intern</span> <span class="meta">@ <a href="https://itvisionsolutions.com/" target="_blank" rel="noopener noreferrer" style="color:var(--cyn);border-bottom:1px solid var(--line)">it vision solutions</a> · nov 2023 — jan 2024</span>
-          <ul><li>mobile apps in kivy, then react native</li><li>windows UIs with tkinter</li><li>sharpened debugging on real-world problems</li></ul></div>
+        <div class="commit"><div class="top"><span class="hash">a1f9c2e</span> <span class="role">Freelance Software Developer</span> <span class="meta">self-employed · jan 2024 — present</span></div>
+          <ul><li>gathered client requirements and shipped tailored web solutions</li><li>built and delivered custom web apps with django and flask</li><li>owned project timelines and client communication end-to-end</li><li>continuously picked up new tools to fit each project's needs</li></ul></div>
+        <div class="commit"><div class="top"><span class="hash">7b3d018</span> <span class="role">Full Stack Python Engineer</span> <span class="meta">yoma org · nov 2025 — apr 2026</span></div>
+          <ul><li>engineered full-stack solutions as part of a US-based team</li><li>built and maintained python-based automation</li></ul></div>
+        <div class="commit"><div class="top"><span class="hash">9de44a0</span> <span class="role">Software Engineer Intern</span> <span class="meta"><a href="https://itvisionsolutions.com/" target="_blank" rel="noopener noreferrer" style="color:var(--cyn);border-bottom:1px solid var(--line)">it vision solutions</a> · nov 2023 — jan 2024</span></div>
+          <ul><li>built desktop UIs in python with tkinter</li><li>explored mobile app development with kivy</li><li>sharpened debugging on real-world problems</li></ul></div>
       </div>
     </div></div>
 
@@ -275,10 +276,10 @@ html.light .tbl tr.proj:hover{background:rgba(31,158,84,.08)}
 
   /* ascii name */
   const art=[
-" _____  _    _     _   _   _    ",
-"|_   _|/ \\  | |   | | | | / \\   ",
-"  | | / _ \\ | |   | |_| |/ _ \\  ",
-"  | |/ ___ \\| |___|  _  / ___ \\ ",
+" _____  _    _     _   _    _    ",
+"|_   _|/ \\  | |   | | | |  / \\   ",
+"  | | / _ \\ | |   | |_| | / _ \\  ",
+"  | |/ ___ \\| |___|  _  |/ ___ \\ ",
 "  |_/_/   \\_\\_____|_| |_/_/   \\_\\"
   ].join('\n');
   document.getElementById('ascii').textContent=art;
@@ -286,9 +287,9 @@ html.light .tbl tr.proj:hover{background:rgba(31,158,84,.08)}
   /* boot sequence */
   const lines=[
     '[ ok ] mounting /dev/talha ...',
-    '[ ok ] loading kernel: python, django, flutter, dart, rust',
-    '[ ok ] starting service: full-stack-engineer.service',
-    '[ ok ] enabling module: ai-automation',
+    '[ ok ] loading kernel: python, django, flask, html, css, js',
+    '[ ok ] starting service: full-stack-python.service',
+    '[ ok ] enabling module: web-development',
     '[ ok ] network: github / linkedin / threads reachable',
     '[ ok ] resolving identity ... talha khalid',
     '',
@@ -309,7 +310,7 @@ html.light .tbl tr.proj:hover{background:rgba(31,158,84,.08)}
   }
 
   /* typed role */
-  const roles=['full stack software engineer','python / django developer','flutter & react native dev','ai automation builder'];
+  const roles=['full stack python engineer','python / django developer','flask + web developer','full stack web dev'];
   let ri=0,ci=0,del=false;const rEl=document.getElementById('role');
   function typeRole(){
     const c=roles[ri];rEl.textContent=c.substring(0,ci);
