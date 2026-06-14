@@ -124,6 +124,23 @@ html.light .commit:hover{background:rgba(31,158,84,.05)}
 .prompt-line::before{content:'➜ ';color:var(--grn)}
 .prompt-line .bk{display:inline-block;width:9px;height:1.05em;background:var(--fg);vertical-align:-2px;animation:blink 1.05s steps(2) infinite}
 
+/* interactive console */
+.console{margin-top:12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);padding:14px 16px;min-height:120px;max-height:340px;overflow-y:auto;cursor:text;transition:border-color .2s}
+.console:focus,.console:focus-within{outline:none;border-color:var(--grn)}
+.console::-webkit-scrollbar{width:8px}
+.console::-webkit-scrollbar-thumb{background:var(--line);border-radius:8px}
+#clog .echo{color:var(--dim);margin-top:6px}
+#clog .echo .ps1{color:var(--grn)}
+#clog .res{color:var(--fg);white-space:pre-wrap;word-break:break-word}
+#clog .res a{color:var(--cyn);border-bottom:1px solid var(--line)}
+#clog .res .ok{color:var(--grn)}
+#clog .res .warn{color:var(--yel)}
+#clog .res .err{color:var(--red)}
+.cline{display:flex;align-items:center;gap:6px;margin-top:6px;flex-wrap:wrap}
+.cline .ps1{color:var(--grn)}
+.cin{flex:1;min-width:120px;background:none;border:none;outline:none;color:var(--fg);font-family:var(--mono);font-size:inherit;caret-color:transparent;padding:0}
+.cline .bk{display:inline-block;width:9px;height:1.05em;background:var(--grn);vertical-align:-2px;animation:blink 1.05s steps(2) infinite;margin-left:-4px}
+
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.blk{opacity:1;transform:none}}
 
 /* tablet */
@@ -258,7 +275,16 @@ html.light .commit:hover{background:rgba(31,158,84,.05)}
         <a class="cc" href="/static/data/resume.pdf" target="_blank"><div class="lbl">resume</div><div class="val">./resume.pdf</div></a>
       </div>
       <div class="foot">© 2026 talha khalid — built in the terminal · lahore, remote worldwide</div>
-      <div class="prompt-line"><span class="bk"></span></div>
+
+      <div class="h" style="margin-top:28px">interactive shell</div>
+      <div class="dim" style="margin-top:4px;font-size:12.5px"># type <span class="grn">help</span> and hit enter · try <span class="yel">coffee</span>, <span class="yel">sudo</span>, <span class="yel">matrix</span></div>
+      <div class="console" id="console" tabindex="0">
+        <div id="clog"></div>
+        <div class="cline"><span class="ps1">talha@khalid</span><span class="dim">:</span><span class="cyn">~</span><span class="dim">$</span>
+          <input id="cin" class="cin" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="terminal input" />
+          <span class="bk" id="cbk"></span>
+        </div>
+      </div>
     </div></div>
 
   </div>
@@ -324,6 +350,66 @@ html.light .commit:hover{background:rgba(31,158,84,.05)}
   document.querySelectorAll('.proj[data-href]').forEach(r=>{
     r.addEventListener('click',()=>window.open(r.dataset.href,'_blank','noopener'));
   });
+
+  /* interactive console */
+  const con=document.getElementById('console'),clog=document.getElementById('clog'),cin=document.getElementById('cin');
+  const hist=[];let hp=-1;let mtx=null;
+  function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  function print(html){const d=document.createElement('div');d.className='res';d.innerHTML=html;clog.appendChild(d);con.scrollTop=con.scrollHeight;}
+  function echo(cmd){const d=document.createElement('div');d.className='echo';d.innerHTML='<span class="ps1">talha@khalid</span>:~$ '+esc(cmd);clog.appendChild(d);}
+
+  const cmds={
+    help:()=>'available commands:\n  <span class="ok">about</span>      who is talha\n  <span class="ok">skills</span>     tech stack\n  <span class="ok">projects</span>   list work (open with: open &lt;name&gt;)\n  <span class="ok">experience</span> work history\n  <span class="ok">contact</span>    ways to reach me\n  <span class="ok">resume</span>     download cv\n  <span class="ok">theme</span>      toggle light/dark\n  <span class="ok">clear</span>      wipe the screen\n  <span class="warn">coffee · sudo · matrix · echo · date</span>  (✨ fun)',
+    about:()=>'talha khalid — full stack python engineer.\nloves diving into code complexity, ships end-to-end web products, and cares about UI/UX.',
+    skills:()=>'python · django · flask · html · css · javascript\n+ tkinter, kivy, rest apis, and whatever a project needs.',
+    projects:()=>'<span class="ok">share-beam</span>   flutter / dart / rust\n<span class="ok">ciro-app</span>     python / flutter / django\n<span class="ok">blockx</span>       javascript / chrome extension\n<span class="ok">luxe-perfume</span> django / jinja / js\n<span class="ok">proomo</span>       django / python / js\n\ntip: <span class="warn">open &lt;name&gt;</span> to launch a repo.',
+    experience:()=>'2024–now  freelance software developer @ self-employed\n2025–26   full stack python engineer @ yoma org\n2023–24   software engineer intern @ it vision solutions',
+    contact:()=>'email     <a href="mailto:talhakhalidlkp@gmail.com">talhakhalidlkp@gmail.com</a>\ngithub    <a href="https://github.com/talha-khallid" target="_blank" rel="noopener noreferrer">@Talha-Khallid</a>\nlinkedin  <a href="https://www.linkedin.com/in/talha-khallid" target="_blank" rel="noopener noreferrer">@Talha-Khallid</a>\nthreads   <a href="https://www.threads.com/@talha_khallid" target="_blank" rel="noopener noreferrer">@Talha_Khallid</a>',
+    resume:()=>{window.open('/static/data/resume.pdf','_blank');return 'opening <span class="ok">./resume.pdf</span> ...';},
+    date:()=>new Date().toString(),
+    whoami:()=>'talha',
+    ls:()=>'about  skills  projects  experience  contact  resume',
+    pwd:()=>'/home/talha/portfolio',
+    theme:()=>{root.classList.toggle('light');localStorage.setItem('theme',root.classList.contains('light')?'light':'dark');return 'theme → <span class="ok">'+(root.classList.contains('light')?'light':'dark')+'</span>';},
+    coffee:()=>'    ( (\n     ) )\n  ........\n  |      |]   brewing... ☕ stay caffeinated.\n  \\      /\n   `----\'',
+    sudo:(a)=>'<span class="err">talha is not in the sudoers file. this incident will be reported.</span> 😈',
+    matrix:()=>{startMatrix();return '<span class="ok">wake up... entering the matrix. (press any key)</span>';},
+    echo:(a)=>a.length?esc(a.join(' ')):'',
+    open:(a)=>{const m={'share-beam':'https://github.com/talha-khallid/Share-Beam','ciro-app':'https://github.com/talha-khallid/Ciro-App','blockx':'https://github.com/talha-khallid/BlockX','luxe-perfume':'https://github.com/talha-khallid/Luxe-Perfume'};const k=(a[0]||'').toLowerCase();if(m[k]){window.open(m[k],'_blank','noopener');return 'launching <span class="ok">'+k+'</span> ...';}return '<span class="err">no project named \''+esc(a[0]||'')+'\'. try: projects</span>';},
+    clear:()=>{clog.innerHTML='';return null;}
+  };
+  const alias={ proj:'projects', exp:'experience', work:'projects', cls:'clear', man:'help', '?':'help' };
+
+  function run(raw){
+    const line=raw.trim();if(!line){echo('');return;}
+    echo(line);
+    const parts=line.split(/\s+/);let name=parts[0].toLowerCase();const args=parts.slice(1);
+    if(alias[name])name=alias[name];
+    const fn=cmds[name];
+    if(!fn){print('<span class="err">command not found: '+esc(parts[0])+'</span> — type <span class="ok">help</span>');return;}
+    const out=fn(args);if(out!==null&&out!==undefined&&out!=='')print(out);
+  }
+
+  cin.addEventListener('keydown',e=>{
+    if(e.key==='Enter'){const v=cin.value;if(v.trim())hist.unshift(v);hp=-1;cin.value='';run(v);}
+    else if(e.key==='ArrowUp'){if(hist.length){hp=Math.min(hp+1,hist.length-1);cin.value=hist[hp];setTimeout(()=>cin.setSelectionRange(cin.value.length,cin.value.length),0);}e.preventDefault();}
+    else if(e.key==='ArrowDown'){if(hp>0){hp--;cin.value=hist[hp];}else{hp=-1;cin.value='';}e.preventDefault();}
+    else if(e.key==='Tab'){e.preventDefault();const p=cin.value.toLowerCase();const hit=Object.keys(cmds).find(c=>c.startsWith(p)&&p);if(hit)cin.value=hit;}
+  });
+  con.addEventListener('click',()=>cin.focus());
+
+  /* matrix easter egg */
+  function startMatrix(){
+    if(mtx)return;
+    const cv=document.createElement('canvas');cv.style.cssText='position:fixed;inset:0;z-index:300;background:#000';document.body.appendChild(cv);
+    const ctx=cv.getContext('2d');let W,H,cols,drops;
+    function size(){W=cv.width=innerWidth;H=cv.height=innerHeight;cols=Math.floor(W/14);drops=Array(cols).fill(1);}
+    size();const ch='アイウエオカキクケコサシスセソｱｲｳ01<>{}[];=$#'.split('');
+    mtx=setInterval(()=>{ctx.fillStyle='rgba(0,0,0,.08)';ctx.fillRect(0,0,W,H);ctx.fillStyle='#5ef38c';ctx.font='14px monospace';
+      drops.forEach((y,i)=>{const t=ch[Math.floor(Math.random()*ch.length)];ctx.fillText(t,i*14,y*14);if(y*14>H&&Math.random()>.975)drops[i]=0;drops[i]++;});},55);
+    const stop=()=>{clearInterval(mtx);mtx=null;cv.remove();removeEventListener('keydown',stop);removeEventListener('click',stop);};
+    addEventListener('keydown',stop);setTimeout(()=>addEventListener('click',stop),300);
+  }
 })();
 </script>
 </body>
