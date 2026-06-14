@@ -1,12 +1,6 @@
 (function(){
   const root=document.documentElement;
 
-  /* theme */
-  const tt=document.getElementById('tt');
-  const stored=localStorage.getItem('theme');
-  if(stored==='light')root.classList.add('light');
-  tt.addEventListener('click',()=>{root.classList.toggle('light');localStorage.setItem('theme',root.classList.contains('light')?'light':'dark');});
-
   /* ascii name */
   const art=[
 " _____  _    _     _   _    _    ",
@@ -64,14 +58,35 @@
   const lcBar=document.getElementById('lcBar');
   const toExec=document.getElementById('toExec');
   const toTerm=document.getElementById('toTerm');
+  const toDesign=document.getElementById('toDesign');
+  const toDesign2=document.getElementById('toDesign2');
   let switching=false;
 
-  if(localStorage.getItem('view')==='exec')document.body.classList.add('view-exec');
+  const savedView=localStorage.getItem('view')||'term';
+  let currentView=savedView;
+  if(savedView!=='term')document.body.classList.add('view-'+savedView);
 
   const bootLines=['$ ./build --target simple','> compiling views ...','> bundling assets ...','> optimizing layout ...','> done. launching.'];
 
-  function switchView(toSimple){
-    if(switching)return;switching=true;
+  function switchView(target){
+    if(switching)return;
+    if(target===currentView)return;
+
+    if(target==='design' || currentView==='design'){
+      if(target==='design'){
+        document.body.classList.toggle('from-exec', currentView==='exec');
+        localStorage.setItem('lastView', currentView);
+      }
+      document.body.classList.remove('view-exec','view-design');
+      if(target!=='term')document.body.classList.add('view-'+target);
+      localStorage.setItem('view',target);
+      currentView=target;
+      window.scrollTo(0,0);
+      return;
+    }
+
+    switching=true;
+    currentView=target;
     loader.className='loader on';
     loaderTerm.textContent='';lcBar.style.width='0%';
     /* phase 1: terminal-style typing */
@@ -86,16 +101,86 @@
       requestAnimationFrame(()=>requestAnimationFrame(()=>{lcBar.style.width='100%';}));
       /* phase 3: swap view + reveal */
       setTimeout(()=>{
-        document.body.classList.toggle('view-exec',toSimple);
-        localStorage.setItem('view',toSimple?'exec':'term');
+        document.body.classList.remove('view-exec','view-design');
+        if(target!=='term')document.body.classList.add('view-'+target);
+        localStorage.setItem('view',target);
         window.scrollTo(0,0);
         loader.classList.add('fade');
         setTimeout(()=>{loader.className='loader';switching=false;},520);
       },1050);
     }
   }
-  if(toExec)toExec.addEventListener('click',()=>switchView(true));
-  if(toTerm)toTerm.addEventListener('click',()=>switchView(false));
+  if(toExec)toExec.addEventListener('click',()=>switchView('exec'));
+  if(toTerm)toTerm.addEventListener('click',()=>switchView('term'));
+  if(toDesign)toDesign.addEventListener('click',()=>switchView('design'));
+  if(toDesign2)toDesign2.addEventListener('click',(e)=>{e.preventDefault();switchView('design');});
+  document.querySelectorAll('.designBackBtn').forEach(b=>{
+    b.addEventListener('click',(e)=>{
+      e.preventDefault();
+      switchView(localStorage.getItem('lastView')||'term');
+    });
+  });
+
+  /* ===== designs gallery & lightbox ===== */
+  const dgGridTerm=document.getElementById('dgGridTerm');
+  const dgGridExec=document.getElementById('dgGridExec');
+  const lb=document.getElementById('lb');
+  const lbImg=document.getElementById('lbImg');
+  const lbClose=document.getElementById('lbClose');
+  const lbPrev=document.getElementById('lbPrev');
+  const lbNext=document.getElementById('lbNext');
+  const lbCount=document.getElementById('lbCount');
+  let lbIdx=0;
+  let dImgs=[];
+
+  if(dgGridTerm || dgGridExec){
+    for(let i=1;i<=14;i++)dImgs.push(i);
+    dImgs.sort(()=>Math.random()-0.5);
+    
+    let html='';
+    dImgs.forEach((num,i)=>{
+      html+=`<a href="#" class="dg-item" data-idx="${i}">
+        <img src="/static/images/designs/${num}.png" alt="Design ${num}" loading="lazy">
+        <div class="cap">Design ${num}</div>
+      </a>`;
+    });
+    if(dgGridTerm) dgGridTerm.innerHTML=html;
+    if(dgGridExec) dgGridExec.innerHTML=html;
+
+    document.querySelectorAll('.dg-item').forEach(el=>{
+      el.addEventListener('click',e=>{
+        e.preventDefault();
+        lbIdx=parseInt(el.getAttribute('data-idx'));
+        openLb();
+      });
+    });
+  }
+
+  function openLb(){
+    updateLb();
+    lb.classList.add('on');
+    setTimeout(()=>lb.classList.add('show'),10);
+  }
+  function closeLb(){
+    lb.classList.remove('show');
+    setTimeout(()=>lb.classList.remove('on'),300);
+  }
+  function updateLb(){
+    lbImg.src=`/static/images/designs/${dImgs[lbIdx]}.png`;
+    lbCount.textContent=`${lbIdx+1} / ${dImgs.length}`;
+  }
+
+  if(lbClose)lbClose.addEventListener('click',closeLb);
+  if(lbPrev)lbPrev.addEventListener('click',()=>{lbIdx=(lbIdx-1+dImgs.length)%dImgs.length;updateLb();});
+  if(lbNext)lbNext.addEventListener('click',()=>{lbIdx=(lbIdx+1)%dImgs.length;updateLb();});
+  if(lb)lb.addEventListener('click',e=>{if(e.target===lb)closeLb();});
+  document.addEventListener('keydown',e=>{
+    if(lb && lb.classList.contains('on')){
+      if(e.key==='Escape')closeLb();
+      if(e.key==='ArrowLeft'){lbIdx=(lbIdx-1+dImgs.length)%dImgs.length;updateLb();}
+      if(e.key==='ArrowRight'){lbIdx=(lbIdx+1)%dImgs.length;updateLb();}
+    }
+  });
 
   /* interactive console */
   const con=document.getElementById('console'),clog=document.getElementById('clog'),cin=document.getElementById('cin');
@@ -105,7 +190,7 @@
   function echo(cmd){const d=document.createElement('div');d.className='echo';d.innerHTML='<span class="ps1">talha@khalid</span>:~$ '+esc(cmd);clog.appendChild(d);}
 
   const cmds={
-    help:()=>'available commands:\n  <span class="ok">about</span>      who is talha\n  <span class="ok">skills</span>     tech stack\n  <span class="ok">projects</span>   list work (open with: open &lt;name&gt;)\n  <span class="ok">experience</span> work history\n  <span class="ok">contact</span>    ways to reach me\n  <span class="ok">resume</span>     download cv\n  <span class="ok">theme</span>      toggle light/dark\n  <span class="ok">clear</span>      wipe the screen\n  <span class="warn">coffee · sudo · matrix · echo · date</span>  (✨ fun)',
+    help:()=>'available commands:\n  <span class="ok">about</span>      who is talha\n  <span class="ok">skills</span>     tech stack\n  <span class="ok">projects</span>   list work (open with: open &lt;name&gt;)\n  <span class="ok">experience</span> work history\n  <span class="ok">contact</span>    ways to reach me\n  <span class="ok">resume</span>     download cv\n  <span class="ok">clear</span>      wipe the screen\n  <span class="warn">coffee · sudo · matrix · echo · date</span>  (✨ fun)',
     about:()=>'talha khalid — full stack python engineer.\nloves diving into code complexity, ships end-to-end web products, and cares about UI/UX.',
     skills:()=>'python · django · flask · html · css · javascript\n+ tkinter, kivy, rest apis, and whatever a project needs.',
     projects:()=>'<span class="ok">share-beam</span>   flutter / dart / rust\n<span class="ok">ciro-app</span>     python / flutter / django\n<span class="ok">blockx</span>       javascript / chrome extension\n<span class="ok">luxe-perfume</span> django / jinja / js\n<span class="ok">proomo</span>       django / python / js\n\ntip: <span class="warn">open &lt;name&gt;</span> to launch a repo.',
@@ -116,7 +201,6 @@
     whoami:()=>'talha',
     ls:()=>'about  skills  projects  experience  contact  resume',
     pwd:()=>'/home/talha/portfolio',
-    theme:()=>{root.classList.toggle('light');localStorage.setItem('theme',root.classList.contains('light')?'light':'dark');return 'theme → <span class="ok">'+(root.classList.contains('light')?'light':'dark')+'</span>';},
     coffee:()=>'    ( (\n     ) )\n  ........\n  |      |]   brewing... ☕ stay caffeinated.\n  \\      /\n   `----\'',
     sudo:(a)=>'<span class="err">talha is not in the sudoers file. this incident will be reported.</span> 😈',
     matrix:()=>{startMatrix();return '<span class="ok">wake up... entering the matrix. (press any key)</span>';},
