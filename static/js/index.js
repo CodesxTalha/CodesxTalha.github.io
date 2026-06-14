@@ -1,160 +1,42 @@
-// Immediately start the loader logic to run concurrently with page rendering
-(function() {
-    // Immediately apply saved theme to avoid flashing
-    if (localStorage.getItem('theme') === 'light') {
-        document.body.classList.add('light-mode');
-    }
+        (function () {
+            const root = document.documentElement;
 
-    const splash = document.getElementById('splash-screen');
-    const bar = document.getElementById('splash-loader-bar');
-    const body = document.body;
+            /* theme */
+            const tt = document.getElementById('tt');
+            const stored = localStorage.getItem('theme');
+            const dark = stored ? stored === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (dark) root.classList.add('dark');
+            const sync = () => tt.textContent = root.classList.contains('dark') ? '[ dark ]' : '[ light ]'; sync();
+            tt.addEventListener('click', () => { root.classList.toggle('dark'); localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light'); sync(); });
 
-    if (!splash || !bar) return;
-
-    let progress = 0;
-    
-    // We want the progress to complete in around 800ms - 1100ms
-    const intervalTime = 16; // ~60fps updates
-    const totalTime = 800 + Math.random() * 300; 
-    const increments = 100 / (totalTime / intervalTime);
-
-    const loaderInterval = setInterval(() => {
-        // Add natural organic variation to the loader speed
-        const jitter = (Math.random() - 0.25) * 1.5; 
-        progress += increments + jitter;
-
-        if (progress >= 100) {
-            progress = 100;
-            clearInterval(loaderInterval);
-            
-            bar.style.width = '100%';
-            
-            // Smoothly exit splash screen
-            setTimeout(() => {
-                splash.classList.add('fade-out');
-                if (body) {
-                    body.classList.remove('loading');
-                }
-                
-                // Completely remove from DOM after CSS transition (0.6s) to free up resources
-                setTimeout(() => {
-                    splash.remove();
-                }, 600);
-            }, 180);
-        } else {
-            const displayProgress = Math.max(0, Math.floor(progress));
-            bar.style.width = displayProgress + '%';
-        }
-    }, intervalTime);
-})();
-
-document.addEventListener('DOMContentLoaded', () => {
-    const expandBtn = document.getElementById('expandBtn');
-    if (expandBtn) {
-        expandBtn.addEventListener('click', function() {
-            var grid = document.getElementById('projectsGrid');
-            var btn = this;
-            if (grid.classList.contains('expanded')) {
-                grid.classList.remove('expanded');
-                btn.innerHTML = 'show more';
-            } else {
-                grid.classList.add('expanded');
-                btn.innerHTML = 'show less';
-            }
-        });
-    }
-
-    const expExpandBtn = document.getElementById('expExpandBtn');
-    if (expExpandBtn) {
-        expExpandBtn.addEventListener('click', function() {
-            var grid = document.getElementById('expGrid');
-            var btn = this;
-            if (grid.classList.contains('expanded')) {
-                grid.classList.remove('expanded');
-                btn.innerHTML = 'show more';
-            } else {
-                grid.classList.add('expanded');
-                btn.innerHTML = 'show less';
-            }
-        });
-    }
-
-    const navToggle = document.getElementById('navToggle');
-    const navLinks = document.getElementById('navLinks');
-    
-    if (navToggle && navLinks) {
-        navToggle.addEventListener('click', function() {
-            navToggle.classList.toggle('open');
-            navLinks.classList.toggle('open');
-        });
-
-        // Close menu when a link is clicked
-        const navItems = navLinks.querySelectorAll('a');
-        navItems.forEach(item => {
-            item.addEventListener('click', () => {
-                navToggle.classList.remove('open');
-                navLinks.classList.remove('open');
-            });
-        });
-    }
-
-    // Theme toggle click handler
-    const themeToggle = document.getElementById('themeToggle');
-    if (themeToggle) {
-        // Sync initial state
-        if (document.body.classList.contains('light-mode')) {
-            themeToggle.checked = true;
-        }
-
-        themeToggle.addEventListener('click', (e) => {
-            const isDark = !themeToggle.checked;
-            
-            if (!document.startViewTransition) {
-                if (isDark) {
-                    document.body.classList.remove('light-mode');
-                    localStorage.setItem('theme', 'dark');
-                } else {
-                    document.body.classList.add('light-mode');
-                    localStorage.setItem('theme', 'light');
-                }
-                return;
-            }
-
-            const x = e.clientX || window.innerWidth / 2;
-            const y = e.clientY || window.innerHeight / 2;
-            
-            const endRadius = Math.hypot(
-                Math.max(x, innerWidth - x),
-                Math.max(y, innerHeight - y)
-            );
-
-            const transition = document.startViewTransition(() => {
-                if (isDark) {
-                    document.body.classList.remove('light-mode');
-                    localStorage.setItem('theme', 'dark');
-                } else {
-                    document.body.classList.add('light-mode');
-                    localStorage.setItem('theme', 'light');
-                }
+            /* splash with counter */
+            window.addEventListener('load', () => {
+                const sp = document.getElementById('splash'), sn = document.getElementById('snum');
+                let n = 0; const t = setInterval(() => { n += Math.floor(Math.random() * 9) + 3; if (n >= 100) { n = 100; clearInterval(t); } sn.textContent = String(n).padStart(3, '0'); }, 90);
+                setTimeout(() => { sp.classList.add('hidden'); document.body.classList.remove('loading'); revealNow(); }, 1700);
             });
 
-            transition.ready.then(() => {
-                const clipPath = [
-                    `circle(0px at ${x}px ${y}px)`,
-                    `circle(${endRadius}px at ${x}px ${y}px)`
-                ];
-                
-                document.documentElement.animate(
-                    {
-                        clipPath: clipPath,
-                    },
-                    {
-                        duration: 500,
-                        easing: 'ease-in-out',
-                        pseudoElement: '::view-transition-new(root)',
-                    }
-                );
+            /* mobile menu */
+            const burger = document.getElementById('burger'), nav = document.getElementById('nav');
+            burger.addEventListener('click', () => { nav.classList.toggle('open'); burger.textContent = nav.classList.contains('open') ? 'Close' : 'Menu'; });
+            nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { nav.classList.remove('open'); burger.textContent = 'Menu'; }));
+
+            /* progress */
+            const prog = document.getElementById('prog');
+            addEventListener('scroll', () => { const h = document.documentElement.scrollHeight - innerHeight; prog.style.width = (scrollY / h * 100) + '%'; });
+
+            /* reveal */
+            const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12 });
+            document.querySelectorAll('.rv').forEach(el => io.observe(el));
+            function revealNow() { document.querySelectorAll('.rv').forEach(el => { if (el.getBoundingClientRect().top < innerHeight) el.classList.add('in'); }); }
+
+            /* lerped cursor */
+            const dot = document.getElementById('dot');
+            let mx = innerWidth / 2, my = innerHeight / 2, dx = mx, dy = my;
+            addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+            (function loop() { dx += (mx - dx) * .2; dy += (my - dy) * .2; dot.style.left = dx + 'px'; dot.style.top = dy + 'px'; requestAnimationFrame(loop); })();
+            document.querySelectorAll('a,button').forEach(el => {
+                el.addEventListener('mouseenter', () => dot.classList.add('big'));
+                el.addEventListener('mouseleave', () => dot.classList.remove('big'));
             });
-        });
-    }
-});
+        })();
