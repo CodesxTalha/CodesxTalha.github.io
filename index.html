@@ -1,311 +1,891 @@
 <!DOCTYPE html>
-<html lang="en" style="scroll-behavior: smooth;">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Talha Khalid | Full Stack Software Engineer</title>
-    <link rel="icon" href="/static/images/favcn.png" type="image/png">
-    
-    <!-- Primary Meta Tags -->
-    <meta name="title" content="Talha Khalid | Full Stack Software Engineer">
-    <meta name="description" content="Portfolio of Talha Khalid, a full stack developer specializing in Python, Django, Flutter, React Native, and AI automation workflows.">
-    <meta name="keywords" content="Talha Khalid, Full Stack Developer, Python Developer, Django, React Native, Flutter, Software Engineer, Portfolio, Freelance Developer">
+    <title>Talha Khalid — Full Stack Software Engineer</title>
+    <meta name="description"
+        content="Talha Khalid, a full stack developer specializing in Python, Django, Flutter, React Native, and AI automation workflows.">
     <meta name="author" content="Talha Khalid">
-    
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
+    <meta property="og:title" content="Talha Khalid — Full Stack Software Engineer">
+    <meta property="og:description"
+        content="Full stack developer specializing in Python, Django, Flutter, React Native, and AI automation.">
     <meta property="og:url" content="https://talha-khallid.github.io/">
-    <meta property="og:title" content="Talha Khalid | Full Stack Software Engineer">
-    <meta property="og:description" content="Portfolio of Talha Khalid, a full stack developer specializing in Python, Django, Flutter, React Native, and AI automation workflows.">
-    <meta property="og:image" content="https://talha-khallid.github.io/static/images/opemgraph.png">
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://talha-khallid.github.io/">
-    <meta property="twitter:title" content="Talha Khalid | Full Stack Software Engineer">
-    <meta property="twitter:description" content="Portfolio of Talha Khalid, a full stack developer specializing in Python, Django, Flutter, React Native, and AI automation workflows.">
-    <meta property="twitter:image" content="https://talha-khallid.github.io/static/images/opemgraph.png">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
-    
-    <!-- External CSS -->
-    <link rel="stylesheet" href="static/css/style.css">
-
-    <!-- Structured Data JSON-LD -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400&display=swap"
+        rel="stylesheet">
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Talha Khalid",
-      "url": "https://talha-khallid.github.io/",
-      "image": "https://talha-khallid.github.io/static/images/me.png",
-      "jobTitle": "Full Stack Software Engineer",
-      "worksFor": {
-        "@type": "Organization",
-        "name": "Self-employed"
-      },
-      "sameAs": [
-        "https://github.com/talha-khallid",
-        "https://www.linkedin.com/in/talha-khallid"
-      ],
-      "knowsAbout": ["Python", "Django", "React Native", "Flutter", "Dart", "JavaScript", "HTML", "CSS", "Full Stack Development", "Software Engineering"]
-    }
-    </script>
+{"@context":"https://schema.org","@type":"Person","name":"Talha Khalid","url":"https://talha-khallid.github.io/","jobTitle":"Full Stack Software Engineer","sameAs":["https://github.com/talha-khallid","https://www.linkedin.com/in/talha-khallid"],"knowsAbout":["Python","Django","React Native","Flutter","Dart","JavaScript"]}
+</script>
+    <style>
+        :root {
+            --bg: #f3f1ec;
+            --ink: #15140f;
+            --soft: #6b685e;
+            --line: rgba(21, 20, 15, .14);
+            --accent: #e8503a;
+            --paper: #faf8f3;
+            --serif: 'Instrument Serif', Georgia, serif;
+            --sans: 'Inter', system-ui, sans-serif;
+            --mono: 'JetBrains Mono', monospace;
+            --ease: cubic-bezier(.19, 1, .22, 1);
+            --pad: clamp(20px, 5vw, 72px);
+        }
+
+        html.dark {
+            --bg: #100f0c;
+            --ink: #f3f1ec;
+            --soft: #9a978c;
+            --line: rgba(243, 241, 236, .16);
+            --paper: #171510;
+            --accent: #ff5d45;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: var(--sans);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            transition: background .6s var(--ease), color .6s var(--ease)
+        }
+
+        body.loading {
+            overflow: hidden;
+            height: 100vh
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        .mono {
+            font-family: var(--mono)
+        }
+
+        .serif {
+            font-family: var(--serif)
+        }
+
+        /* grain + noise paper feel */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            opacity: .045;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")
+        }
+
+        /* progress */
+        .prog {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 2px;
+            width: 0;
+            background: var(--accent);
+            z-index: 200
+        }
+
+        /* splash */
+        .splash {
+            position: fixed;
+            inset: 0;
+            background: var(--bg);
+            z-index: 999;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            padding: var(--pad);
+            transition: opacity .8s var(--ease), visibility .8s var(--ease)
+        }
+
+        .splash.hidden {
+            opacity: 0;
+            visibility: hidden
+        }
+
+        .splash .big {
+            font-family: var(--serif);
+            font-size: clamp(3rem, 14vw, 11rem);
+            line-height: .85;
+            font-style: italic
+        }
+
+        .splash .num {
+            font-family: var(--mono);
+            font-size: 1rem;
+            color: var(--soft)
+        }
+
+        /* cursor follower */
+        .dot {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent);
+            z-index: 998;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: difference;
+            transition: width .3s var(--ease), height .3s var(--ease), opacity .3s
+        }
+
+        .dot.big {
+            width: 64px;
+            height: 64px;
+            background: var(--ink)
+        }
+
+        @media(hover:none) {
+            .dot {
+                display: none
+            }
+        }
+
+        /* header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 24px var(--pad);
+            mix-blend-mode: difference;
+            color: #fff
+        }
+
+        .brand {
+            font-family: var(--mono);
+            font-size: .85rem;
+            letter-spacing: .02em
+        }
+
+        .nav {
+            display: flex;
+            gap: 26px
+        }
+
+        .nav a {
+            font-family: var(--mono);
+            font-size: .8rem;
+            position: relative;
+            color: #fff
+        }
+
+        .nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -3px;
+            width: 0;
+            height: 1px;
+            background: #fff;
+            transition: width .35s var(--ease)
+        }
+
+        .nav a:hover::after {
+            width: 100%
+        }
+
+        .tt {
+            font-family: var(--mono);
+            font-size: .8rem;
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer
+        }
+
+        .burger {
+            display: none;
+            font-family: var(--mono);
+            font-size: .8rem;
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer
+        }
+
+        /* layout */
+        .sec {
+            padding: 0 var(--pad)
+        }
+
+        hr.rule {
+            border: none;
+            border-top: 1px solid var(--line);
+            margin: 0 var(--pad)
+        }
+
+        /* hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-top: 120px;
+            padding-bottom: 60px
+        }
+
+        .eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-family: var(--mono);
+            font-size: .78rem;
+            color: var(--soft);
+            margin-bottom: 34px
+        }
+
+        .eyebrow .av {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent)
+        }
+
+        .display {
+            font-family: var(--serif);
+            font-size: clamp(3.2rem, 13.5vw, 13rem);
+            line-height: .84;
+            letter-spacing: -.02em;
+            font-weight: 400
+        }
+
+        .display em {
+            font-style: italic;
+            color: var(--accent)
+        }
+
+        .hero-foot {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: clamp(40px, 7vw, 90px)
+        }
+
+        .hero-foot p {
+            max-width: 430px;
+            font-size: 1.02rem;
+            color: var(--soft)
+        }
+
+        .hero-foot p b {
+            color: var(--ink);
+            font-weight: 500
+        }
+
+        .arrow {
+            font-family: var(--mono);
+            font-size: .8rem;
+            color: var(--soft);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            animation: bob 2.4s var(--ease) infinite
+        }
+
+        @keyframes bob {
+
+            0%,
+            100% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(6px)
+            }
+        }
+
+        /* section heads */
+        .shead {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: clamp(70px, 9vw, 130px) 0 40px
+        }
+
+        .shead h2 {
+            font-family: var(--serif);
+            font-size: clamp(2rem, 5vw, 3.4rem);
+            font-weight: 400;
+            letter-spacing: -.01em
+        }
+
+        .shead h2 em {
+            font-style: italic
+        }
+
+        .shead .idx {
+            font-family: var(--mono);
+            font-size: .78rem;
+            color: var(--soft)
+        }
+
+        /* reveal */
+        .rv>* {
+            opacity: 0;
+            transform: translateY(40px)
+        }
+
+        .rv.in>* {
+            opacity: 1;
+            transform: none;
+            transition: opacity .9s var(--ease), transform .9s var(--ease)
+        }
+
+        .rv.in>*:nth-child(2) {
+            transition-delay: .08s
+        }
+
+        .rv.in>*:nth-child(3) {
+            transition-delay: .16s
+        }
+
+        .rv.in>*:nth-child(4) {
+            transition-delay: .24s
+        }
+
+        .rv.in>*:nth-child(5) {
+            transition-delay: .32s
+        }
+
+        /* project rows */
+        .prow {
+            display: grid;
+            grid-template-columns: 64px 1fr auto;
+            gap: 28px;
+            align-items: center;
+            padding: 30px 0;
+            border-top: 1px solid var(--line);
+            position: relative;
+            transition: padding .4s var(--ease)
+        }
+
+        .prow:last-child {
+            border-bottom: 1px solid var(--line)
+        }
+
+        .prow .n {
+            font-family: var(--mono);
+            font-size: .85rem;
+            color: var(--soft);
+            transition: color .4s
+        }
+
+        .prow .body {
+            transition: transform .5s var(--ease)
+        }
+
+        .prow .title {
+            font-family: var(--serif);
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            line-height: 1;
+            letter-spacing: -.01em;
+            transition: color .4s
+        }
+
+        .prow .desc {
+            font-size: .92rem;
+            color: var(--soft);
+            max-width: 520px;
+            margin-top: 10px;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height .5s var(--ease), opacity .4s var(--ease), margin .4s
+        }
+
+        .prow .tags {
+            font-family: var(--mono);
+            font-size: .74rem;
+            color: var(--soft);
+            text-align: right;
+            white-space: nowrap
+        }
+
+        .prow .go {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translate(20px, -50%);
+            font-family: var(--serif);
+            font-style: italic;
+            font-size: 1.6rem;
+            color: var(--accent);
+            opacity: 0;
+            transition: all .4s var(--ease)
+        }
+
+        a.prow:hover {
+            padding: 42px 0
+        }
+
+        a.prow:hover .title {
+            color: var(--accent)
+        }
+
+        a.prow:hover .body {
+            transform: translateX(14px)
+        }
+
+        a.prow:hover .desc {
+            max-height: 80px;
+            opacity: 1;
+            margin-top: 14px
+        }
+
+        a.prow:hover .n {
+            color: var(--ink)
+        }
+
+        a.prow:hover .tags {
+            opacity: 0
+        }
+
+        a.prow:hover .go {
+            opacity: 1;
+            transform: translate(0, -50%)
+        }
+
+        /* experience */
+        .exp {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 30px;
+            padding: 34px 0;
+            border-top: 1px solid var(--line)
+        }
+
+        .exp:last-child {
+            border-bottom: 1px solid var(--line)
+        }
+
+        .exp .when {
+            font-family: var(--mono);
+            font-size: .78rem;
+            color: var(--soft);
+            padding-top: 6px
+        }
+
+        .exp .role {
+            font-family: var(--serif);
+            font-size: clamp(1.4rem, 3.4vw, 2rem);
+            line-height: 1.05
+        }
+
+        .exp .co {
+            font-family: var(--mono);
+            font-size: .8rem;
+            color: var(--accent);
+            margin: 6px 0 14px
+        }
+
+        .exp .co a {
+            border-bottom: 1px solid var(--accent)
+        }
+
+        .exp ul {
+            list-style: none
+        }
+
+        .exp li {
+            font-size: .92rem;
+            color: var(--soft);
+            padding-left: 20px;
+            position: relative;
+            margin-bottom: 5px;
+            max-width: 560px
+        }
+
+        .exp li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--accent)
+        }
+
+        /* contact */
+        .contact {
+            padding: clamp(80px, 11vw, 160px) var(--pad)
+        }
+
+        .contact .lead {
+            font-family: var(--serif);
+            font-size: clamp(2.6rem, 9vw, 7.5rem);
+            line-height: .92;
+            letter-spacing: -.02em
+        }
+
+        .contact .lead em {
+            font-style: italic;
+            color: var(--accent)
+        }
+
+        .cmail {
+            display: inline-block;
+            margin-top: 30px;
+            font-family: var(--serif);
+            font-style: italic;
+            font-size: clamp(1.6rem, 5vw, 3rem);
+            border-bottom: 2px solid var(--line);
+            transition: border-color .4s, color .4s
+        }
+
+        .cmail:hover {
+            color: var(--accent);
+            border-color: var(--accent)
+        }
+
+        .socials {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 60px
+        }
+
+        .socials a {
+            font-family: var(--mono);
+            font-size: .82rem;
+            color: var(--soft);
+            position: relative
+        }
+
+        .socials a::after {
+            content: '↗';
+            margin-left: 4px;
+            display: inline-block;
+            transition: transform .3s var(--ease)
+        }
+
+        .socials a:hover {
+            color: var(--ink)
+        }
+
+        .socials a:hover::after {
+            transform: translate(3px, -3px)
+        }
+
+        footer {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding: 30px var(--pad);
+            font-family: var(--mono);
+            font-size: .74rem;
+            color: var(--soft);
+            border-top: 1px solid var(--line)
+        }
+
+        @media(max-width:760px) {
+            .nav {
+                display: none
+            }
+
+            .burger {
+                display: block
+            }
+
+            .nav.open {
+                display: flex;
+                position: fixed;
+                inset: 0;
+                background: var(--ink);
+                color: var(--bg);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 30px;
+                mix-blend-mode: normal;
+                z-index: 150
+            }
+
+            .nav.open a {
+                color: var(--bg);
+                font-family: var(--serif);
+                font-style: italic;
+                font-size: 2.2rem
+            }
+
+            .nav.open a::after {
+                display: none
+            }
+
+            .prow {
+                grid-template-columns: 36px 1fr;
+                gap: 16px
+            }
+
+            .prow .tags {
+                display: none
+            }
+
+            a.prow:hover .body {
+                transform: none
+            }
+
+            .exp {
+                grid-template-columns: 1fr;
+                gap: 8px
+            }
+
+            .hero-foot {
+                flex-direction: column;
+                align-items: flex-start
+            }
+        }
+
+        @media(prefers-reduced-motion:reduce) {
+            * {
+                animation: none !important;
+                transition: none !important
+            }
+        }
+    </style>
 </head>
+
 <body class="loading">
 
-    <!-- Premium Splash Screen -->
-    <div id="splash-screen" class="splash-screen">
-        <div class="splash-content">
-            <div class="splash-name mono">Talha<span class="splash-dot">_</span></div>
-            <div class="splash-loader-container">
-                <div id="splash-loader-bar" class="splash-loader-bar"></div>
-            </div>
-        </div>
+    <div class="prog" id="prog"></div>
+    <div class="dot" id="dot"></div>
+
+    <div class="splash" id="splash">
+        <div class="big">Talha</div>
+        <div class="num" id="snum">000</div>
     </div>
 
-    <div class="container">
-        
-        <!-- Navigation -->
-        <nav>
-            <div class="logo">Talha<span class="logo-dot">_</span></div>
-            <div class="nav-links mono" id="navLinks">
-                <a href="#about">about</a>
-                <a href="#projects">projects</a>
-                <a href="#experience">experience</a>
-                <a href="#contact">contact</a>
-            </div>
-            
-            <div class="nav-actions">
-                <label for="themeToggle" class="themeToggle st-sunMoonThemeToggleBtn" type="checkbox">
-                    <input type="checkbox" id="themeToggle" class="themeToggleInput" aria-label="Toggle Theme" />
-                    <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor" stroke="none">
-                        <mask id="moon-mask">
-                            <rect x="0" y="0" width="20" height="20" fill="white"></rect>
-                            <circle cx="11" cy="3" r="8" fill="black"></circle>
-                        </mask>
-                        <circle class="sunMoon" cx="10" cy="10" r="8" mask="url(#moon-mask)"></circle>
-                        <g>
-                            <circle class="sunRay sunRay1" cx="18" cy="10" r="1.5"></circle>
-                            <circle class="sunRay sunRay2" cx="14" cy="16.928" r="1.5"></circle>
-                            <circle class="sunRay sunRay3" cx="6" cy="16.928" r="1.5"></circle>
-                            <circle class="sunRay sunRay4" cx="2" cy="10" r="1.5"></circle>
-                            <circle class="sunRay sunRay5" cx="6" cy="3.1718" r="1.5"></circle>
-                            <circle class="sunRay sunRay6" cx="14" cy="3.1718" r="1.5"></circle>
-                        </g>
-                    </svg>
-                </label>
-                <button class="nav-toggle" id="navToggle" aria-label="Toggle Navigation">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="chevron-icon">
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                    </svg>
-                </button>
-            </div>
+    <header>
+        <a href="#top" class="brand">TALHA KHALID ®</a>
+        <nav class="nav" id="nav">
+            <a href="#work">Work</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
         </nav>
+        <div style="display:flex;gap:22px;align-items:center">
+            <button class="tt" id="tt">[ light ]</button>
+            <button class="burger" id="burger">Menu</button>
+        </div>
+    </header>
 
-        <!-- About / Hero -->
-        <section id="about" class="hero">
-            <h1>Hi, I'm Talha.</h1>
-            <p>a full stack developer who loves diving into code complexities and learning new stuff. also have a good taste of user interfaces and enhancing user experiences.</p>
-            <div class="hero-actions">
-                <a href="/static/data/resume.pdf" target="_blank" class="btn btn-primary mono">Resume</a>
-                <a href="#contact" class="btn btn-secondary mono">Contact</a>
+    <main id="top">
+
+        <section class="sec hero rv">
+            <div class="eyebrow"><span class="av"></span> Available for work — 2026</div>
+            <h1 class="display">Full&nbsp;Stack<br>Software <em>Engineer</em></h1>
+            <div class="hero-foot">
+                <p>I'm <b>Talha Khalid</b> — a developer who loves diving into code complexity, building end-to-end
+                    products, and crafting interfaces that actually feel good to use.</p>
+                <div class="arrow">scroll ↓</div>
             </div>
         </section>
 
-        <!-- Projects -->
-        <section id="projects">
-            <h2 class="section-title mono">Projects</h2>
-            <div class="projects-container">
-                <div class="projects-grid" id="projectsGrid">
-                
-                <a href="https://github.com/talha-khallid/Share-Beam" target="_blank" rel="noopener noreferrer" class="project-card">
-                    <div class="project-meta"></div>
-                    <div class="project-content">
-                        <div class="project-header">
-                            <h3 class="project-title">Share Beam</h3>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="project-icon"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-                        </div>
-                        <p class="project-desc">A fast and seamless cross-platform local file sharing application. It offers a clean, intuitive user interface and provides significantly faster data transfer speeds compared to traditional sharing apps.</p>
-                        <div class="project-tech mono">
-                            <span>Flutter</span>
-                            <span>Dart</span>
-                            <span>Rust</span>
-                        </div>
-                    </div>
-                </a>
-
-                <a href="https://github.com/talha-khallid/Ciro-App" target="_blank" rel="noopener noreferrer" class="project-card">
-                    <div class="project-meta"></div>
-                    <div class="project-content">
-                        <div class="project-header">
-                            <h3 class="project-title">Ciro App</h3>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="project-icon"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-                        </div>
-                        <p class="project-desc">An intelligent, real-time weather and crisis monitoring mobile application. It bridges the gap between traditional meteorological data and hyper-local, user-generated reports utilizing a multi-agent AI workflow.</p>
-                        <div class="project-tech mono">
-                            <span>Python</span>
-                            <span>Dart</span>
-                            <span>Flutter</span>
-                            <span>Django</span>
-                        </div>
-                    </div>
-                </a>
-
-                <a href="https://github.com/talha-khallid/BlockX" target="_blank" rel="noopener noreferrer" class="project-card">
-                    <div class="project-meta"></div>
-                    <div class="project-content">
-                        <div class="project-header">
-                            <h3 class="project-title">BlockX</h3>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="project-icon"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-                        </div>
-                        <p class="project-desc">A high-performance network configuration and site management tool for Google Chrome. It enforces content filtering, search engine safety policies, and domain restrictions with zero resource lag.</p>
-                        <div class="project-tech mono">
-                            <span>JavaScript</span>
-                            <span>Chrome extension</span>
-                        </div>
-                    </div>
-                </a>
-
-                <a href="https://github.com/talha-khallid/Luxe-Perfume" target="_blank" rel="noopener noreferrer" class="project-card">
-                    <div class="project-meta"></div>
-                    <div class="project-content">
-                        <div class="project-header">
-                            <h3 class="project-title">Luxe Perfume</h3>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="project-icon"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-                        </div>
-                        <p class="project-desc">A premium e-commerce platform designed for discovering and purchasing luxury fragrances, focusing on an elegant user interface and seamless shopping experience.</p>
-                        <div class="project-tech mono">
-                            <span>Python</span>
-                            <span>Django</span>
-                            <span>Jinja</span>
-                            <span>HTML</span>
-                            <span>CSS</span>
-                            <span>JavaScript</span>
-                        </div>
-                    </div>
-                </a>
-
-                <div class="project-card" style="cursor: default;">
-                    <div class="project-meta"></div>
-                    <div class="project-content">
-                        <div class="project-header">
-                            <h3 class="project-title">Proomo</h3>
-                        </div>
-                        <p class="project-desc">A platform for influencers selling their promotional offers. A Django-based application for managing influencer profiles, social accounts, and available ad spaces.</p>
-                        <div class="project-tech mono">
-                            <span>Python</span>
-                            <span>Django</span>
-                            <span>Jinja</span>
-                            <span>HTML</span>
-                            <span>CSS</span>
-                            <span>JavaScript</span>
-                        </div>
-                    </div>
-                </div>
-
-                </div>
-                <div class="projects-fade" id="projectsFade"></div>
+        <section class="sec" id="work">
+            <div class="shead rv">
+                <h2 class="serif">Selected <em>Work</em></h2><span class="idx">(01 — 05)</span>
             </div>
-            <button class="expand-btn mono" id="expandBtn">show more</button>
-        </section>
-
-        <!-- Experience -->
-        <section id="experience">
-            <h2 class="section-title mono">Experience</h2>
-            
-            <div class="exp-container">
-                <div class="exp-grid" id="expGrid">
-
-                <div class="exp-item">
-                    <div class="exp-date mono">Jan 2024 — Present</div>
-                    <div>
-                        <h3 class="exp-role">Freelance Software Developer</h3>
-                        <div class="exp-company">Self-employed</div>
-                        <ul class="exp-desc">
-                            <li>Collaborated with clients to gather requirements and provide tailored software solutions.</li>
-                            <li>Delivered custom web and mobile applications using technologies such as Django, Flask, and React Native.</li>
-                            <li>Managed project timelines and communicated effectively to ensure client satisfaction.</li>
-                            <li>Continuously learned and adapted to new technologies to meet diverse client needs.</li>
-                        </ul>
+            <div class="rv">
+                <a href="https://github.com/talha-khallid/Share-Beam" target="_blank" rel="noopener noreferrer"
+                    class="prow">
+                    <span class="n">01</span>
+                    <div class="body">
+                        <div class="title serif">Share Beam</div>
+                        <div class="desc">A fast, seamless cross-platform local file-sharing app with a clean interface
+                            and far faster transfer speeds than traditional sharing tools.</div>
                     </div>
-                </div>
-    
-                <div class="exp-item">
-                    <div class="exp-date mono">Nov 2025 — Apr 2026</div>
-                    <div>
-                        <h3 class="exp-role">Full Stack Python Engineer</h3>
-                        <div class="exp-company">Yoma org</div>
-                        <ul class="exp-desc">
-                            <li>Engineered full stack solutions as part of a US-based team.</li>
-                            <li>Developed and maintained Python-based automation for the company.</li>
-                        </ul>
+                    <span class="tags">Flutter / Dart / Rust</span><span class="go">↗</span>
+                </a>
+                <a href="https://github.com/talha-khallid/Ciro-App" target="_blank" rel="noopener noreferrer"
+                    class="prow">
+                    <span class="n">02</span>
+                    <div class="body">
+                        <div class="title serif">Ciro App</div>
+                        <div class="desc">Real-time weather and crisis monitoring that bridges meteorological data with
+                            hyper-local user reports through a multi-agent AI workflow.</div>
                     </div>
-                </div>
-    
-                <div class="exp-item">
-                    <div class="exp-date mono">Ongoing</div>
-                    <div>
-                        <h3 class="exp-role">Vibe Coding</h3>
-                        <div class="exp-company">Self-driven</div>
-                        <ul class="exp-desc">
-                            <li>Skilled in working with AI technologies and proficient in prompt engineering.</li>
-                            <li>Experienced in creating end to end applications using AI.</li>
-                            <li>Able to work effectively with new technologies, including unfamiliar programming languages and frameworks with the help of AI.</li>
-                        </ul>
+                    <span class="tags">Python / Flutter / Django</span><span class="go">↗</span>
+                </a>
+                <a href="https://github.com/talha-khallid/BlockX" target="_blank" rel="noopener noreferrer"
+                    class="prow">
+                    <span class="n">03</span>
+                    <div class="body">
+                        <div class="title serif">BlockX</div>
+                        <div class="desc">A high-performance network configuration and site management tool for Chrome —
+                            content filtering, safe-search and domain rules with zero lag.</div>
                     </div>
-                </div>
-    
-                <div class="exp-item">
-                    <div class="exp-date mono">Nov 2023 — Jan 2024</div>
-                    <div>
-                        <h3 class="exp-role">Software Engineer Intern</h3>
-                        <div class="exp-company"><a href="https://itvisionsolutions.com/" target="_blank">IT Vision Solutions</a></div>
-                        <ul class="exp-desc">
-                            <li>Developed mobile applications using Kivy and later transitioned to React Native for cross-platform development.</li>
-                            <li>Created user interfaces for Windows applications using Tkinter.</li>
-                            <li>Enhanced problem-solving skills by addressing real-world challenges and debugging complex issues.</li>
-                        </ul>
+                    <span class="tags">JavaScript / Chrome</span><span class="go">↗</span>
+                </a>
+                <a href="https://github.com/talha-khallid/Luxe-Perfume" target="_blank" rel="noopener noreferrer"
+                    class="prow">
+                    <span class="n">04</span>
+                    <div class="body">
+                        <div class="title serif">Luxe Perfume</div>
+                        <div class="desc">A premium fragrance e-commerce platform built around an elegant interface and
+                            a seamless, refined shopping experience.</div>
                     </div>
+                    <span class="tags">Django / Jinja / JS</span><span class="go">↗</span>
+                </a>
+                <div class="prow" style="cursor:default">
+                    <span class="n">05</span>
+                    <div class="body">
+                        <div class="title serif">Proomo</div>
+                        <div class="desc">A marketplace for influencers selling promotional offers — managing profiles,
+                            social accounts and available ad spaces.</div>
+                    </div>
+                    <span class="tags">Django / Python / JS</span>
                 </div>
-
-                </div>
-                <div class="exp-fade" id="expFade"></div>
-            </div>
-            <button class="expand-btn mono" id="expExpandBtn">show more</button>
-
-        </section>
-
-        <!-- Contact -->
-        <section id="contact">
-            <h2 class="section-title mono">Contact</h2>
-            <p class="desc">I'm currently open for new opportunities. Whether you have a question or just want to say hi, I'll try my best to get back to you.</p>
-            
-            <div class="contact-links">
-                <a href="mailto:talhakhalidlkp@gmail.com" target="_blank" rel="noopener noreferrer" class="contact-link">
-                    <span class="mono">Email</span>
-                    <span>talhakhalidlkp@gmail.com</span>
-                </a>
-                <a href="https://github.com/talha-khallid" target="_blank" rel="noopener noreferrer" class="contact-link">
-                    <span class="mono">GitHub</span>
-                    <span>@Talha-Khallid</span>
-                </a>
-                <a href="https://www.linkedin.com/in/talha-khallid" target="_blank" rel="noopener noreferrer" class="contact-link">
-                    <span class="mono">LinkedIn</span>
-                    <span>@Talha-Khallid</span>
-                </a>
-                <a href="https://www.threads.com/@talha_khallid" target="_blank" rel="noopener noreferrer" class="contact-link">
-                    <span class="mono">Threads</span>
-                    <span>@Talha_Khallid</span>
-                </a>
             </div>
         </section>
 
-    </div>
+        <section class="sec" id="about">
+            <div class="shead rv">
+                <h2 class="serif"><em>Experience</em></h2><span class="idx">(since 2023)</span>
+            </div>
+            <div class="rv">
+                <div class="exp">
+                    <div class="when">Jan 2024 — Present</div>
+                    <div>
+                        <div class="role serif">Freelance Software Developer</div>
+                        <div class="co">Self-employed</div>
+                        <ul>
+                            <li>Gathered client requirements and shipped tailored software solutions.</li>
+                            <li>Delivered custom web & mobile apps with Django, Flask and React Native.</li>
+                            <li>Managed timelines and communication to ensure client satisfaction.</li>
+                            <li>Continuously adapted to new technologies for diverse client needs.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="exp">
+                    <div class="when">Nov 2025 — Apr 2026</div>
+                    <div>
+                        <div class="role serif">Full Stack Python Engineer</div>
+                        <div class="co">Yoma org</div>
+                        <ul>
+                            <li>Engineered full-stack solutions as part of a US-based team.</li>
+                            <li>Built and maintained Python-based automation for the company.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="exp">
+                    <div class="when">Ongoing</div>
+                    <div>
+                        <div class="role serif">Vibe Coding</div>
+                        <div class="co">Self-driven</div>
+                        <ul>
+                            <li>Skilled with AI technologies and proficient in prompt engineering.</li>
+                            <li>Build end-to-end applications using AI.</li>
+                            <li>Work effectively with unfamiliar languages and frameworks alongside AI.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="exp">
+                    <div class="when">Nov 2023 — Jan 2024</div>
+                    <div>
+                        <div class="role serif">Software Engineer Intern</div>
+                        <div class="co"><a href="https://itvisionsolutions.com/" target="_blank"
+                                rel="noopener noreferrer">IT Vision Solutions</a></div>
+                        <ul>
+                            <li>Built mobile apps with Kivy, then moved to React Native for cross-platform.</li>
+                            <li>Created Windows app UIs using Tkinter.</li>
+                            <li>Sharpened problem-solving on real-world challenges and complex bugs.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <!-- External JavaScript -->
-    <script src="static/js/index.js"></script>
+        <section class="contact" id="contact">
+            <div class="rv">
+                <h2 class="lead">Let's build<br>something <em>worth shipping.</em></h2>
+                <a href="mailto:talhakhalidlkp@gmail.com" class="cmail">talhakhalidlkp@gmail.com</a>
+                <div class="socials">
+                    <a href="https://github.com/talha-khallid" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    <a href="https://www.linkedin.com/in/talha-khallid" target="_blank"
+                        rel="noopener noreferrer">LinkedIn</a>
+                    <a href="https://www.threads.com/@talha_khallid" target="_blank"
+                        rel="noopener noreferrer">Threads</a>
+                    <a href="/static/data/resume.pdf" target="_blank">Resume</a>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <span>© 2026 Talha Khalid</span>
+            <span>Designed & built with intent</span>
+            <span>Lahore — remote worldwide</span>
+        </footer>
+
+    </main>
+
+    <script>
+        (function () {
+            const root = document.documentElement;
+
+            /* theme */
+            const tt = document.getElementById('tt');
+            const stored = localStorage.getItem('theme');
+            const dark = stored ? stored === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (dark) root.classList.add('dark');
+            const sync = () => tt.textContent = root.classList.contains('dark') ? '[ dark ]' : '[ light ]'; sync();
+            tt.addEventListener('click', () => { root.classList.toggle('dark'); localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light'); sync(); });
+
+            /* splash with counter */
+            window.addEventListener('load', () => {
+                const sp = document.getElementById('splash'), sn = document.getElementById('snum');
+                let n = 0; const t = setInterval(() => { n += Math.floor(Math.random() * 9) + 3; if (n >= 100) { n = 100; clearInterval(t); } sn.textContent = String(n).padStart(3, '0'); }, 90);
+                setTimeout(() => { sp.classList.add('hidden'); document.body.classList.remove('loading'); revealNow(); }, 1700);
+            });
+
+            /* mobile menu */
+            const burger = document.getElementById('burger'), nav = document.getElementById('nav');
+            burger.addEventListener('click', () => { nav.classList.toggle('open'); burger.textContent = nav.classList.contains('open') ? 'Close' : 'Menu'; });
+            nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { nav.classList.remove('open'); burger.textContent = 'Menu'; }));
+
+            /* progress */
+            const prog = document.getElementById('prog');
+            addEventListener('scroll', () => { const h = document.documentElement.scrollHeight - innerHeight; prog.style.width = (scrollY / h * 100) + '%'; });
+
+            /* reveal */
+            const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12 });
+            document.querySelectorAll('.rv').forEach(el => io.observe(el));
+            function revealNow() { document.querySelectorAll('.rv').forEach(el => { if (el.getBoundingClientRect().top < innerHeight) el.classList.add('in'); }); }
+
+            /* lerped cursor */
+            const dot = document.getElementById('dot');
+            let mx = innerWidth / 2, my = innerHeight / 2, dx = mx, dy = my;
+            addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+            (function loop() { dx += (mx - dx) * .2; dy += (my - dy) * .2; dot.style.left = dx + 'px'; dot.style.top = dy + 'px'; requestAnimationFrame(loop); })();
+            document.querySelectorAll('a,button').forEach(el => {
+                el.addEventListener('mouseenter', () => dot.classList.add('big'));
+                el.addEventListener('mouseleave', () => dot.classList.remove('big'));
+            });
+        })();
+    </script>
 </body>
+
 </html>
