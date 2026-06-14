@@ -136,10 +136,9 @@ html.light .commit:hover{background:rgba(31,158,84,.05)}
 #clog .res .ok{color:var(--grn)}
 #clog .res .warn{color:var(--yel)}
 #clog .res .err{color:var(--red)}
-.cline{display:flex;align-items:center;gap:6px;margin-top:6px;flex-wrap:wrap}
+.cline{display:flex;align-items:center;margin-top:6px;flex-wrap:nowrap}
 .cline .ps1{color:var(--grn)}
-.cin{flex:1;min-width:120px;background:none;border:none;outline:none;color:var(--fg);font-family:var(--mono);font-size:inherit;caret-color:transparent;padding:0}
-.cline .bk{display:inline-block;width:9px;height:1.05em;background:var(--grn);vertical-align:-2px;animation:blink 1.05s steps(2) infinite;margin-left:-4px}
+.cin{flex:1;min-width:40px;background:none;border:none;outline:none;color:var(--fg);font-family:var(--mono);font-size:inherit;line-height:1.05;caret-color:var(--grn);padding:0;margin:0}
 
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.blk{opacity:1;transform:none}}
 
@@ -280,10 +279,7 @@ html.light .commit:hover{background:rgba(31,158,84,.05)}
       <div class="dim" style="margin-top:4px;font-size:12.5px"># type <span class="grn">help</span> and hit enter · try <span class="yel">coffee</span>, <span class="yel">sudo</span>, <span class="yel">matrix</span></div>
       <div class="console" id="console" tabindex="0">
         <div id="clog"></div>
-        <div class="cline"><span class="ps1">talha@khalid</span><span class="dim">:</span><span class="cyn">~</span><span class="dim">$</span>
-          <input id="cin" class="cin" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="terminal input" />
-          <span class="bk" id="cbk"></span>
-        </div>
+        <div class="cline"><span class="ps1">talha@khalid</span><span class="dim">:</span><span class="cyn">~</span><span class="dim">$&nbsp;</span><input id="cin" class="cin" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="terminal input" /></div>
       </div>
     </div></div>
 
