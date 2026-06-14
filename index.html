@@ -245,8 +245,6 @@ body.view-design.from-exec #designExec {display:block}
 .ev-navright{display:flex;align-items:center;gap:26px}
 .ev-navright a{color:var(--esoft);text-decoration:none;transition:color .2s}
 .ev-navright a:hover{color:var(--eink)}
-.ev-toggle{font-family:inherit;font-size:.82rem;font-weight:500;color:var(--ebg);background:var(--eaccent);border:none;border-radius:100px;padding:8px 16px;cursor:pointer;transition:opacity .2s}
-.ev-toggle:hover{opacity:.85}
 .ev-hero{padding:clamp(50px,9vw,100px) 0 clamp(40px,6vw,70px)}
 .ev-kicker{font-size:.82rem;font-weight:500;letter-spacing:.04em;color:var(--esoft);margin:0 0 14px}
 .ev-hero h1{font-size:clamp(2.4rem,7vw,4rem);line-height:1.02;letter-spacing:-.03em;color:var(--eink);font-weight:700;margin:0 0 26px}
@@ -272,7 +270,7 @@ a.ev-item:hover .t{color:var(--esoft)}
 .ev-foot a:hover{color:var(--eink)}
 @media(max-width:600px){
   .ev-navright{gap:16px}
-  .ev-navright a{display:none}
+  .ev-navright a.hide-mob{display:none}
 }
 </style>
 </head>
@@ -287,7 +285,6 @@ a.ev-item:hover .t{color:var(--esoft)}
     <span class="right">
       <button id="toDesign">designs</button>
       <button id="toExec">simple view</button>
-      <span class="dim">80x24</span>
     </span>
   </div>
 
@@ -378,11 +375,8 @@ a.ev-item:hover .t{color:var(--esoft)}
     <nav class="ev-nav">
       <div class="ev-logo">Talha Khalid</div>
       <div class="ev-navright">
-        <a href="#ev-work">Work</a>
-        <a href="#ev-exp">Experience</a>
-        <a href="#ev-contact">Contact</a>
         <a href="#" id="toDesign2">Designs</a>
-        <button class="ev-toggle" id="toTerm">Developer view</button>
+        <a href="#" id="toTerm">Dev-view</a>
       </div>
     </nav>
 
@@ -434,7 +428,6 @@ a.ev-item:hover .t{color:var(--esoft)}
     <span class="path">talha@khalid: ~/portfolio/designs — zsh</span>
     <span class="right">
       <button class="designBackBtn">← back</button>
-      <span class="dim">80x24</span>
     </span>
   </div>
   <div class="term">
