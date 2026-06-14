@@ -45,7 +45,7 @@ body::after{content:'';position:fixed;inset:0;z-index:49;pointer-events:none;box
 /* hero ascii */
 .ascii-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -4px}
 .ascii-wrap::-webkit-scrollbar{height:0}
-.ascii{color:var(--grn);font-size:14px;line-height:1.05;white-space:pre;font-weight:700;letter-spacing:0;font-variant-ligatures:none}
+.ascii{color:var(--grn);font-family:var(--mono);font-size:14px;line-height:1.05;white-space:pre;font-weight:normal;letter-spacing:normal;font-variant-ligatures:none}
 .tag{margin-top:18px;font-size:15px}
 .tag .role{color:var(--cyn)}
 .cursor{display:inline-block;width:9px;height:1.05em;background:var(--grn);vertical-align:-2px;margin-left:3px;animation:blink 1.05s steps(2) infinite}
