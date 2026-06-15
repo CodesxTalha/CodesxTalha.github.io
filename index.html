@@ -13,36 +13,78 @@
 <link rel="stylesheet" href="/static/css/style.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Person","name":"Talha Khalid","url":"https://talha-khallid.github.io/","jobTitle":"Full Stack Software Engineer","sameAs":["https://github.com/talha-khallid","https://www.linkedin.com/in/talha-khallid"],"knowsAbout":["Python","Django","React Native","Flutter","Dart","JavaScript"]}
-</script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Talha Khalid","url":"https://talha-khallid.github.io/","jobTitle":"Full Stack Software Engineer","sameAs":["https://github.com/talha-khallid","https://www.linkedin.com/in/talha-khallid"],"knowsAbout":["Python","Django","React Native","Flutter","Dart","JavaScript"]}</script>
 </head>
 <body class="boot">
 
-<div class="boot-scr" id="boot"><pre id="bootpre"></pre></div>
+<div class="boot-scr" id="boot">
+  <pre id="bootpre"></pre>
+  <div class="boot-bar"><i id="bootBar"></i></div>
+  <div class="boot-pct" id="bootPct">0%</div>
+</div>
 
 <div class="win" id="mainWin">
   <div class="bar">
     <span class="tl r"></span><span class="tl y"></span><span class="tl g"></span>
     <span class="path">talha@khalid: ~/portfolio — zsh</span>
+    <span class="clock" id="clock"></span>
     <span class="right">
       <button id="toDesign">designs</button>
       <button id="toExec">simple view</button>
     </span>
   </div>
-
   <div class="term" id="term">
-
     <!-- whoami -->
     <div class="blk"><div class="cmd"><b>whoami</b> <span class="flag">--verbose</span></div>
     <div class="out">
-      <div class="ascii-wrap"><pre class="ascii" id="ascii"></pre></div>
+      <div class="ascii-wrap"><pre class="ascii" id="ascii" title="psst… click me"></pre></div>
       <div class="tag"><span class="grn">talha khalid</span> :: <span class="role" id="role"></span><span class="cursor"></span></div>
       <div class="kv">
         <span class="k">status</span><span class="v grn">● available for work</span>
         <span class="k">skills</span><span class="v">python · django · flask · html · css · javascript · web design <span class="dim">+ more</span></span>
         <span class="k">summary</span><span class="v">dev who loves diving into code complexity, ships end-to-end products, and cares about UI/UX.</span>
+      </div>
+    </div></div>
+
+    <!-- neofetch -->
+    <div class="blk"><div class="cmd"><b>neofetch</b></div>
+    <div class="out">
+      <div class="nf">
+        <pre class="nf-logo">      .--.
+     |o_o |
+     |:_/ |   &lt;/&gt;
+    //   \ \
+   (|     | )
+  /'\_   _/`\
+  \___)=(___/</pre>
+        <div class="nf-info">
+          <div class="row"><span class="key">talha</span><span class="sep">@</span><span class="val2">khalid</span></div>
+          <div class="row"><span class="key">os</span><span class="sep">:</span><span class="val2">Portfolio x86_64</span></div>
+          <div class="row"><span class="key">host</span><span class="sep">:</span><span class="val2">Portfolio v2.0</span></div>
+          <div class="row"><span class="key">kernel</span><span class="sep">:</span><span class="val2">python-3.12</span></div>
+          <div class="row"><span class="key">shell</span><span class="sep">:</span><span class="val2">zsh 5.9</span></div>
+          <div class="row"><span class="key">stack</span><span class="sep">:</span><span class="val2">django / flask / js</span></div>
+          <div class="row"><span class="key">uptime</span><span class="sep">:</span><span class="val2" id="nfUptime">0s</span></div>
+          <div class="row"><span class="key">location</span><span class="sep">:</span><span class="val2">lahore 🌍 remote worldwide</span></div>
+          <div class="row"><span class="key">status</span><span class="sep">:</span><span class="val2 grn">● available for work</span></div>
+          <div class="row"><span class="key">coffee</span><span class="sep">:</span><span class="val2"><span class="grn">████████</span><span class="dim">░░</span> 80%</span></div>
+          <div class="nf-palette">
+            <span style="background:var(--fg)"></span><span style="background:var(--red)"></span>
+            <span style="background:var(--grn)"></span><span style="background:var(--yel)"></span>
+            <span style="background:var(--cyn)"></span><span style="background:var(--mag)"></span>
+            <span style="background:#56d4dd"></span><span style="background:var(--dim)"></span>
+          </div>
+        </div>
+      </div>
+      <div class="h" style="margin-top:24px">skill levels</div>
+      <div class="bars" id="skillBars">
+        <div class="bar-row"><span class="bn">python</span><span class="bar-track" data-pct="95"></span><span class="bar-pct">95%</span></div>
+        <div class="bar-row"><span class="bn">django</span><span class="bar-track" data-pct="90"></span><span class="bar-pct">90%</span></div>
+        <div class="bar-row"><span class="bn">flask</span><span class="bar-track" data-pct="85"></span><span class="bar-pct">85%</span></div>
+        <div class="bar-row"><span class="bn">javascript</span><span class="bar-track" data-pct="80"></span><span class="bar-pct">80%</span></div>
+        <div class="bar-row"><span class="bn">html / css</span><span class="bar-track" data-pct="92"></span><span class="bar-pct">92%</span></div>
+        <div class="bar-row"><span class="bn">ui / ux</span><span class="bar-track" data-pct="78"></span><span class="bar-pct">78%</span></div>
       </div>
     </div></div>
 
@@ -69,7 +111,7 @@
         </tr>
         <tr>
           <td class="perm">-rw-r--r--</td><td class="nm" style="color:var(--dim)">proomo</td>
-          <td class="ds">marketplace for influencers selling promotional offers & ad spaces<br><span class="tg">django / python / js</span></td>
+          <td class="ds">marketplace for influencers selling promotional offers &amp; ad spaces<br><span class="tg">django / python / js</span></td>
         </tr>
       </table>
     </div></div>
@@ -101,15 +143,13 @@
         <a class="cc" href="/static/data/resume.pdf" target="_blank"><div class="lbl">resume</div><div class="val">./resume.pdf</div></a>
       </div>
       <div class="foot">© 2026 talha khalid — built in the terminal · lahore, remote worldwide</div>
-
       <div class="h" style="margin-top:28px">interactive shell</div>
-      <div class="dim" style="margin-top:4px;font-size:12.5px"># type <span class="grn">help</span> and hit enter · try <span class="yel">coffee</span>, <span class="yel">sudo</span>, <span class="yel">matrix</span></div>
+      <div class="dim" style="margin-top:4px;font-size:12.5px"># type <span class="grn">help</span> and hit enter · try <span class="yel">coffee</span>, <span class="yel">theme</span>, <span class="yel">hack</span>, <span class="yel">matrix</span></div>
       <div class="console" id="console" tabindex="0">
         <div id="clog"></div>
         <div class="cline"><span class="ps1">talha@khalid</span><span class="dim">:</span><span class="cyn">~</span><span class="dim">$&nbsp;</span><input id="cin" class="cin" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="terminal input" /></div>
       </div>
     </div></div>
-
   </div>
 </div>
 
@@ -123,14 +163,12 @@
         <a href="#" id="toTerm">Dev-view</a>
       </div>
     </nav>
-
     <header class="ev-hero">
       <p class="ev-kicker">Full Stack Software Engineer</p>
       <h1>Talha Khalid</h1>
       <p class="ev-intro">I design, build, and ship dependable web applications with Python, Django, and Flask. I care about clean execution and a great user experience.</p>
       <p class="ev-links"><a href="mailto:talhakhalidlkp@gmail.com">Email</a> <a href="/static/data/resume.pdf" target="_blank">Resume</a> <a href="https://www.linkedin.com/in/talha-khallid" target="_blank" rel="noopener noreferrer">LinkedIn</a> <a href="https://github.com/talha-khallid" target="_blank" rel="noopener noreferrer">GitHub</a></p>
     </header>
-
     <section class="ev-sec" id="ev-work">
       <h2>Selected Work</h2>
       <div class="ev-list">
@@ -141,7 +179,6 @@
         <div class="ev-item"><span class="t">Proomo</span><span class="d">A marketplace for influencers selling promotional offers and ad spaces.</span><span class="m">Django, Python, JavaScript</span></div>
       </div>
     </section>
-
     <section class="ev-sec" id="ev-exp">
       <h2>Experience</h2>
       <div class="ev-list">
@@ -150,13 +187,11 @@
         <div class="ev-item"><span class="t">Software Engineer Intern</span><span class="d">Built desktop UIs in Python with Tkinter, explored mobile development with Kivy, and sharpened debugging skills.</span><span class="m">IT Vision Solutions · Nov 2023 — Jan 2024</span></div>
       </div>
     </section>
-
     <section class="ev-sec" id="ev-contact">
       <h2>Contact</h2>
       <p class="ev-intro">I'm currently open to new opportunities. Whether you have a project in mind or just want to connect, I'd love to hear from you.</p>
       <p class="ev-mail"><a href="mailto:talhakhalidlkp@gmail.com">talhakhalidlkp@gmail.com</a></p>
     </section>
-
     <footer class="ev-foot">
       <span>© 2026 Talha Khalid</span>
       <span><a href="https://github.com/talha-khallid" target="_blank" rel="noopener noreferrer">GitHub</a> · <a href="https://www.linkedin.com/in/talha-khallid" target="_blank" rel="noopener noreferrer">LinkedIn</a> · <a href="https://www.threads.com/@talha_khallid" target="_blank" rel="noopener noreferrer">Threads</a></span>
@@ -164,15 +199,12 @@
   </div>
 </div>
 
-<!-- morphing loader overlay -->
 <!-- ============ DESIGN VIEW (TERM) ============ -->
 <div class="win" id="designTerm">
   <div class="bar">
     <span class="tl r"></span><span class="tl y"></span><span class="tl g"></span>
     <span class="path">talha@khalid: ~/portfolio/designs — zsh</span>
-    <span class="right">
-      <button class="designBackBtn">← back</button>
-    </span>
+    <span class="right"><button class="designBackBtn">← back</button></span>
   </div>
   <div class="term">
     <div class="blk in">
@@ -191,9 +223,7 @@
   <div class="ev-wrap">
     <nav class="ev-nav">
       <div class="ev-logo">Talha Khalid</div>
-      <div class="ev-navright">
-        <a href="#" class="designBackBtn" style="color:var(--esoft);text-decoration:none;">← back</a>
-      </div>
+      <div class="ev-navright"><a href="#" class="designBackBtn" style="color:var(--esoft);text-decoration:none;">← back</a></div>
     </nav>
     <header class="ev-hero" style="padding-bottom:clamp(30px,5vw,50px);">
       <p class="ev-kicker">Design · Figma</p>
@@ -203,9 +233,7 @@
     <section class="ev-sec" style="border-top:none;padding-top:0;">
       <div class="dg-grid" id="dgGridExec"></div>
     </section>
-    <footer class="ev-foot">
-      <span>© 2026 Talha Khalid</span>
-    </footer>
+    <footer class="ev-foot"><span>© 2026 Talha Khalid</span></footer>
   </div>
 </div>
 
