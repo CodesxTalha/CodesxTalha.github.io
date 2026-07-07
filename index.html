@@ -317,8 +317,6 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
   transition:transform .4s var(--ease),box-shadow .4s,border-color .4s;
 }
 .proj:hover{
-  transform:translateY(-5px);
-  box-shadow:0 28px 52px -22px rgba(26,38,32,.2);
   border-color:#C2D2BC;
 }
 .proj-art{
@@ -330,7 +328,6 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
   padding:2rem;
 }
 .proj-art svg.art{width:min(90%,470px);height:auto;color:var(--art-ink);transition:transform .55s var(--ease)}
-.proj:hover .proj-art svg.art{transform:scale(1.035)}
 .proj-body{padding:clamp(1.6rem,3vw,2.5rem);display:flex;flex-direction:column;gap:.85rem}
 .kicker{font-family:var(--font-mono);font-size:.72rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--leaf-dark)}
 .proj h3{font-family:var(--font-display);font-size:1.55rem;font-weight:650;letter-spacing:-.015em;line-height:1.15}
@@ -422,7 +419,7 @@ a.stretch::after{content:"";position:absolute;inset:0;z-index:2}
   padding:1.6rem 1.5rem;
   transition:transform .35s var(--ease),box-shadow .35s,border-color .35s;
 }
-.svc:hover{transform:translateY(-4px);border-color:#C2D2BC;box-shadow:0 18px 36px -18px rgba(26,38,32,.16)}
+.svc:hover{border-color:#C2D2BC}
 .svc .icon{
   width:46px;height:46px;border-radius:13px;
   background:var(--panel);border:1px solid var(--line);
@@ -621,8 +618,7 @@ footer{border-top:1px solid var(--line);padding:2rem 0;margin-top:clamp(2rem,5vw
     <div class="mq-item"><span>JavaScript</span><i class="mq-dot"></i></div>
     <div class="mq-item"><span>Flutter</span><i class="mq-dot"></i></div>
     <div class="mq-item"><span>REST APIs</span><i class="mq-dot"></i></div>
-    <div class="mq-item"><span>PostgreSQL</span><i class="mq-dot"></i></div>
-    <div class="mq-item"><span>Rust</span><i class="mq-dot"></i></div>
+    <div class="mq-item"><span>SQL</span><i class="mq-dot"></i></div>
     <div class="mq-item"><span>Chrome Extensions</span><i class="mq-dot"></i></div>
     <div class="mq-item"><span>Figma</span><i class="mq-dot"></i></div>
     <div class="mq-item"><span>UI Engineering</span><i class="mq-dot"></i></div>
@@ -634,7 +630,6 @@ footer{border-top:1px solid var(--line);padding:2rem 0;margin-top:clamp(2rem,5vw
     <div class="mq-item"><span>Flutter</span><i class="mq-dot"></i></div>
     <div class="mq-item"><span>REST APIs</span><i class="mq-dot"></i></div>
     <div class="mq-item"><span>PostgreSQL</span><i class="mq-dot"></i></div>
-    <div class="mq-item"><span>Rust</span><i class="mq-dot"></i></div>
     <div class="mq-item"><span>Chrome Extensions</span><i class="mq-dot"></i></div>
     <div class="mq-item"><span>Figma</span><i class="mq-dot"></i></div>
     <div class="mq-item"><span>UI Engineering</span><i class="mq-dot"></i></div>
@@ -958,7 +953,7 @@ footer{border-top:1px solid var(--line);padding:2rem 0;margin-top:clamp(2rem,5vw
 <footer>
   <div class="container foot">
     <span>© 2026 Talha Khalid</span>
-    <span>Designed &amp; built by hand — one HTML file, zero templates</span>
+    <span>Created with Love ❤︎</span>
     <a href="#top">Back to top ↑</a>
   </div>
 </footer>
