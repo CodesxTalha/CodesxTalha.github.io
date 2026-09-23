@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: talha-khallid.github.io/sitemap.xml
+Sitemap: https://codesxtalha.github.io/sitemap.xml
