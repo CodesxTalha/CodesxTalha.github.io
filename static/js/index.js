@@ -15,7 +15,7 @@
     '[ ok ] loading kernel: python, django, flask, html, css, js',
     '[ ok ] starting service: full-stack-python.service',
     '[ ok ] enabling module: web-development',
-    '[ ok ] network: github / linkedin / threads reachable',
+    '[ ok ] network: github / threads / instagram reachable',
     '[ ok ] resolving identity ... talha khalid',
     '',
     'welcome. booting portfolio shell ...'
@@ -191,19 +191,18 @@
   }
 
   const cmds={
-    help:()=>'available commands:\n  <span class="ok">about</span>      who is talha\n  <span class="ok">skills</span>     tech stack\n  <span class="ok">projects</span>   list work (open with: open &lt;name&gt;)\n  <span class="ok">experience</span> work history\n  <span class="ok">contact</span>    ways to reach me\n  <span class="ok">resume</span>     download cv\n  <span class="ok">neofetch</span>   system info\n  <span class="ok">theme</span>      toggle light / dark terminal\n  <span class="ok">clear</span>      wipe the screen\n  <span class="warn">coffee · sudo · matrix · hack · cowsay · banner · history · weather · sl · echo · date</span>  (✨ fun)\n  <span class="dim"># psst: there\'s a hidden konami code 🎮</span>',
+    help:()=>'available commands:\n  <span class="ok">about</span>      who is talha\n  <span class="ok">skills</span>     tech stack\n  <span class="ok">projects</span>   list work (open with: open &lt;name&gt;)\n  <span class="ok">experience</span> work history\n  <span class="ok">contact</span>    ways to reach me\n  <span class="ok">neofetch</span>   system info\n  <span class="ok">theme</span>      toggle light / dark terminal\n  <span class="ok">clear</span>      wipe the screen\n  <span class="warn">coffee · sudo · matrix · hack · cowsay · banner · history · weather · sl · echo · date</span>  (✨ fun)\n  <span class="dim"># psst: there\'s a hidden konami code 🎮</span>',
     about:()=>'talha khalid — full stack python engineer.\nloves diving into code complexity, ships end-to-end web products, and cares about UI/UX.',
     skills:()=>'python · django · flask · html · css · javascript\n+ tkinter, kivy, rest apis, and whatever a project needs.',
     projects:()=>'<span class="ok">share-beam</span>   flutter / dart / rust\n<span class="ok">ciro-app</span>     python / flutter / django\n<span class="ok">blockx</span>       javascript / chrome extension\n<span class="ok">luxe-perfume</span> django / jinja / js\n<span class="ok">proomo</span>       django / python / js\n\ntip: <span class="warn">open &lt;name&gt;</span> to launch a repo.',
     experience:()=>'2024–now  freelance software developer @ self-employed\n2025–26   full stack python engineer @ yoma org\n2023–24   software engineer intern @ it vision solutions',
-    contact:()=>'email     <a href="mailto:talhakhalidlkp@gmail.com">talhakhalidlkp@gmail.com</a>\ngithub    <a href="https://github.com/CodesxTalha" target="_blank" rel="noopener noreferrer">@CodesxTalha</a>\nlinkedin  <a href="https://www.linkedin.com/in/talha-khallid" target="_blank" rel="noopener noreferrer">@Talha-Khallid</a>\nthreads   <a href="https://www.threads.com/@CodesxTalha" target="_blank" rel="noopener noreferrer">@CodesxTalha</a>',
-    resume:()=>{window.open('/static/data/resume.pdf','_blank');return 'opening <span class="ok">./resume.pdf</span> ...';},
+    contact:()=>'email     <a href="mailto:talhalkp@gmail.com">talhalkp@gmail.com</a>\ngithub    <a href="https://github.com/CodesxTalha" target="_blank" rel="noopener noreferrer">@CodesxTalha</a>\nthreads   <a href="https://www.threads.com/@CodesxTalha" target="_blank" rel="noopener noreferrer">@CodesxTalha</a>\ninstagram <a href="https://www.instagram.com/CodesxTalha" target="_blank" rel="noopener noreferrer">@CodesxTalha</a>',
     date:()=>new Date().toString(),
     whoami:()=>'talha',
-    ls:()=>'about  skills  projects  experience  contact  resume',
+    ls:()=>'about  skills  projects  experience  contact',
     pwd:()=>'/home/talha/portfolio',
     repo:()=>{window.open('https://github.com/CodesxTalha','_blank','noopener');return 'opening <span class="ok">github.com/CodesxTalha</span> ...';},
-    social:()=>'github   <a href="https://github.com/CodesxTalha" target="_blank" rel="noopener noreferrer">@CodesxTalha</a>\nlinkedin <a href="https://www.linkedin.com/in/talha-khallid" target="_blank" rel="noopener noreferrer">@Talha-Khallid</a>\nthreads  <a href="https://www.threads.com/@CodesxTalha" target="_blank" rel="noopener noreferrer">@CodesxTalha</a>',
+    social:()=>'github    <a href="https://github.com/CodesxTalha" target="_blank" rel="noopener noreferrer">@CodesxTalha</a>\nthreads   <a href="https://www.threads.com/@CodesxTalha" target="_blank" rel="noopener noreferrer">@CodesxTalha</a>\ninstagram <a href="https://www.instagram.com/CodesxTalha" target="_blank" rel="noopener noreferrer">@CodesxTalha</a>',
     coffee:()=>'    ( (\n     ) )\n  ........\n  |      |]   brewing... ☕ stay caffeinated.\n  \\      /\n   `----\'',
     sudo:(a)=>'<span class="err">talha is not in the sudoers file. this incident will be reported.</span> 😈',
     matrix:()=>{startMatrix();return '<span class="ok">wake up... entering the matrix. (press any key)</span>';},
