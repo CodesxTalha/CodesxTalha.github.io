@@ -10,8 +10,7 @@
 <link rel="canonical" href="https://codesxtalha.github.io/">
 <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231e1e1e'/%3E%3Cpath d='M22 20 10 32l12 12M42 20l12 12-12 12M36 15 28 49' fill='none' stroke='%234ade80' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 
 <!-- Open Graph / social previews -->
 <meta property="og:type" content="profile">
@@ -19,7 +18,7 @@
 <meta property="og:title" content="Talha Khalid — Full-Stack Python Developer">
 <meta property="og:description" content="Django and Flask web apps, REST APIs and Python automation. Resume, experience and projects.">
 <meta property="og:url" content="https://codesxtalha.github.io/">
-<meta property="og:image" content="https://codesxtalha.github.io/static/images/og.jpg">
+<meta property="og:image" content="https://codesxtalha.github.io/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Talha Khalid — Just a developer who's in love with code &amp; pixels">
@@ -30,12 +29,88 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Talha Khalid — Full-Stack Python Developer">
 <meta name="twitter:description" content="Django and Flask web apps, REST APIs and Python automation. Resume, experience and projects.">
-<meta name="twitter:image" content="https://codesxtalha.github.io/static/images/og.jpg">
+<meta name="twitter:image" content="https://codesxtalha.github.io/og.jpg">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="static/css/style.css">
+<style>
+/* VOICE: plain, calm, professional; the same resume, just interactive.
+   IDEA: a printed one-page resume whose entries unfold into case notes.
+   COLOUR and TYPE: black on white (white on near-black at night), Inter, one grey for body.
+   LAYOUT: single column up to 820px, rules between sections, dates right-aligned. */
+:root{color-scheme:light dark;--bg:light-dark(#ffffff,#121212);--ink:light-dark(#222222,#ededed);--soft:light-dark(#555555,#b4b4b4);--mute:light-dark(#6b6b6b,#8f8f8f);--rule:light-dark(#333333,#5a5a5a);--panel:light-dark(#f6f6f6,#1c1c1c);--line:light-dark(#e3e3e3,#2c2c2c)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "Inter",system-ui,sans-serif;overflow-x:clip}
+a{color:inherit}
+.skip{position:absolute;left:-9999px;top:8px;background:var(--ink);color:var(--bg);padding:8px 12px;border-radius:6px;z-index:10}
+.skip:focus{left:8px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.page{max-width:820px;margin:0 auto;padding:clamp(28px,5vw,56px) max(5vw,18px) 48px}
+
+/* header */
+.site-head{text-align:center}
+h1{margin:0;font-size:clamp(34px,7vw,50px);font-weight:800;letter-spacing:-.5px;line-height:1.05;text-transform:uppercase}
+.role-title{font-size:clamp(17px,2.6vw,21px);margin:6px 0 20px}
+.contact{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 18px;font-size:15px;color:var(--soft);padding:0 0 12px;margin:0;list-style:none;border-bottom:1.5px solid var(--rule)}
+.contact li{margin:0}
+.contact span,.contact a{display:inline-flex;align-items:center;gap:6px;color:var(--soft)}
+.contact a{text-decoration:underline;text-decoration-color:var(--mute);text-underline-offset:3px}
+.contact a:hover{color:var(--ink)}
+.contact svg{width:14px;height:14px;fill:currentColor;flex:none}
+
+/* sections */
+section{padding:18px 0 16px;border-bottom:1.5px solid var(--rule)}
+section:last-of-type{border-bottom:0}
+h2{margin:0 0 10px;font-size:22px;font-weight:700;letter-spacing:.2px;text-transform:uppercase}
+.summary{color:var(--soft);margin:0;max-width:70ch}
+.skills{display:grid;grid-template-columns:120px minmax(0,1fr);row-gap:4px;font-size:15.5px;margin:0}
+.skills dt{font-weight:500}.skills dd{margin:0;color:var(--soft)}
+
+/* expandable entries */
+.item{border-top:1px solid var(--line)}
+.item:first-of-type{border-top:0}
+.item-head{padding:12px 0 0;cursor:pointer}
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:6px 16px;flex-wrap:wrap}
+h3.name{margin:0;font-weight:600;font-size:16.5px}
+.name .org{font-weight:400;color:var(--soft)}
+.meta{font-size:14.5px;color:var(--ink);white-space:nowrap}
+.tech{font-size:13.5px;color:var(--soft);white-space:nowrap}
+ul{margin:6px 0 0;padding-left:20px;color:var(--soft);font-size:15.5px}
+li{margin:2px 0}
+.more{all:unset;box-sizing:border-box;display:inline-flex;align-items:center;gap:5px;margin:8px 0 10px;font-size:13.5px;font-weight:500;color:var(--mute);cursor:pointer}
+.more:hover{color:var(--ink)}
+.more:focus-visible{outline:2px solid var(--ink);outline-offset:4px;border-radius:4px}
+.more svg{width:12px;height:12px;transition:transform .2s ease;fill:none;stroke:currentColor;stroke-width:2}
+.item.open .more svg{transform:rotate(180deg)}
+.detail{display:grid;grid-template-rows:0fr;transition:grid-template-rows .25s ease}
+.item.open .detail{grid-template-rows:1fr}
+.detail>div{overflow:hidden}
+.panel{background:var(--panel);border-radius:8px;padding:16px 18px;margin:2px 0 14px;font-size:15px;color:var(--soft)}
+.panel h4{margin:14px 0 4px;font-size:14px;font-weight:600;color:var(--ink)}
+.panel h4:first-child{margin-top:0}
+.panel p{margin:0 0 6px;max-width:70ch}
+.panel ul{margin-top:2px;font-size:15px}
+.panel strong{color:var(--ink);font-weight:600}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 0;padding:0;list-style:none}
+.tags li{font-size:13px;border:1px solid var(--line);border-radius:999px;padding:3px 10px;margin:0;color:var(--ink);background:var(--bg)}
+.edu{font-weight:500;font-size:16px;margin:4px 0}
+.site-foot{text-align:center;font-size:13px;color:var(--mute);margin-top:28px}
+.site-foot p{margin:4px 0}
+
+@media(prefers-reduced-motion:reduce){.detail,.more svg{transition:none}}
+@media(max-width:600px){.skills{grid-template-columns:96px minmax(0,1fr)}.contact{justify-content:flex-start}.meta,.tech{white-space:normal}}
+
+/* print: expand everything, drop the controls */
+@media print{
+  :root{color-scheme:light}
+  .more,.skip,.site-foot{display:none}
+  .detail{grid-template-rows:1fr}
+  .item,.panel{break-inside:avoid}
+  .panel{background:none;padding:0 0 0 12px;border-left:2px solid #ddd}
+}
+</style>
 
 <script type="application/ld+json">
 {
@@ -60,7 +135,6 @@
       "jobTitle": "Full-Stack Python Developer",
       "description": "Full-stack Python developer building web applications and automation systems with Django and Flask.",
       "url": "https://codesxtalha.github.io/",
-      "image": "https://codesxtalha.github.io/static/images/talha-khalid.jpg",
       "email": "mailto:talhalkp@gmail.com",
       "address": { "@type": "PostalAddress", "addressLocality": "Islamabad", "addressCountry": "PK" },
       "sameAs": ["https://github.com/CodesxTalha"],
@@ -288,10 +362,54 @@
   </main>
 
   <footer class="site-foot">
-    <p>Click any role or project to see the details.</p>
     <p>© 2026 Talha Khalid · Islamabad, Pakistan</p>
   </footer>
 </div>
-<script src="static/js/index.js" defer></script>
+<script>
+/* Expand / collapse resume entries. All content is in the HTML (for crawlers
+   and no-JS readers); this only toggles visibility and syncs the URL hash. */
+(() => {
+  const items = [...document.querySelectorAll('.item')];
+
+  const toggle = (item, open) => {
+    item.classList.toggle('open', open);
+    const btn = item.querySelector('.more');
+    const detail = item.querySelector('.detail');
+    const label = item.querySelector('.lbl');
+    btn.setAttribute('aria-expanded', String(open));
+    detail.inert = !open;
+    if (label) label.textContent = open ? (label.dataset.close || 'Hide details') : (label.dataset.open || 'View details');
+  };
+
+  items.forEach(item => {
+    toggle(item, false);
+    const flip = () => {
+      const open = !item.classList.contains('open');
+      toggle(item, open);
+      if (open && item.id) history.replaceState(null, '', '#' + item.id);
+    };
+    item.querySelector('.more').addEventListener('click', flip);
+    // The whole heading area is a larger mouse target; the button handles keyboard.
+    const head = item.querySelector('.item-head');
+    if (head) head.addEventListener('click', e => {
+      if (e.target.closest('a') || getSelection().toString()) return;
+      flip();
+    });
+  });
+
+  const openFromHash = () => {
+    const el = location.hash && document.getElementById(location.hash.slice(1));
+    if (el && el.classList.contains('item')) {
+      toggle(el, true);
+      el.scrollIntoView({ block: 'start' });
+    }
+  };
+  openFromHash();
+  addEventListener('hashchange', openFromHash);
+
+  // Show every panel when printing.
+  addEventListener('beforeprint', () => items.forEach(i => { i.querySelector('.detail').inert = false; }));
+})();
+</script>
 </body>
 </html>
