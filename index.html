@@ -451,7 +451,7 @@ li{margin:2px 0}
 </div>
 <script>
 /* Expand / collapse resume entries. All content is in the HTML (for crawlers
-   and no-JS readers); this only toggles visibility and syncs the URL hash. */
+   and no-JS readers); this only toggles visibility. */
 (() => {
   const items = [...document.querySelectorAll('.item')];
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -474,11 +474,7 @@ li{margin:2px 0}
 
   items.forEach(item => {
     toggle(item, false);
-    const flip = () => {
-      const open = !item.classList.contains('open');
-      toggle(item, open);
-      if (open && item.id) history.replaceState(null, '', '#' + item.id);
-    };
+    const flip = () => toggle(item, !item.classList.contains('open'));
     item.querySelector('.more').addEventListener('click', flip);
     // The whole heading area is a larger mouse target; the button handles keyboard.
     const head = item.querySelector('.item-head');
@@ -487,16 +483,6 @@ li{margin:2px 0}
       flip();
     });
   });
-
-  const openFromHash = () => {
-    const el = location.hash && document.getElementById(location.hash.slice(1));
-    if (el && el.classList.contains('item')) {
-      toggle(el, true);
-      el.scrollIntoView({ block: 'start' });
-    }
-  };
-  openFromHash();
-  addEventListener('hashchange', openFromHash);
 
   // Show every panel when printing.
   addEventListener('beforeprint', () => items.forEach(i => { i.querySelector('.detail').inert = false; }));
