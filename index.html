@@ -8,8 +8,7 @@
 <meta name="author" content="Talha Khalid">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="canonical" href="https://codesxtalha.github.io/">
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23222222'/%3E%3Cpath d='M22 20 10 32l12 12M42 20l12 12-12 12M36 15 28 49' fill='none' stroke='%23ededed' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 
 <!-- Open Graph / social previews -->
@@ -39,8 +38,7 @@
    IDEA: a printed one-page resume whose entries unfold into case notes.
    COLOUR and TYPE: black on white (white on near-black at night), Inter, one grey for body.
    LAYOUT: single column up to 820px, rules between sections, dates right-aligned. */
-:root{color-scheme:light dark;--bg:light-dark(#ffffff,#121212);--ink:light-dark(#222222,#ededed);--soft:light-dark(#555555,#b4b4b4);--mute:light-dark(#6b6b6b,#8f8f8f);--rule:light-dark(#333333,#5a5a5a);--panel:light-dark(#f6f6f6,#1c1c1c);--line:light-dark(#e3e3e3,#2c2c2c)}
-:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+:root{color-scheme:light;--bg:#ffffff;--ink:#222222;--soft:#555555;--mute:#6b6b6b;--rule:#333333;--panel:#f6f6f6;--line:#e3e3e3;--track:#d4d4d4}
 *{box-sizing:border-box;min-width:0}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "Inter",system-ui,sans-serif;overflow-x:clip}
 a{color:inherit}
@@ -103,6 +101,23 @@ li{margin:2px 0}
 .phone{margin:0}
 .phone video{display:block;width:100%;height:auto;border-radius:14px;background:#000}
 .phone figcaption{margin-top:6px;font-size:12.5px;color:var(--mute);text-align:center}
+.shot video,.phone video{cursor:pointer}
+.vc{display:flex;align-items:center;gap:8px;margin-top:8px;container-type:inline-size;font-size:12.5px;color:var(--mute)}
+.vc button{all:unset;box-sizing:border-box;display:grid;place-items:center;flex:none;width:26px;height:26px;border-radius:6px;color:var(--ink);cursor:pointer}
+.vc button:hover{background:var(--line)}
+.vc button:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.vc svg{width:14px;height:14px;fill:currentColor}
+.vc input{flex:1;min-width:40px;height:18px;margin:0;background:none;cursor:pointer;-webkit-appearance:none;appearance:none}
+.vc input:focus-visible{outline:2px solid var(--ink);outline-offset:2px;border-radius:4px}
+.vc input::-webkit-slider-runnable-track{height:3px;border-radius:3px;background:linear-gradient(var(--ink),var(--ink)) 0/var(--p,0%) 100% no-repeat,var(--track)}
+.vc input::-webkit-slider-thumb{-webkit-appearance:none;width:11px;height:11px;margin-top:-4px;border-radius:50%;background:var(--ink);opacity:0;transition:opacity .15s}
+.vc:hover input::-webkit-slider-thumb,.vc input:focus-visible::-webkit-slider-thumb{opacity:1}
+.vc input::-moz-range-track{height:3px;border-radius:3px;background:var(--track)}
+.vc input::-moz-range-progress{height:3px;border-radius:3px;background:var(--ink)}
+.vc input::-moz-range-thumb{width:11px;height:11px;border:0;border-radius:50%;background:var(--ink);opacity:0;transition:opacity .15s}
+.vc:hover input::-moz-range-thumb,.vc input:focus-visible::-moz-range-thumb{opacity:1}
+.vc .time{flex:none;white-space:nowrap;font-variant-numeric:tabular-nums}
+@container (max-width:250px){.vc .dur{display:none}}
 .badge{display:inline-block;margin-left:8px;padding:1px 8px;border:1px solid var(--line);border-radius:999px;font-size:12px;font-weight:500;color:var(--soft);vertical-align:2px}
 .tags li{font-size:13px;border:1px solid var(--line);border-radius:999px;padding:3px 10px;margin:0;color:var(--ink);background:var(--bg)}
 .edu{font-weight:500;font-size:16px;margin:4px 0}
@@ -114,8 +129,7 @@ li{margin:2px 0}
 
 /* print: expand everything, drop the controls */
 @media print{
-  :root{color-scheme:light}
-  .more,.skip,.site-foot{display:none}
+  .more,.skip,.site-foot,.vc{display:none}
   .detail{grid-template-rows:1fr}
   .item,.panel{break-inside:avoid}
   .panel{background:none;padding:0 0 0 12px;border-left:2px solid #ddd}
@@ -298,7 +312,7 @@ li{margin:2px 0}
         <div class="detail" id="d-blurry"><div><div class="panel">
           <div class="split">
             <figure class="phone">
-              <video muted loop playsinline preload="none" data-autoplay poster="media/blurry-poster.webp" width="592" height="1280" aria-label="Blurry app demo: faces blurred live in the camera, then edited and exported">
+              <video controls muted loop playsinline preload="none" data-autoplay data-duration="0:54" poster="media/blurry-poster.webp" width="592" height="1280" aria-label="Blurry app demo: faces blurred live in the camera, then edited and exported">
                 <source src="media/blurry.webm" type="video/webm">
                 <source src="media/blurry.mp4" type="video/mp4">
               </video>
@@ -377,7 +391,7 @@ li{margin:2px 0}
         <button class="more" type="button" aria-expanded="false" aria-controls="d-proomo"><span class="lbl">View details</span> <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4"/></svg></button>
         <div class="detail" id="d-proomo"><div><div class="panel">
           <figure class="shot">
-            <video controls playsinline preload="none" poster="media/proomo-poster.webp" width="540" height="360" aria-label="Proomo intro video">
+            <video controls playsinline preload="none" data-audio data-duration="0:44" poster="media/proomo-poster.webp" width="540" height="360" aria-label="Proomo intro video">
               <source src="media/proomo-intro.webm" type="video/webm">
               <source src="media/proomo-intro.mp4" type="video/mp4">
             </video>
@@ -419,7 +433,7 @@ li{margin:2px 0}
         <div class="detail" id="d-ecommerce"><div><div class="panel">
           <h4>Demo of a recent project</h4>
           <figure class="shot">
-            <video muted loop playsinline preload="none" data-autoplay poster="media/ecommerce-poster.webp" width="1898" height="1080" aria-label="Scroll-through of a jewelry brand website: hero, collections, product grid and care section">
+            <video controls muted loop playsinline preload="none" data-autoplay data-duration="0:19" poster="media/ecommerce-poster.webp" width="1898" height="1080" aria-label="Scroll-through of a jewelry brand website: hero, collections, product grid and care section">
               <source src="media/ecommerce-demo.webm" type="video/webm">
               <source src="media/ecommerce-demo.mp4" type="video/mp4">
             </video>
@@ -455,8 +469,79 @@ li{margin:2px 0}
 (() => {
   const items = [...document.querySelectorAll('.item')];
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  // No autoplay for reduced-motion users; give the demos normal controls instead.
-  if (reduceMotion) document.querySelectorAll('video[data-autoplay]').forEach(v => { v.controls = true; });
+
+  /* Minimal video player: play/pause, seek line, time, mute (audio only), full screen */
+  const ico = {
+    play: '<path d="M4.5 2.5v11l9-5.5z"/>',
+    pause: '<path d="M4 2.5h2.8v11H4zM9.2 2.5H12v11H9.2z"/>',
+    vol: '<path d="M2 6h2.5L8 3v10L4.5 10H2z"/><path d="M10.5 5.5a3.5 3.5 0 0 1 0 5M12.5 3.5a6.3 6.3 0 0 1 0 9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>',
+    muted: '<path d="M2 6h2.5L8 3v10L4.5 10H2z"/><path d="M10.5 6l4 4m0-4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>',
+    full: '<path d="M2.5 6V2.5H6M10 2.5h3.5V6M13.5 10v3.5H10M6 13.5H2.5V10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>'
+  };
+  const svg = d => '<svg viewBox="0 0 16 16" aria-hidden="true">' + d + '</svg>';
+  const fmt = s => { s = Math.max(0, Math.floor(s || 0)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
+
+  document.querySelectorAll('video').forEach(v => {
+    v.controls = false;
+    const bar = document.createElement('div');
+    bar.className = 'vc';
+    bar.innerHTML =
+      '<button type="button" class="pp" aria-label="Play">' + svg(ico.play) + '</button>' +
+      '<input type="range" min="0" max="1000" step="1" value="0" aria-label="Seek">' +
+      '<span class="time"><span class="cur">0:00</span><span class="dur"> / ' + (v.dataset.duration || '0:00') + '</span></span>' +
+      (v.hasAttribute('data-audio') ? '<button type="button" class="mu" aria-label="Mute">' + svg(ico.vol) + '</button>' : '') +
+      '<button type="button" class="fs" aria-label="Full screen">' + svg(ico.full) + '</button>';
+    v.after(bar);
+    const pp = bar.querySelector('.pp'), seek = bar.querySelector('input'),
+          cur = bar.querySelector('.cur'), dur = bar.querySelector('.dur'),
+          mu = bar.querySelector('.mu'), fs = bar.querySelector('.fs');
+    let dragging = false, pending = null;
+
+    const flipPlay = () => (v.paused ? v.play().catch(() => {}) : v.pause());
+    pp.addEventListener('click', flipPlay);
+    v.addEventListener('click', flipPlay);
+    const syncPlay = () => {
+      pp.innerHTML = svg(v.paused ? ico.play : ico.pause);
+      pp.setAttribute('aria-label', v.paused ? 'Play' : 'Pause');
+    };
+    v.addEventListener('play', syncPlay);
+    v.addEventListener('pause', syncPlay);
+
+    const paint = p => seek.style.setProperty('--p', p * 100 + '%');
+    v.addEventListener('durationchange', () => { dur.textContent = ' / ' + fmt(v.duration); });
+    v.addEventListener('timeupdate', () => {
+      if (dragging || !v.duration) return;
+      seek.value = (v.currentTime / v.duration) * 1000;
+      paint(v.currentTime / v.duration);
+      cur.textContent = fmt(v.currentTime);
+    });
+    seek.addEventListener('input', () => {
+      dragging = true;
+      const p = seek.value / 1000;
+      paint(p);
+      if (v.duration) { v.currentTime = p * v.duration; cur.textContent = fmt(v.currentTime); }
+      else if (pending === null) { pending = p; v.preload = 'metadata'; v.load(); }
+      else pending = p;
+    });
+    v.addEventListener('loadedmetadata', () => {
+      if (pending !== null) { v.currentTime = pending * v.duration; cur.textContent = fmt(v.currentTime); pending = null; }
+    });
+    seek.addEventListener('change', () => { dragging = false; });
+
+    if (mu) {
+      mu.addEventListener('click', () => { v.muted = !v.muted; });
+      v.addEventListener('volumechange', () => {
+        mu.innerHTML = svg(v.muted ? ico.muted : ico.vol);
+        mu.setAttribute('aria-label', v.muted ? 'Unmute' : 'Mute');
+      });
+    }
+
+    fs.addEventListener('click', () => {
+      if (v.requestFullscreen) { v.controls = true; v.requestFullscreen().catch(() => { v.controls = false; }); }
+      else if (v.webkitEnterFullscreen) v.webkitEnterFullscreen(); // iPhone
+    });
+    v.addEventListener('fullscreenchange', () => { if (!document.fullscreenElement) v.controls = false; });
+  });
 
   const toggle = (item, open) => {
     item.classList.toggle('open', open);
