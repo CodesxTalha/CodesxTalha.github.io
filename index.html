@@ -94,13 +94,21 @@ li{margin:2px 0}
 .panel ul{margin-top:2px;font-size:15px}
 .panel strong{color:var(--ink);font-weight:600}
 .tags{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 0;padding:0;list-style:none}
+.shot{margin:0 0 14px}
+.shot img,.shot video{display:block;width:100%;height:auto;border-radius:8px;background:#2a2a2a}
+.shot figcaption{margin-top:6px;font-size:12.5px;color:var(--mute)}
+.split{display:grid;grid-template-columns:200px minmax(0,1fr);gap:20px;align-items:start}
+.phone{margin:0}
+.phone video{display:block;width:100%;height:auto;border-radius:14px;background:#000}
+.phone figcaption{margin-top:6px;font-size:12.5px;color:var(--mute);text-align:center}
+.badge{display:inline-block;margin-left:8px;padding:1px 8px;border:1px solid var(--line);border-radius:999px;font-size:12px;font-weight:500;color:var(--soft);vertical-align:2px}
 .tags li{font-size:13px;border:1px solid var(--line);border-radius:999px;padding:3px 10px;margin:0;color:var(--ink);background:var(--bg)}
 .edu{font-weight:500;font-size:16px;margin:4px 0}
 .site-foot{text-align:center;font-size:13px;color:var(--mute);margin-top:28px}
 .site-foot p{margin:4px 0}
 
 @media(prefers-reduced-motion:reduce){.detail,.more svg{transition:none}}
-@media(max-width:600px){.skills{grid-template-columns:96px minmax(0,1fr)}.contact{justify-content:flex-start}.meta,.tech{white-space:normal}}
+@media(max-width:600px){.split{grid-template-columns:1fr}.phone{width:min(220px,70%);margin:0 auto}.skills{grid-template-columns:96px minmax(0,1fr)}.contact{justify-content:flex-start}.meta,.tech{white-space:normal}}
 
 /* print: expand everything, drop the controls */
 @media print{
@@ -277,6 +285,63 @@ li{margin:2px 0}
     <section aria-labelledby="h-projects">
       <h2 id="h-projects">Recent Projects</h2>
 
+      <article class="item" id="blurry">
+        <div class="item-head">
+          <div class="row"><h3 class="name">Blurry <span class="badge">In progress</span></h3><div class="tech">iOS</div></div>
+          <ul>
+            <li>Privacy-first iOS camera app that automatically detects and blurs faces, either live while recording or after capture.</li>
+          </ul>
+        </div>
+        <button class="more" type="button" aria-expanded="false" aria-controls="d-blurry"><span class="lbl">View details</span> <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4"/></svg></button>
+        <div class="detail" id="d-blurry"><div><div class="panel">
+          <div class="split">
+            <figure class="phone">
+              <video muted loop playsinline preload="none" data-autoplay poster="media/blurry-poster.webp" width="592" height="1280" aria-label="Blurry app demo: faces blurred live in the camera, then edited and exported">
+                <source src="media/blurry.webm" type="video/webm">
+                <source src="media/blurry.mp4" type="video/mp4">
+              </video>
+              <figcaption>Screen recording from the app</figcaption>
+            </figure>
+            <div>
+              <h4>What it is</h4>
+              <p>An iOS app for capturing photos and videos without exposing the people in them. It finds faces automatically and hides them, so footage can be shared without putting anyone's identity on display.</p>
+              <h4>Two ways to blur</h4>
+              <ul>
+                <li><strong>Live blur:</strong> faces are blurred in real time, right in the camera, while you record.</li>
+                <li><strong>Capture, then blur:</strong> record normally and apply the blur afterwards, a lighter option than live blurring.</li>
+              </ul>
+              <h4>Editing</h4>
+              <p>Pick pixelate, blur or a solid fill, tune block size, coverage and edge softness, compare the result with a before/after slider, then export.</p>
+              <ul class="tags"><li>iOS</li><li>Face detection</li><li>Real-time video</li><li>Privacy</li></ul>
+            </div>
+          </div>
+        </div></div></div>
+      </article>
+
+      <article class="item" id="sharebeam">
+        <div class="item-head">
+          <div class="row"><h3 class="name">ShareBeam</h3><div class="tech">Flutter, Dart, Rust</div></div>
+          <ul>
+            <li>Local file-sharing app with near-instant device discovery and transfer speeds that outpace most file-sharing apps on the Play Store.</li>
+          </ul>
+        </div>
+        <button class="more" type="button" aria-expanded="false" aria-controls="d-sharebeam"><span class="lbl">View details</span> <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4"/></svg></button>
+        <div class="detail" id="d-sharebeam"><div><div class="panel">
+          <figure class="shot"><img src="media/sharebeam.webp" width="1400" height="1000" loading="lazy" decoding="async" alt="ShareBeam app screens: chat-style file feed, connected participants, and automatic download settings"></figure>
+          <h4>What it is</h4>
+          <p>A cross-platform app for sending files and messages between devices on the same local network, from phone to laptop and back.</p>
+          <h4>Why it's fast</h4>
+          <p>Instead of relying on an off-the-shelf sharing library, I designed the discovery and transfer logic myself, combining several technologies. Devices find each other almost instantly, and files move noticeably faster than with most popular file-sharing apps.</p>
+          <h4>Features</h4>
+          <ul>
+            <li>Chat-style feed for sending messages and files in one place.</li>
+            <li>Host and participant sessions, with every connected device listed.</li>
+            <li>Automatic downloads by media type, with a maximum file size and a custom download folder.</li>
+          </ul>
+          <ul class="tags"><li>Flutter</li><li>Dart</li><li>Rust</li><li>Custom networking</li><li>Cross-platform</li></ul>
+        </div></div></div>
+      </article>
+
       <article class="item" id="ciro">
         <div class="item-head">
           <div class="row"><h3 class="name">Ciro</h3><div class="tech">Python, Flask, Flutter</div></div>
@@ -286,6 +351,7 @@ li{margin:2px 0}
         </div>
         <button class="more" type="button" aria-expanded="false" aria-controls="d-ciro"><span class="lbl">View details</span> <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4"/></svg></button>
         <div class="detail" id="d-ciro"><div><div class="panel">
+          <figure class="shot"><img src="media/ciro.webp" width="700" height="500" loading="lazy" decoding="async" alt="Ciro app screens: community incident feed, incident report form, and local weather map"></figure>
           <h4>What it is</h4>
           <p>A hackathon project: a mobile app that keeps people informed about emergencies and serious events near them.</p>
           <h4>How it works</h4>
@@ -308,6 +374,13 @@ li{margin:2px 0}
         </div>
         <button class="more" type="button" aria-expanded="false" aria-controls="d-proomo"><span class="lbl">View details</span> <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4"/></svg></button>
         <div class="detail" id="d-proomo"><div><div class="panel">
+          <figure class="shot">
+            <video controls playsinline preload="none" poster="media/proomo-poster.webp" width="540" height="360" aria-label="Proomo intro video">
+              <source src="media/proomo-intro.webm" type="video/webm">
+              <source src="media/proomo-intro.mp4" type="video/mp4">
+            </video>
+            <figcaption>Proomo intro video</figcaption>
+          </figure>
           <h4>What it is</h4>
           <p>A marketplace for the user-generated-content (UGC) industry. Creators publish a professional profile; brands find the right creator for a campaign and hire them directly, without going through agencies or scattered DMs.</p>
           <h4>My role</h4>
@@ -342,6 +415,14 @@ li{margin:2px 0}
         </div>
         <button class="more" type="button" aria-expanded="false" aria-controls="d-ecommerce"><span class="lbl">View details</span> <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4"/></svg></button>
         <div class="detail" id="d-ecommerce"><div><div class="panel">
+          <h4>Demo of a recent project</h4>
+          <figure class="shot">
+            <video muted loop playsinline preload="none" data-autoplay poster="media/ecommerce-poster.webp" width="1898" height="1080" aria-label="Scroll-through of a jewelry brand website: hero, collections, product grid and care section">
+              <source src="media/ecommerce-demo.webm" type="video/webm">
+              <source src="media/ecommerce-demo.mp4" type="video/mp4">
+            </video>
+            <figcaption>Jewelry brand website, built with Django</figcaption>
+          </figure>
           <h4>What I built</h4>
           <p>Most recently I built the website for a jewelry brand, and before that I worked on a perfume brand's online store. Everything on both sites is editable through a simple admin panel, designed so non-technical people can manage it easily.</p>
           <h4>Highlights</h4>
@@ -371,6 +452,9 @@ li{margin:2px 0}
    and no-JS readers); this only toggles visibility and syncs the URL hash. */
 (() => {
   const items = [...document.querySelectorAll('.item')];
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // No autoplay for reduced-motion users; give the demos normal controls instead.
+  if (reduceMotion) document.querySelectorAll('video[data-autoplay]').forEach(v => { v.controls = true; });
 
   const toggle = (item, open) => {
     item.classList.toggle('open', open);
@@ -379,6 +463,10 @@ li{margin:2px 0}
     const label = item.querySelector('.lbl');
     btn.setAttribute('aria-expanded', String(open));
     detail.inert = !open;
+    detail.querySelectorAll('video').forEach(v => {
+      if (!open) v.pause();
+      else if (v.hasAttribute('data-autoplay') && !reduceMotion) v.play().catch(() => {});
+    });
     if (label) label.textContent = open ? (label.dataset.close || 'Hide details') : (label.dataset.open || 'View details');
   };
 
