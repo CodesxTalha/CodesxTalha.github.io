@@ -118,6 +118,14 @@ li{margin:2px 0}
 .vc:hover input::-moz-range-thumb,.vc input:focus-visible::-moz-range-thumb{opacity:1}
 .vc .time{flex:none;white-space:nowrap;font-variant-numeric:tabular-nums}
 @container (max-width:250px){.vc .dur{display:none}}
+.vbox:fullscreen,.vbox.fake-fs{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:24px;background:#141414}
+.vbox.fake-fs{position:fixed;inset:0;z-index:1000}
+.vbox:fullscreen video,.vbox.fake-fs video{width:auto;height:auto;max-width:100%;max-height:calc(100% - 64px);object-fit:contain;border-radius:8px}
+.vbox:fullscreen .vc,.vbox.fake-fs .vc{width:min(720px,100%);margin:0;padding:8px 10px;gap:10px;background:var(--bg);border:1px solid var(--line);border-radius:8px}
+.vbox:fullscreen .vc button,.vbox.fake-fs .vc button{width:30px;height:30px;border:1px solid var(--line);border-radius:6px;background:var(--panel)}
+.vbox:fullscreen .vc button:hover,.vbox.fake-fs .vc button:hover{background:var(--line)}
+.vbox:fullscreen .dur,.vbox.fake-fs .dur{display:inline}
+body.no-scroll{overflow:hidden}
 .badge{display:inline-block;margin-left:8px;padding:1px 8px;border:1px solid var(--line);border-radius:999px;font-size:12px;font-weight:500;color:var(--soft);vertical-align:2px}
 .tags li{font-size:13px;border:1px solid var(--line);border-radius:999px;padding:3px 10px;margin:0;color:var(--ink);background:var(--bg)}
 .edu{font-weight:500;font-size:16px;margin:4px 0}
@@ -312,7 +320,7 @@ li{margin:2px 0}
         <div class="detail" id="d-blurry"><div><div class="panel">
           <div class="split">
             <figure class="phone">
-              <video controls muted loop playsinline preload="none" data-autoplay data-duration="0:54" poster="media/blurry-poster.webp" width="592" height="1280" aria-label="Blurry app demo: faces blurred live in the camera, then edited and exported">
+              <video controls controlslist="nodownload noplaybackrate noremoteplayback nofullscreen" disablepictureinpicture disableremoteplayback muted loop playsinline preload="none" data-autoplay data-duration="0:54" poster="media/blurry-poster.webp" width="592" height="1280" aria-label="Blurry app demo: faces blurred live in the camera, then edited and exported">
                 <source src="media/blurry.webm" type="video/webm">
                 <source src="media/blurry.mp4" type="video/mp4">
               </video>
@@ -391,7 +399,7 @@ li{margin:2px 0}
         <button class="more" type="button" aria-expanded="false" aria-controls="d-proomo"><span class="lbl">View details</span> <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4"/></svg></button>
         <div class="detail" id="d-proomo"><div><div class="panel">
           <figure class="shot">
-            <video controls playsinline preload="none" data-audio data-duration="0:44" poster="media/proomo-poster.webp" width="540" height="360" aria-label="Proomo intro video">
+            <video controls controlslist="nodownload noplaybackrate noremoteplayback nofullscreen" disablepictureinpicture disableremoteplayback playsinline preload="none" data-audio data-duration="0:44" poster="media/proomo-poster.webp" width="540" height="360" aria-label="Proomo intro video">
               <source src="media/proomo-intro.webm" type="video/webm">
               <source src="media/proomo-intro.mp4" type="video/mp4">
             </video>
@@ -433,7 +441,7 @@ li{margin:2px 0}
         <div class="detail" id="d-ecommerce"><div><div class="panel">
           <h4>Demo of a recent project</h4>
           <figure class="shot">
-            <video controls muted loop playsinline preload="none" data-autoplay data-duration="0:19" poster="media/ecommerce-poster.webp" width="1898" height="1080" aria-label="Scroll-through of a jewelry brand website: hero, collections, product grid and care section">
+            <video controls controlslist="nodownload noplaybackrate noremoteplayback nofullscreen" disablepictureinpicture disableremoteplayback muted loop playsinline preload="none" data-autoplay data-duration="0:19" poster="media/ecommerce-poster.webp" width="1898" height="1080" aria-label="Scroll-through of a jewelry brand website: hero, collections, product grid and care section">
               <source src="media/ecommerce-demo.webm" type="video/webm">
               <source src="media/ecommerce-demo.mp4" type="video/mp4">
             </video>
@@ -476,13 +484,15 @@ li{margin:2px 0}
     pause: '<path d="M4 2.5h2.8v11H4zM9.2 2.5H12v11H9.2z"/>',
     vol: '<path d="M2 6h2.5L8 3v10L4.5 10H2z"/><path d="M10.5 5.5a3.5 3.5 0 0 1 0 5M12.5 3.5a6.3 6.3 0 0 1 0 9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>',
     muted: '<path d="M2 6h2.5L8 3v10L4.5 10H2z"/><path d="M10.5 6l4 4m0-4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>',
-    full: '<path d="M2.5 6V2.5H6M10 2.5h3.5V6M13.5 10v3.5H10M6 13.5H2.5V10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>'
+    full: '<path d="M2.5 6V2.5H6M10 2.5h3.5V6M13.5 10v3.5H10M6 13.5H2.5V10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>',
+    exit: '<path d="M6 2.5V6H2.5M10 2.5V6h3.5M13.5 10H10v3.5M6 13.5V10H2.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>'
   };
   const svg = d => '<svg viewBox="0 0 16 16" aria-hidden="true">' + d + '</svg>';
   const fmt = s => { s = Math.max(0, Math.floor(s || 0)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
 
   document.querySelectorAll('video').forEach(v => {
     v.controls = false;
+    v.addEventListener('contextmenu', e => e.preventDefault()); // no "Show controls" / PiP / download menu
     const bar = document.createElement('div');
     bar.className = 'vc';
     bar.innerHTML =
@@ -491,7 +501,12 @@ li{margin:2px 0}
       '<span class="time"><span class="cur">0:00</span><span class="dur"> / ' + (v.dataset.duration || '0:00') + '</span></span>' +
       (v.hasAttribute('data-audio') ? '<button type="button" class="mu" aria-label="Mute">' + svg(ico.vol) + '</button>' : '') +
       '<button type="button" class="fs" aria-label="Full screen">' + svg(ico.full) + '</button>';
-    v.after(bar);
+    // Video + bar live in one box; that box (not the bare video) goes full screen,
+    // so the browser never swaps in its own controls.
+    const box = document.createElement('div');
+    box.className = 'vbox';
+    v.before(box);
+    box.append(v, bar);
     const pp = bar.querySelector('.pp'), seek = bar.querySelector('input'),
           cur = bar.querySelector('.cur'), dur = bar.querySelector('.dur'),
           mu = bar.querySelector('.mu'), fs = bar.querySelector('.fs');
@@ -536,11 +551,29 @@ li{margin:2px 0}
       });
     }
 
+    const isFull = () => document.fullscreenElement === box || box.classList.contains('fake-fs');
+    const syncFull = () => {
+      const on = isFull();
+      fs.innerHTML = svg(on ? ico.exit : ico.full);
+      fs.setAttribute('aria-label', on ? 'Exit full screen' : 'Full screen');
+    };
+    // iPhone Safari can only full-screen a bare <video> (with native controls),
+    // so there the box fills the viewport instead.
+    const setFake = on => {
+      box.classList.toggle('fake-fs', on);
+      document.body.classList.toggle('no-scroll', on);
+      syncFull();
+    };
     fs.addEventListener('click', () => {
-      if (v.requestFullscreen) { v.controls = true; v.requestFullscreen().catch(() => { v.controls = false; }); }
-      else if (v.webkitEnterFullscreen) v.webkitEnterFullscreen(); // iPhone
+      if (isFull()) {
+        if (document.fullscreenElement) document.exitFullscreen();
+        else setFake(false);
+      } else if (box.requestFullscreen && document.fullscreenEnabled) {
+        box.requestFullscreen().catch(() => setFake(true));
+      } else setFake(true);
     });
-    v.addEventListener('fullscreenchange', () => { if (!document.fullscreenElement) v.controls = false; });
+    document.addEventListener('fullscreenchange', syncFull);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && box.classList.contains('fake-fs')) setFake(false); });
   });
 
   const toggle = (item, open) => {
